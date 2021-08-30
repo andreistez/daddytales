@@ -1,0 +1,51 @@
+.header {
+    position: relative;
+    background-color: $brand-yellow;
+    box-shadow: $shadow;
+    z-index: 1;
+
+    &-inner {
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: $spacer-xs
+    }
+
+    &-logo {
+        width: 100%;
+        height: 100px;
+        text-align: center;
+        margin-bottom: $spacer-xs;
+
+        @media (min-width: $grid-md) {
+            width: auto;
+            text-align: left
+        }
+
+        a {
+            width: 100%;
+            height: 100%
+        }
+
+        img {
+            height: 100%;
+            width: auto
+        }
+    }
+
+    &-right {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: $spacer-xs;
+
+        @media (min-width: $grid-md) {
+            width: auto;
+            margin: 0 0 0 auto
+        }
+
+        @media (min-width: $grid-xl) {
+            flex-direction: column;
+            align-items: flex-end
+        }
+    }
+}

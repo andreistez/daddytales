@@ -1,0 +1,20 @@
+.button {
+    font-weight: $fw-semibold;
+    padding: 5px $spacer-sm;
+    border-radius: $radius;
+    text-align: center;
+    box-shadow: $shadow;
+
+    &.yellow {
+        background-color: $brand-yellow;
+        color: $gray;
+        transition:
+            background-color ease-out $tr,
+            color ease-out $tr;
+
+        &:hover {
+            background-color: $light;
+            color: $brand-green
+        }
+    }
+}

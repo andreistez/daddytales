@@ -1,0 +1,30 @@
+.searchform {
+    width: 100%;
+    max-width: 350px;
+
+    input {
+        background-color: $light
+    }
+
+    &-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        font-size: $fs-md;
+        color: $dark;
+        background-color: transparent;
+        border: none;
+        border-radius: $radius;
+        cursor: pointer;
+        transition: color ease-out $tr;
+
+        &:hover {
+            color: $brand-green
+        }
+    }
+}

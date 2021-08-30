@@ -1,0 +1,191 @@
+.fw {
+	&-container {
+		position: relative;
+		width: 100%;
+		max-width: 100%;
+		padding: 0 15px;
+		margin: 0 auto;
+
+		@media all and (min-width: $grid-md) {
+			max-width: $container-md;
+			padding: 0
+		}
+
+		@media all and (min-width: $grid-lg) {
+			max-width: $container-lg
+		}
+
+		@media all and (min-width: $grid-xl) {
+			max-width: $container-xl
+		}
+
+		@media all and (min-width: $grid-xxl) {
+			max-width: $container-xxl
+		}
+
+		&-fluid {
+			width: 100%;
+			max-width: 100%;
+			padding: 0 15px;
+
+			.fw {
+				&-row {
+					padding: 0
+				}
+			}
+		}
+	}
+
+	&-row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		width: 100%
+	}
+
+	&-col {
+		// Extra small < 767px
+		&-xs {
+			&-12 {
+				width: 100%
+			}
+
+			&-9 {
+				width: 74%
+			}
+
+			&-8 {
+				width: 66%
+			}
+
+			&-6 {
+				width: 49%
+			}
+
+			&-4 {
+				width: 32%
+			}
+
+			&-3 {
+				width: 24%
+			}
+		}
+
+		// Small >= 767px
+		&-sm {
+			&-12 {
+				@media all and (min-width: $grid-md) {
+					width: 100%
+				}
+			}
+
+			&-9 {
+				@media all and (min-width: $grid-md) {
+					width: 74%
+				}
+			}
+
+			&-8 {
+				@media all and (min-width: $grid-md) {
+					width: 66%
+				}
+			}
+
+			&-6 {
+				@media all and (min-width: $grid-md) {
+					width: 49%
+				}
+			}
+
+			&-4 {
+				@media all and (min-width: $grid-md) {
+					width: 32%
+				}
+			}
+
+			&-3 {
+				@media all and (min-width: $grid-md) {
+					width: 24%
+				}
+			}
+		}
+
+		// Medium >= 992px
+		&-md {
+			&-12 {
+				@media all and (min-width: $grid-lg) {
+					width: 100%
+				}
+			}
+
+			&-9 {
+				@media all and (min-width: $grid-lg) {
+					width: 74%
+				}
+			}
+
+			&-8 {
+				@media all and (min-width: $grid-lg) {
+					width: 66%
+				}
+			}
+
+			&-6 {
+				@media all and (min-width: $grid-lg) {
+					width: 49%
+				}
+			}
+
+			&-4 {
+				@media all and (min-width: $grid-lg) {
+					width: 32%
+				}
+			}
+
+			&-3 {
+				@media all and (min-width: $grid-lg) {
+					width: 24%
+				}
+			}
+		}
+
+		// Large >= 1200px
+		&-lg {
+			&-12 {
+				@media all and (min-width: $grid-xl) {
+					width: 100%
+				}
+			}
+
+			&-9 {
+				@media all and (min-width: $grid-xl) {
+					width: 74%
+				}
+			}
+
+			&-8 {
+				@media all and (min-width: $grid-xl) {
+					width: 66%
+				}
+			}
+
+			&-6 {
+				@media all and (min-width: $grid-xl) {
+					width: 49%
+				}
+			}
+
+			&-4 {
+				@media all and (min-width: $grid-xl) {
+					width: 32%
+				}
+			}
+
+			&-3 {
+				@media all and (min-width: $grid-xl) {
+					width: 24%
+				}
+			}
+		}
+	}
+}

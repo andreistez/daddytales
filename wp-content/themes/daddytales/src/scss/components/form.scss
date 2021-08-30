@@ -1,0 +1,30 @@
+form {
+    position: relative
+}
+
+input,
+.input {
+    width: 100%;
+    height: 40px;
+    font-family: $ff;
+    font-size: $fs-md;
+    color: $dark;
+    padding: 0 $spacer-xl 0 15px;
+    border-radius: $radius;
+    border: 1px solid $gray;
+    transition:
+        border-color ease-out $tr,
+        color ease-out $tr;
+
+    &::placeholder {
+        color: $dark;
+        opacity: 1
+    }
+
+    &:active,
+    &:focus {
+        outline: none;
+        border-color: $brand-green;
+        color: $brand-green
+    }
+}

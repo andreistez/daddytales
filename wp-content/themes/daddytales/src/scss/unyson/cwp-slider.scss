@@ -1,0 +1,157 @@
+.cwp-slider {
+    position: relative;
+    margin: 0 -15px;
+
+    @media (min-width: $grid-xl) {
+        margin-top: 110px
+    }
+
+    &:hover {
+        .cwp-slider-nav__button {
+            @media (min-width: $grid-xl) {
+                opacity: 1
+            }
+        }
+    }
+
+    &-wrapper {
+        position: relative
+    }
+
+    &-title {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: translate(10%, -60%);
+        justify-content: center;
+        align-items: center;
+        font-family: $ff-title;
+        font-weight: $fw-black;
+        font-size: 300px;
+        color: $light;
+        text-shadow: $text-shadow-1;
+        opacity: 0.35;
+        pointer-events: none;
+
+        @media (min-width: $grid-xl) {
+            display: flex
+        }
+    }
+
+    &-nav__button {
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        height: $spacer-xl;
+        width: $spacer-xl;
+        margin-top: -$spacer-md;
+        border: none;
+        border-radius: 50%;
+        font-size: $fs-xl;
+        z-index: 3;
+        cursor: pointer;
+        background-color: $light;
+        color: $gray;
+        box-shadow: $shadow;
+        transition:
+            opacity ease-out $tr,
+            color ease-out $tr,
+            background-color ease-out $tr;
+
+        &:hover {
+            color: $white;
+            background-color: $brand-yellow
+        }
+    }
+
+    &-nav__prev {
+        left: $spacer-lg
+    }
+
+    &-nav__next {
+        right: $spacer-lg
+    }
+
+    .slick-list {
+        padding: $spacer-xs 0
+    }
+}
+
+.slide {
+    padding: 0 15px;
+    display: flex !important;
+    justify-content: center;
+    transition: opacity ease-out $tr;
+
+    &-inner {
+        position: relative;
+        width: 100%;
+        max-width: 250px;
+        overflow: hidden;
+        border-radius: $radius;
+        box-shadow: $shadow;
+
+        &:hover {
+            .slide-info {
+                transform: translateY(0)
+            }
+        }
+    }
+
+    &-thumb {
+        position: relative;
+        height: 350px;
+
+        @media (min-width: $grid-md) {
+            height: 300px
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            font-family: 'object-fit: cover;'
+        }
+    }
+
+    &-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 0 $spacer-xs $spacer-sm;
+        background: linear-gradient(transparent 0%, $very-dark 100%);
+        z-index: 1;
+        transform: translateY(52px);    // To hide button.
+        transition: transform ease-out $tr;
+
+        &__title {
+            a {
+                color: $white;
+                text-shadow: $text-shadow;
+
+                &:hover {
+                    color: $brand-yellow
+                }
+            }
+        }
+    }
+
+    &-button {
+        .button {
+            width: 100%
+        }
+    }
+
+    &-permalink {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1
+    }
+}

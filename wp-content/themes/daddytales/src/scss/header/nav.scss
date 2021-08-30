@@ -1,0 +1,259 @@
+.header-nav {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $light;
+    padding: 60px $spacer-lg;
+    overflow-y: auto;
+    z-index: 10;
+    transition: opacity ease-out $tr;
+
+    @media (min-width: $grid-xl) {
+        display: block;
+        position: relative;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        padding: 0;
+        overflow-y: visible;
+        opacity: 1
+    }
+
+    &.active {
+        display: block
+    }
+
+    &.visible {
+        opacity: 1
+    }
+
+    &-wrapper {
+        width: 40px;
+        margin-left: auto;
+
+        @media (min-width: $grid-xl) {
+            margin: auto 0 0;
+            width: auto
+        }
+
+        &.mobile {
+            .sub-menu {
+                &.active {
+                    display: block;
+                    pointer-events: all;
+                    z-index: 1
+                }
+
+                &.visible {
+                    opacity: 1
+                }
+            }
+        }
+    }
+
+    &__close {
+        display: none;
+        opacity: 0;
+        position: fixed;
+        top: 5px;
+        right: 5px;
+        width: $spacer-xl;
+        height: $spacer-xl;
+        justify-content: center;
+        align-items: center;
+        font-size: $fs-xl;
+        cursor: pointer;
+        z-index: 11;
+        transition: opacity ease-out $tr;
+
+        &.active {
+            display: flex;
+
+            @media (min-width: $grid-xl) {
+                display: none
+            }
+        }
+
+        &.visible {
+            opacity: 1;
+
+            &:hover {
+                opacity: 0.75
+            }
+        }
+    }
+
+    &__mobile {
+        font-size: $fs-xl;
+        text-align: right;
+        cursor: pointer;
+        transition: color ease-out $tr;
+
+        @media (min-width: $grid-xl) {
+            display: none
+        }
+
+        &:hover {
+            color: $brand-green
+        }
+    }
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @media (min-width: $grid-xl) {
+        flex-direction: row;
+        flex-wrap: wrap
+    }
+
+    &-item {
+        position: relative;
+        width: 100%;
+        cursor: pointer;
+
+        @media (min-width: $grid-xl) {
+            width: auto;
+            margin-right: $spacer-xl
+        }
+
+        &:last-child {
+            margin-right: 0
+        }
+
+        &:hover {
+            & > a {
+                &:active {
+                    color: $brand-green
+                }
+
+                @media (min-width: $grid-xl) {
+                    color: $brand-green
+                }
+            }
+        }
+
+        &.menu-item-has-children {
+            transition: margin-bottom ease-out $tr;
+
+            @media (min-width: $grid-xl) {
+                padding-right: 25px;
+                margin-right: 15px
+            }
+
+            &.active {
+                a {
+                    &::after {
+                        transform: rotate(180deg);
+
+                        @media (min-width: $grid-xl) {
+                            transform: rotate(0)
+                        }
+                    }
+                }
+            }
+
+            a {
+                &::after {
+                    content: '\f107';
+                    font-family: 'Font Awesome 5 Free';
+                    position: absolute;
+                    top: 17px;
+                    right: -15px;
+                    font-size: $fs-xs;
+                    pointer-events: none;
+                    transition: transform ease-out $tr
+                }
+            }
+
+            &:hover {
+                a {
+                    &::after {
+                        @media (min-width: $grid-xl) {
+                            transform: rotate(180deg)
+                        }
+                    }
+                }
+
+                .sub-menu {
+                    @media (min-width: $grid-xl) {
+                        opacity: 1;
+                        pointer-events: all;
+                        z-index: 1
+                    }
+                }
+            }
+        }
+
+        &.current-menu-item {
+            & > a {
+                color: $brand-green
+            }
+        }
+
+        a {
+            position: relative;
+            font-family: $ff-title;
+            font-size: $fs-xl;
+            font-weight: $fw-bold;
+            color: $gray;
+            padding: $spacer-xs 0;
+
+            @media (min-width: $grid-xl) {
+                width: 100%
+            }
+        }
+    }
+}
+
+.sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -$spacer-lg;
+    width: calc(100% + 60px);
+    opacity: 0;
+    pointer-events: none;
+    z-index: -10;
+    background-color: $light-2;
+    transition: opacity ease-out $tr;
+
+    @media (min-width: $grid-xl) {
+        display: block;
+        width: auto;
+        min-width: 200px;
+        padding: $spacer-xs 0;
+        margin: 0;
+        background-color: lighten($brand-yellow, 8%);
+        box-shadow: $shadow
+    }
+
+    .menu-item {
+        margin: 0;
+        padding: 0 $spacer-sm;
+        border-bottom: 1px solid $light-1;
+
+        @media (min-width: $grid-xl) {
+            border-bottom: none
+        }
+
+        &:not(.menu-item-has-children) {
+            a {
+                &::after {
+                    display: none
+                }
+            }
+        }
+
+        a {
+            font-family: $ff;
+            font-size: $fs-lg
+        }
+    }
+}

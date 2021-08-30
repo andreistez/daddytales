@@ -1,0 +1,64 @@
+// Grid.
+$grid-xs: 360px;
+$grid-sm: 480px;
+$grid-md: 768px;
+$grid-lg: 992px;
+$grid-xl: 1200px;
+$grid-xxl: 1366px;
+
+// Container.
+$container-sm: 460px;
+$container-md: 720px;
+$container-lg: 960px;
+$container-xl: 1170px;
+$container-xxl: 1320px;
+
+// Font families.
+$ff: 'Source Sans Pro', Arial, sans-serif;
+$ff-title: 'Roboto Slab', Arial, sans-serif;
+
+// Font sizes.
+$fs-xs: 12px;
+$fs-sm: 14px;
+$fs-md: 16px;
+$fs-lg: 18px;
+$fs-xl: 20px;
+
+// Font weights.
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: 700;
+$fw-extrabold: 800;
+$fw-black: 900;
+
+// Line heights.
+$lh: 1.5;
+$lh-title: 1.3;
+
+// Colors.
+$white: #fff;
+$light: #f0f0f0;
+$light-1: #c4c4c4;
+$light-2: #ddd;
+$black: #121212;
+$very-dark: #222;
+$dark: #3c3c3c;
+$gray: #5e5e5e;
+$brand-yellow: #ffd556;
+$brand-green: #01a231;
+
+// Spacers.
+$spacer-xs: 10px;
+$spacer-sm: 15px;
+$spacer-md: 20px;
+$spacer-lg: 30px;
+$spacer-xl: 40px;
+
+// Others.
+$tr: 0.35s;
+$radius: 5px;
+$shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+$text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+$text-shadow-1: 10px 10px 15px rgba(0, 0, 0, 0.5);

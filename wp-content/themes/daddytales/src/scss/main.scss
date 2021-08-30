@@ -1,0 +1,27 @@
+// Theme styles file.
+@import '../../style';
+
+// Libs.
+@import '../../node_modules/@fortawesome/fontawesome-free/css/all.min';
+@import '../../node_modules/slick-carousel/slick/slick.scss';
+@import '../../node_modules/slick-carousel/slick/slick-theme.scss';
+
+// Theme necessary styles.
+@import 'components/vars';
+@import 'components/frontend-grid';
+@import 'components/typography';
+@import 'components/base';
+@import 'components/buttons';
+@import 'components/form';
+
+// Header.
+@import 'header/header';
+@import 'header/search';
+@import 'header/nav';
+
+// Footer.
+@import 'footer/footer';
+
+// Unyson framework extensions styles.
+@import '../../../../plugins/unyson-framework-plugin/framework/extensions/shortcodes/shortcodes/section/static/css/styles';
+@import 'unyson/cwp-slider';
