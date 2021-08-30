@@ -18,3 +18,22 @@
         }
     }
 }
+
+.link {
+    position: relative;
+    font-size: $fs-lg;
+    font-weight: $fw-semibold;
+    color: $brand-yellow;
+
+    &:hover {
+        color: $brand-green
+    }
+
+    &::after {
+        content: '\f105';
+        font-family: 'Font Awesome 5 Free';
+        position: absolute;
+        top: 0;
+        right: -$spacer-md
+    }
+}

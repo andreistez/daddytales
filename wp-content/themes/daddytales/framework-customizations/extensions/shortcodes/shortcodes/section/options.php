@@ -2,6 +2,11 @@
 if( !defined( 'FW' ) ) die( 'Forbidden' );
 
 $options = [
+	'class_name'	=> [
+		'type'	=> 'text',
+		'label'	=> esc_html__( 'Class Name', 'daddytales' )
+	],
+
 	'is_fullwidth'	=> [
 		'label'	=> __( 'Full Width', 'fw' ),
 		'type'	=> 'switch'

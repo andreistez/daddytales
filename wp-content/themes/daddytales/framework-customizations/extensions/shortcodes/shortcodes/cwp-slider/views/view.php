@@ -5,7 +5,6 @@ $type_of_slider = $atts['type_of_slider'];
 ?>
 
 <div class="cwp-slider-wrapper">
-	<div class="cwp-slider-title">Мультфильмы</div>
 	<div class = "cwp-slider">
 		<?php
 		if( $type_of_slider['choice'] === 'auto' ){

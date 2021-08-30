@@ -14,3 +14,4 @@
  * Unyson components scripts.
  */
 //= unyson/cwp-slider.js
+//= unyson/cwp-latest-posts-column.js

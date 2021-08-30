@@ -10,7 +10,8 @@
 $post_id = get_the_ID();
 
 // If this is single post page.
-if (is_singular('post')) {
+if( is_singular( 'post' ) ){
+    dt_set_post_views( $post_id );
     ?>
     <article class="single-post post-<?php echo esc_attr($post_id) ?>">
         <h1><?php the_title() ?></h1>

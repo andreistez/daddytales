@@ -98,8 +98,19 @@
 			}
 
 			&-4 {
+				margin-bottom: $spacer-md;
+
+				&:last-child {
+					margin-bottom: 0
+				}
+
 				@media all and (min-width: $grid-md) {
-					width: 32%
+					width: 49%
+				}
+
+				@media all and (min-width: $grid-lg) {
+					width: 32%;
+					margin-bottom: 0
 				}
 			}
 

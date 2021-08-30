@@ -1,0 +1,28 @@
+.cwp-title {
+    position: relative;
+
+    @media all and (min-width: $grid-xl) {
+        margin-top: 110px
+    }
+
+    &__text {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        font-family: $ff-title;
+        font-weight: $fw-black;
+        font-size: 300px;
+        color: $light;
+        text-shadow: $text-shadow-1;
+        opacity: 0.35;
+        pointer-events: none;
+        margin-top: -220px;
+
+        @media all and (min-width: $grid-xl) {
+            display: flex
+        }
+    }
+}

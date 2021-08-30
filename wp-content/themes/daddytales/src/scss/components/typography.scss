@@ -64,3 +64,27 @@ p {
 b, strong {
     font-weight: $fw-bold
 }
+
+.underlined {
+    position: relative;
+    color: $gray;
+    margin-bottom: $spacer-xl;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $light-2
+    }
+
+    &.yellow {
+        color: $brand-yellow;
+
+        &::after {
+            background-color: $brand-yellow
+        }
+    }
+}

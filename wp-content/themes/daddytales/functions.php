@@ -24,7 +24,7 @@ register_nav_menus(
 /**
  * Dequeue plugins styles.
  */
-function custom_dequeue() {
+function dt_custom_dequeue() {
 	wp_dequeue_style( 'fw-ext-builder-frontend-grid' );
 	wp_deregister_style( 'fw-ext-builder-frontend-grid' );
 	wp_dequeue_style( 'fw-ext-forms-default-styles' );
@@ -34,9 +34,9 @@ function custom_dequeue() {
 	wp_dequeue_style( 'wp-block-library' );
 	wp_deregister_style( 'wp-block-library' );
 }
-add_action( 'wp_enqueue_scripts', 'custom_dequeue', 9999 );
-add_action( 'wp_head', 'custom_dequeue', 9999 );
-add_action( 'wp_print_styles', 'custom_dequeue' );
+add_action( 'wp_enqueue_scripts', 'dt_custom_dequeue', 9999 );
+add_action( 'wp_head', 'dt_custom_dequeue', 9999 );
+add_action( 'wp_print_styles', 'dt_custom_dequeue' );
 
 /**
  * JS variables for frontend, such as AJAX URL.
@@ -64,7 +64,7 @@ add_filter( 'get_the_archive_title', function( $title ) {
  * @param	mixed	$value	- some value to clean.
  * @return	mixed	$value	- the same value, but cleaned.
  */
-function clean_value( $value )
+function dt_clean_value( $value )
 {
 	$value = trim( $value );
 	$value = stripslashes( $value );
@@ -74,4 +74,57 @@ function clean_value( $value )
 }
 
 require_once get_template_directory() . '/tgmpa/daddytales.php';
+
+/**
+ * Get post views count.
+ */
+function dt_get_post_views( $post_id ){
+    $count_key = 'post_views_count';
+    $count = get_post_meta( $post_id, $count_key, true );
+
+    if( $count === '' ){
+        delete_post_meta( $post_id, $count_key );
+        add_post_meta( $post_id, $count_key, '0' );
+        return '0';
+    }
+
+    return $count;
+}
+
+/**
+ * Set post views count.
+ */
+function dt_set_post_views( $post_id ){
+    $count_key = 'post_views_count';
+    $count = get_post_meta( $post_id, $count_key, true );
+
+    if( $count === '' ){
+        $count = 0;
+        delete_post_meta( $post_id, $count_key );
+        add_post_meta( $post_id, $count_key, '0' );
+    }	else {
+        $count++;
+        update_post_meta( $post_id, $count_key, $count );
+    }
+}
+
+/**
+ * Remove double view count when opening post.
+ */
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
+
+/**
+ * Posts views in Admin Console.
+ */
+add_filter( 'manage_posts_columns', 'dt_posts_column_views' );
+add_filter( 'manage_pages_columns', 'dt_posts_column_views' );
+function dt_posts_column_views( $defaults ){
+    $defaults['post_views'] = esc_html__( 'Views' );
+    return $defaults;
+}
+add_action( 'manage_posts_custom_column', 'dt_posts_custom_column_views', 5, 2 );
+add_action( 'manage_pages_custom_column', 'dt_posts_custom_column_views', 5, 2 );
+function dt_posts_custom_column_views( $column_name, $id ){
+    if( $column_name === 'post_views' ) echo dt_get_post_views( get_the_ID() );
+}
 

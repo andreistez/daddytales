@@ -1,6 +1,7 @@
-<?php if ( ! defined( 'FW' ) ) {
-	die( 'Forbidden' );
-}
+<?php
+if( ! defined( 'FW' ) ) die( 'Forbidden' );
+
+$class = $atts['class_name'] ? ' ' . $atts['class_name'] : '';
 
 $bg_color = '';
 if ( ! empty( $atts['background_color'] ) ) {
@@ -18,7 +19,7 @@ $padding		= 'padding:' . esc_attr( $padding_top ) . 'px 0 ' . esc_attr( $padding
 $section_style   = $bg_color ? 'style="' . $padding . esc_attr( $bg_color ) . '"' : '';
 $container_class = ( isset( $atts['is_fullwidth'] ) && $atts['is_fullwidth'] ) ? 'fw-container-fluid' : 'fw-container';
 ?>
-<section class = "fw-main-row" <?php echo $section_style ?>>
+<section class = "fw-main-row<?php echo esc_attr( $class ) ?>" <?php echo $section_style ?>>
 	<div class = "<?php echo esc_attr( $container_class ) ?>">
 		<?php echo do_shortcode( $content ) ?>
 	</div>
