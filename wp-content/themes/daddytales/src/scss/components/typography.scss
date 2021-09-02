@@ -81,10 +81,10 @@ b, strong {
     }
 
     &.yellow {
-        color: $brand-yellow;
+        color: $brand-blue;
 
         &::after {
-            background-color: $brand-yellow
+            background-color: $brand-blue
         }
     }
 }

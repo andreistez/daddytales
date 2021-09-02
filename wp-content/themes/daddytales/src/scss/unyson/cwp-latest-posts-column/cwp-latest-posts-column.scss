@@ -1,3 +1,45 @@
+.cwp-latest-posts-columns {
+    .fw-col-xs-12 {
+        &:nth-child(1) {
+            .latest-col {
+                @media all and (min-width: $grid-xl) {
+                    margin-top: -$spacer-md
+                }
+            }
+        }
+
+        &:nth-child(2) {
+            .latest-col {
+                box-shadow: 0 0 20px 5px rgba(0, 255, 16, 0.15);
+
+                @media all and (min-width: $grid-xl) {
+                    animation-delay: 500ms
+                }
+            }
+        }
+
+        &:nth-child(3) {
+            .latest-col {
+                box-shadow: 0 0 20px 5px rgba(156, 11, 255, 0.15);
+
+                @media all and (min-width: $grid-xl) {
+                    margin-top: -$spacer-xl;
+                    animation-delay: 1s
+                }
+            }
+        }
+    }
+}
+
+@keyframes slow-bounce {
+    50% {
+        transform: translateY(-3%)
+    }
+    100% {
+        transform: translateY(0)
+    }
+}
+
 .latest-col {
     position: relative;
     display: flex;
@@ -7,6 +49,17 @@
     box-shadow: $shadow;
     padding: $spacer-lg;
     border-radius: $radius;
+    box-shadow: 0 0 20px 5px rgba(0, 219, 255, 0.15);
+    z-index: 1;
+
+    @media all and (min-width: $grid-xl) {
+        animation: slow-bounce ease-in-out 3s infinite;
+
+        &:hover {
+            animation-play-state: paused;
+            box-shadow: inherit inherit 30px inherit inherit
+        }
+    }
 
     &-title {
         position: relative;
@@ -22,16 +75,20 @@
         }
 
         .cwp-slider-nav__button {
-            top: 0;
+            top: -8px;
             margin-top: 0;
             opacity: 1;
             background-color: transparent;
             border-radius: 0;
             box-shadow: none;
-            color: $brand-yellow;
+            color: $brand-blue;
+
+            @media all and (min-width: $grid-md) {
+                top: 0
+            }
 
             &:hover {
-                color: $brand-green
+                color: $brand-violet
             }
 
             &.cwp-slider-nav__prev {
@@ -114,7 +171,7 @@
                     color: $gray;
 
                     &:hover {
-                        color: $brand-green
+                        color: $brand-violet
                     }
                 }
             }
@@ -129,7 +186,7 @@
                 font-weight: $fw-light;
 
                 i {
-                    color: $brand-green;
+                    color: $brand-violet;
                     font-size: $fs-xl;
                     margin-right: 5px
                 }

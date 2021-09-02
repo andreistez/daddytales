@@ -23,8 +23,6 @@ input,
 
     &:active,
     &:focus {
-        outline: none;
-        border-color: $brand-green;
-        color: $brand-green
+        outline: none
     }
 }

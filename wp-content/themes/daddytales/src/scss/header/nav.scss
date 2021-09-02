@@ -98,7 +98,7 @@
         }
 
         &:hover {
-            color: $brand-green
+            color: $brand-violet
         }
     }
 }
@@ -130,11 +130,15 @@
         &:hover {
             & > a {
                 &:active {
-                    color: $brand-green
+                    color: $brand-blue;
+
+                    @media (min-width: $grid-xl) {
+                        color: $light
+                    }
                 }
 
                 @media (min-width: $grid-xl) {
-                    color: $brand-green
+                    color: $light
                 }
             }
         }
@@ -193,7 +197,7 @@
 
         &.current-menu-item {
             & > a {
-                color: $brand-green
+                color: $light
             }
         }
 
@@ -202,7 +206,7 @@
             font-family: $ff-title;
             font-size: $fs-xl;
             font-weight: $fw-bold;
-            color: $gray;
+            color: $dark-1;
             padding: $spacer-xs 0;
 
             @media (min-width: $grid-xl) {
@@ -230,7 +234,7 @@
         min-width: 200px;
         padding: $spacer-xs 0;
         margin: 0;
-        background-color: lighten($brand-yellow, 8%);
+        background-color: #bdb1df;
         box-shadow: $shadow
     }
 

@@ -14,8 +14,27 @@
 
         &:hover {
             background-color: $light;
-            color: $brand-green
+            color: $brand-violet
         }
+    }
+
+    &.black {
+        background-color: $very-dark;
+        color: $light;
+        transition:
+            background-color ease-out $tr,
+            color ease-out $tr;
+
+        &:hover {
+            background-color: $brand-yellow;
+            color: $gray
+        }
+    }
+
+    &.lg {
+        font-size: $fs-xl;
+        min-width: 200px;
+        padding: $spacer-sm 25px
     }
 }
 
@@ -23,10 +42,10 @@
     position: relative;
     font-size: $fs-lg;
     font-weight: $fw-semibold;
-    color: $brand-yellow;
+    color: $brand-blue;
 
     &:hover {
-        color: $brand-green
+        color: $brand-violet
     }
 
     &::after {

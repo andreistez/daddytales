@@ -1,5 +1,6 @@
 .cwp-title {
     position: relative;
+    z-index: 1;
 
     @media all and (min-width: $grid-xl) {
         margin-top: 110px

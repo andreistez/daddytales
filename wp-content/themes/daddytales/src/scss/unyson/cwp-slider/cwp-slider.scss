@@ -11,7 +11,8 @@
     }
 
     &-wrapper {
-        position: relative
+        position: relative;
+        z-index: 1
     }
 
     &-nav__button {

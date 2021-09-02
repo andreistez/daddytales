@@ -100,7 +100,7 @@
 	 * Header mobile navigation sub-menu open/close.
 	 */
 	function headerSubMenuToggle(){
-		if( ! $( '.menu-item-has-children' ).length || windowWidth >= 1200 ) return;
+		if( ! $( '.menu-item-has-children' ).length ) return;
 
 		// Click on menu item with children, NOT on link.
 		$( '.header' ).on( 'click', '.header-nav .menu-item-has-children', function(){

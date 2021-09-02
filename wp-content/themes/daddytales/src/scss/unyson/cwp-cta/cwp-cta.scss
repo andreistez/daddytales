@@ -1,0 +1,66 @@
+.cwp-cta {
+    display: flex;
+    flex-direction: column;
+    padding: $spacer-xl 0;
+
+    @media (min-width: $grid-md) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center
+    }
+
+    &-text {
+        width: 100%;
+
+        @media (min-width: $grid-md) {
+            width: 70%
+        }
+
+        @media (min-width: $grid-lg) {
+            width: 80%
+        }
+
+        @media (min-width: $grid-xl) {
+            padding-right: 20%
+        }
+
+        &__title {
+            font-weight: $fw-black;
+            font-size: 40px;
+            color: $light;
+            text-shadow: $text-shadow;
+
+            @media (min-width: $grid-xl) {
+                font-size: 60px
+            }
+        }
+
+        &__desc {
+            font-size: $fs-lg;
+            font-weight: $fw-semibold;
+            color: $light;
+            margin-bottom: 0;
+            text-shadow: $text-shadow;
+
+            @media (min-width: $grid-xl) {
+                font-size: $fs-xl
+            }
+        }
+    }
+
+    &-button {
+        width: 100%;
+        text-align: center;
+        margin-top: $spacer-xl;
+
+        @media (min-width: $grid-md) {
+            width: 30%;
+            text-align: right;
+            margin-top: 0
+        }
+
+        @media (min-width: $grid-lg) {
+            width: 20%
+        }
+    }
+}
