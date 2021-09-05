@@ -36,5 +36,7 @@ if( ! $post_id ) return;
             <?php echo number_format( dt_get_post_views( $post_id ), 0, '', ' ' ) ?>
         </div>
     </div>
+
+    <a class="latest-col-post__link" href="<?php echo get_the_permalink( $post_id ) ?>"></a>
 </article><!-- .latest-col-post -->
 

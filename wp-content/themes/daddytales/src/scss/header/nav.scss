@@ -88,12 +88,16 @@
     }
 
     &__mobile {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: $spacer-xl;
         font-size: $fs-xl;
         text-align: right;
         cursor: pointer;
         transition: color ease-out $tr;
 
-        @media (min-width: $grid-xl) {
+        @media all and (min-width: $grid-xl) {
             display: none
         }
 

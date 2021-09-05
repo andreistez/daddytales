@@ -14,13 +14,14 @@
         width: 100%;
         height: 100%;
         font-family: $ff-title;
-        font-weight: $fw-black;
         font-size: 300px;
+        line-height: 1;
+        font-weight: $fw-black;
         color: $light;
         text-shadow: $text-shadow-1;
         opacity: 0.35;
         pointer-events: none;
-        margin-top: -220px;
+        margin-top: -170px;
 
         @media all and (min-width: $grid-xl) {
             display: flex

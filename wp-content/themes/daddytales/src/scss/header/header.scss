@@ -34,11 +34,11 @@
 
     &-right {
         display: flex;
-        align-items: center;
         width: 100%;
         margin-bottom: $spacer-xs;
 
-        @media (min-width: $grid-md) {
+        @media all and (min-width: $grid-md) {
+            align-items: center;
             width: auto;
             margin: 0 0 0 auto
         }
@@ -46,6 +46,17 @@
         @media (min-width: $grid-xl) {
             flex-direction: column;
             align-items: flex-end
+        }
+
+        &-top {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            width: 100%;
+
+            @media all and (min-width: $grid-sm) {
+                flex-wrap: nowrap
+            }
         }
     }
 }

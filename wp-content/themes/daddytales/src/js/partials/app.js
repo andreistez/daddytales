@@ -25,6 +25,9 @@
 		openMobileMenu();
 		closeMobileMenu();
 		headerSubMenuToggle();
+
+		openModal();
+		closeModal();
 	} );
 
 	/**
@@ -134,4 +137,80 @@
 			}
 		} );
 	}
+
+	/**
+	 * Open modal window with get-in-touch form.
+	 */
+	function openModal(){
+		if( ! $( '.modal-wrapper' ).length ) return;
+
+		$( 'body' ).on( 'click', '.footer-contacts__send', function( e ){
+			e.preventDefault();
+			// Disable scroll, except target element.
+			targetElement = document.querySelector( '#modal-wrapper' );
+			bodyScrollLock.disableBodyScroll( targetElement, { reserveScrollBarGap: true } );
+			var modalWrapper = $( '.modal-wrapper' );
+
+			// If not visible - show it.
+			if( ! modalWrapper.hasClass( 'active visible' ) ){
+				modalWrapper.addClass( 'active' );
+				setTimeout( function(){
+					modalWrapper.addClass( 'visible' );
+				}, 10 );
+			}	else {	// Otherwise - hide it.
+				modalWrapper.removeClass( 'visible' );
+				setTimeout( function(){
+					modalWrapper.removeClass( 'active' );
+				}, 350 );
+			}
+		} );
+	}
+
+	/**
+	 * Close modal window with get-in-touch form.
+	 */
+	function closeModal(){
+		if( ! $( '.modal-wrapper' ).length ) return;
+
+		$( 'body' ).on( 'click', '.modal-close', function(){
+			var modalWrapper = $( '.modal-wrapper' );
+
+			// If is visible - hide it.
+			if( modalWrapper.hasClass( 'active visible' ) ){
+				modalWrapper.removeClass( 'visible' );
+				bodyScrollLock.enableBodyScroll( targetElement );
+				setTimeout( function(){
+					modalWrapper.removeClass( 'active' );
+				}, 350 );
+			}
+		} );
+	}
+
+	/**
+	 * Animates element when window scrolled to it.
+	 *
+	 * @param jQuery block - jQuery element to animate.
+	 * @param int st - scrolled from the top.
+	 * @param float windowHeight - window height.
+	 */
+	function animateBlock( block, st, windowHeight ){
+		block.each( function( index, elem ){
+			var col = $( this );
+
+			if( ! col.hasClass( 'visible' ) && st >= ( col.offset().top - windowHeight + 200 ) ){
+				block.addClass( 'visible' );
+				return;
+			}
+		} );
+	}
+
+	/**
+	 * When scrolling page.
+	 */
+	$( window ).on( 'scroll', function(){
+		var st = $( this ).scrollTop();
+		var windowHeight = $( window ).height();
+
+		animateBlock( $( '.latest-col' ), st, windowHeight );
+	} );
 } )( jQuery );

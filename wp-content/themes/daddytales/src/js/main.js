@@ -9,6 +9,9 @@
  * Theme scripts.
  */
 //= partials/app.js
+//= partials/ajax.js
+
+//= auth/ajax.js
 
 /**
  * Unyson components scripts.

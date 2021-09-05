@@ -1,26 +1,47 @@
 .cwp-cta {
     display: flex;
     flex-direction: column;
-    padding: $spacer-xl 0;
+    padding: $spacer-md 0;
 
-    @media (min-width: $grid-md) {
+    @media all and (min-width: $grid-md) {
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center
     }
 
+    &.small {
+        padding: $spacer-xs 0;
+
+        .cwp-cta-text__title {
+            font-size: 30px;
+            margin-bottom: 5px;
+
+            @media all and (min-width: $grid-xl) {
+                font-size: 40px
+            }
+        }
+
+        .cwp-cta-text__desc {
+            font-size: $fs-md;
+
+            @media all and (min-width: $grid-xl) {
+                font-size: $fs-lg
+            }
+        }
+    }
+
     &-text {
         width: 100%;
 
-        @media (min-width: $grid-md) {
+        @media all and (min-width: $grid-md) {
             width: 70%
         }
 
-        @media (min-width: $grid-lg) {
+        @media all and (min-width: $grid-lg) {
             width: 80%
         }
 
-        @media (min-width: $grid-xl) {
+        @media all and (min-width: $grid-xl) {
             padding-right: 20%
         }
 
@@ -30,7 +51,7 @@
             color: $light;
             text-shadow: $text-shadow;
 
-            @media (min-width: $grid-xl) {
+            @media all and (min-width: $grid-xl) {
                 font-size: 60px
             }
         }
@@ -53,13 +74,13 @@
         text-align: center;
         margin-top: $spacer-xl;
 
-        @media (min-width: $grid-md) {
+        @media all and (min-width: $grid-md) {
             width: 30%;
             text-align: right;
             margin-top: 0
         }
 
-        @media (min-width: $grid-lg) {
+        @media all and (min-width: $grid-lg) {
             width: 20%
         }
     }

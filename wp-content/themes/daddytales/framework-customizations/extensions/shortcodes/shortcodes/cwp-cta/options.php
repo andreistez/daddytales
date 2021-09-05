@@ -1,9 +1,18 @@
 <?php
-if ( !defined( 'FW' ) ) {
-	die( 'Forbidden' );
-}
+if( !defined( 'FW' ) ) die( 'Forbidden' );
 
 $options = [
+	'text_size'=> [
+		'type'		=> 'radio',
+		'value'		=> 'large',
+		'label'		=> esc_html__( 'Text Size', 'daddytales' ),
+		'choices'	=> [
+			'large'	=> esc_html__( 'Large', 'daddytales' ),
+			'small'	=> esc_html__( 'Small', 'daddytales' )
+		],
+		'inline'	=> true
+	],
+
 	'title'	=> [
 		'type'	=> 'text',
 		'label'	=> esc_html__( 'Title', 'daddytales' )
@@ -35,5 +44,16 @@ $options = [
 				'text'	=> esc_html__( 'Yes', 'daddytales' )
 			]
 		]
+	],
+
+	'alt_view'  => [
+		'type'			=> 'select',
+		'label'			=> esc_html__( 'Alt View If User is Logged In', 'daddytales' ),
+		'choices'		=> [
+			'leave'				=> esc_html__( 'Leave the Same View', 'daddytales' ),
+			'hide'				=> esc_html__( 'Hide', 'daddytales' ),
+			'show_alt_content'	=> esc_html__( 'Show User Greetings', 'daddytales' )
+		],
+		'no-validate'	=> false
 	]
 ];

@@ -1,7 +1,5 @@
 <?php
-if ( !defined( 'FW' ) ) {
-	die( 'Forbidden' );
-}
+if( !defined( 'FW' ) ) die( 'Forbidden' );
 
 $options = [
 	'category'	=> [
@@ -18,3 +16,4 @@ $options = [
 		'label'	=> esc_html__( 'Posts Count', 'daddytales' )
 	]
 ];
+

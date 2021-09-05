@@ -1,9 +1,17 @@
+button {
+    cursor: pointer;
+    border: none
+}
+
 .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-weight: $fw-semibold;
     padding: 5px $spacer-sm;
     border-radius: $radius;
-    text-align: center;
     box-shadow: $shadow;
+    min-height: $spacer-xl;
 
     &.yellow {
         background-color: $brand-yellow;
@@ -19,7 +27,7 @@
     }
 
     &.black {
-        background-color: $very-dark;
+        background-color: $dark-1;
         color: $light;
         transition:
             background-color ease-out $tr,
@@ -35,6 +43,20 @@
         font-size: $fs-xl;
         min-width: 200px;
         padding: $spacer-sm 25px
+    }
+
+    &.icon {
+        font-size: 17px;
+        font-weight: $fw-regular;
+
+        span {
+            white-space: nowrap
+        }
+
+        i {
+            font-size: $fs-lg;
+            margin-left: $spacer-xs
+        }
     }
 }
 

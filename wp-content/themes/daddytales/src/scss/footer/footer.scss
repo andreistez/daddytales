@@ -1,3 +1,128 @@
 .footer {
-    margin-top: auto
+    margin-top: auto;
+    box-shadow: $shadow;
+    z-index: 10;
+
+    &-logo {
+        margin-bottom: $spacer-md;
+
+        @media all and (min-width: $grid-md) {
+            width: 100%;
+            text-align: center
+        }
+
+        @media all and (min-width: $grid-xl) {
+            width: 20%;
+            text-align: left;
+            margin-bottom: 0
+        }
+    }
+
+    &-top {
+        background-color: $very-dark;
+        padding: $spacer-md 0;
+
+        &-inner {
+            display: flex;
+            flex-wrap: wrap
+        }
+    }
+
+    &-bottom {
+        background-color: $black;
+        padding: $spacer-xs 0;
+
+        p {
+            font-size: $fs-sm;
+            font-weight: $fw-light;
+            color: $gray;
+            margin-bottom: 0
+        }
+
+        a {
+            color: $brand-blue;
+
+            &:hover {
+                color: $brand-violet
+            }
+        }
+    }
+
+    &-nav {
+        width: 100%;
+
+        @media all and (min-width: $grid-md) {
+            width: 70%
+        }
+
+        @media all and (min-width: $grid-xl) {
+            width: 65%
+        }
+
+        .menu {
+            @media all and (min-width: $grid-sm) {
+                flex-direction: row;
+                flex-wrap: wrap
+            }
+
+            &-item {
+                width: 100%;
+                margin-right: 0;
+                cursor: default;
+
+                @media all and (min-width: $grid-sm) {
+                    width: 50%
+                }
+
+                @media all and (min-width: $grid-xl) {
+                    width: 33.333%
+                }
+
+                &.current-menu-item {
+                    & > a {
+                        color: $brand-yellow
+                    }
+                }
+
+                a {
+                    width: auto;
+                    font-family: $ff;
+                    font-size: $fs-md;
+                    font-weight: $fw-regular;
+                    color: $light;
+                    padding: 5px 0;
+
+                    &:hover {
+                        color: $brand-yellow
+                    }
+                }
+            }
+        }
+    }
+
+    &-contacts {
+        width: 100%;
+        margin-top: $spacer-md;
+
+        @media all and (min-width: $grid-sm) {
+            width: 50%
+        }
+
+        @media all and (min-width: $grid-md) {
+            width: 30%;
+            margin-top: 0;
+            text-align: right
+        }
+
+        @media all and (min-width: $grid-xl) {
+            width: 15%
+        }
+
+        p {
+            margin-bottom: $spacer-sm;
+            color: $light-1;
+            font-size: $fs-sm;
+            font-weight: $fw-light
+        }
+    }
 }

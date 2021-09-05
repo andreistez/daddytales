@@ -41,6 +41,7 @@
 }
 
 .latest-col {
+    opacity: 0;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -51,14 +52,18 @@
     border-radius: $radius;
     box-shadow: 0 0 20px 5px rgba(0, 219, 255, 0.15);
     z-index: 1;
+    transition: opacity ease-out $tr * 3;
 
-    @media all and (min-width: $grid-xl) {
-        animation: slow-bounce ease-in-out 3s infinite;
+        @media all and (min-width: $grid-xl) {
+            animation: slow-bounce ease-in-out 3s infinite;
 
-        &:hover {
-            animation-play-state: paused;
-            box-shadow: inherit inherit 30px inherit inherit
+            &:hover {
+                animation-play-state: paused
+            }
         }
+
+    &.visible {
+        opacity: 1
     }
 
     &-title {
@@ -116,13 +121,15 @@
 
                 & > div {
                     margin-bottom: $spacer-md;
-                    padding-bottom: $spacer-xs;
                     border-bottom: 1px solid $light-2;
+
+                    .latest-col-post {
+                        padding-bottom: $spacer-xs
+                    }
 
                     &:last-child {
                         margin-bottom: 0;
-                        border-bottom: none;
-                        padding-bottom: 0
+                        border-bottom: none
                     }
                 }
             }
@@ -130,8 +137,21 @@
     }
 
     &-post {
+        position: relative;
         display: flex !important;
         flex-wrap: wrap;
+        border-radius: $radius;
+        transition: background-color ease-out $tr;
+
+        &:hover {
+            background-color: rgba(89, 224, 255, 0.1);
+
+            .latest-col-post-info__title {
+                a {
+                    color: $brand-violet
+                }
+            }
+        }
 
         &-thumb {
             position: relative;
@@ -168,11 +188,7 @@
                 margin-bottom: 5px;
 
                 a {
-                    color: $gray;
-
-                    &:hover {
-                        color: $brand-violet
-                    }
+                    color: $gray
                 }
             }
 
@@ -191,6 +207,15 @@
                     margin-right: 5px
                 }
             }
+        }
+
+        &__link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1
         }
     }
 

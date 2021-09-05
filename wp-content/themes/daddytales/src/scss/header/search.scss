@@ -1,9 +1,13 @@
 .searchform {
     width: 100%;
-    max-width: 350px;
+
+    @media all and (min-width: $grid-md) {
+        max-width: 350px
+    }
 
     input {
-        background-color: $light
+        background-color: $light;
+        padding-right: $spacer-xl
     }
 
     &-button {

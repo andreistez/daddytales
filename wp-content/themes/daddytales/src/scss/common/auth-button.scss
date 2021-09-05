@@ -1,0 +1,36 @@
+.auth-buttons {
+    display: flex;
+    width: 100%;
+    margin-top: $spacer-md;
+
+    @media all and (min-width: $grid-sm) {
+        width: auto;
+        margin: 0 0 0 $spacer-md
+    }
+
+    .button {
+        margin-right: $spacer-xs;
+
+        &:last-child {
+            margin-right: 0
+        }
+
+        span {
+            display: none
+        }
+
+        i {
+            margin-left: 0
+        }
+
+        @media all and (min-width: $grid-md) {
+            span {
+                display: inline
+            }
+
+            i {
+                margin-left: $spacer-xs
+            }
+        }
+    }
+}

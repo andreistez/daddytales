@@ -118,45 +118,62 @@
 	?>
 
 	<div class="wrapper">
-		<header class="header">
-			<div class="fw-container">
-				<div class="header-inner">
-					<?php
-					if( $header_logo ){
-						?>
-						<div class="header-logo">
-							<a href="<?php echo home_url( '/' ) ?>">
-								<?php echo wp_get_attachment_image( $header_logo['attachment_id'] ) ?>
-							</a>
-						</div>
+		<?php
+		// Hide header on Login/Registration/Lostpass/Activation pages.
+		if(
+			! is_page_template( 'page-template-login.php' )
+			&& ! is_page_template( 'page-template-lostpass.php' )
+			&& ! is_page_template( 'page-template-register.php' )
+			&& ! is_page_template( 'page-template-activate.php' )
+		){
+			?>
+			<header class="header">
+				<div class="fw-container">
+					<div class="header-inner">
 						<?php
-					}
-					?>
+						if( $header_logo ){
+							?>
+							<div class="header-logo">
+								<a href="<?php echo home_url( '/' ) ?>" title="<?php esc_attr_e( 'На Главную', 'daddytales' ) ?>">
+									<?php echo wp_get_attachment_image( $header_logo['attachment_id'] ) ?>
+								</a>
+							</div>
+							<?php
+						}
+						?>
 
-					<div class="header-right">
-						<?php get_search_form() ?>
-
-						<div id="header-nav-wrapper" class="header-nav-wrapper">
-							<div class="header-nav__mobile">
-								<i class="fas fa-bars"></i>
+						<div class="header-right">
+							<div class="header-right-top">
+								<?php
+								get_search_form();
+								get_template_part( 'includes/common/auth', 'buttons' );
+								?>
 							</div>
 
-							<?php
-							wp_nav_menu(
-								[
-									'theme_location'	=> 'header_menu',
-									'container'			=> 'nav',
-									'container_class'	=> 'header-nav',
-									'container_id'		=> 'header-nav'
-								]
-							)
-							?>
+							<div id="header-nav-wrapper" class="header-nav-wrapper">
+								<div class="header-nav__mobile">
+									<i class="fas fa-bars"></i>
+								</div>
 
-							<div class="close-cross header-nav__close">
-								<i class="fas fa-times"></i>
+								<?php
+								wp_nav_menu(
+									[
+										'theme_location'	=> 'header_menu',
+										'container'			=> 'nav',
+										'container_class'	=> 'header-nav',
+										'container_id'		=> 'header-nav'
+									]
+								)
+								?>
+
+								<div class="close-cross header-nav__close">
+									<i class="fas fa-times"></i>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</header>
+			</header>
+			<?php
+		}
+		?>

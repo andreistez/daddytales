@@ -99,7 +99,7 @@
         padding: 0 $spacer-xs $spacer-sm;
         background: linear-gradient(transparent 0%, $very-dark 100%);
         z-index: 1;
-        transform: translateY(52px);    // To hide button.
+        transform: translateY(55px);    // To hide button.
         transition: transform ease-out $tr;
 
         &__title {

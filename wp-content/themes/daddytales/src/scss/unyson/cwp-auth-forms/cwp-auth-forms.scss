@@ -1,0 +1,50 @@
+.section {
+    &-login,
+    &-register,
+    &-lostpass,
+    &-activate {
+        min-height: 100vh
+    }
+}
+
+.login-wrapper {
+    padding: $spacer-xl 0
+}
+
+.already-logged-in {
+    position: relative;
+    font-size: $fs-xl;
+    font-weight: $fw-semibold;
+    z-index: 1;
+
+    &-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: $spacer-md;
+
+        .button {
+            margin-right: $spacer-xs;
+
+            &:last-child {
+                margin-right: 0
+            }
+        }
+    }
+
+    a {
+        color: $brand-blue;
+
+        &:hover {
+            color: $brand-violet
+        }
+    }
+}
+
+.dt-logout {
+    color: $brand-blue;
+
+    &:hover {
+        color: $brand-violet
+    }
+}

@@ -1,7 +1,5 @@
 <?php
-if ( !defined( 'FW' ) ) {
-	die( 'Forbidden' );
-}
+if( !defined( 'FW' ) ) die( 'Forbidden' );
 
 $options = [
 	'title'	=> [
