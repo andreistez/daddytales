@@ -12,6 +12,7 @@
 //= partials/ajax.js
 
 //= auth/ajax.js
+//= auth/scripts.js
 
 /**
  * Unyson components scripts.

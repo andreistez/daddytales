@@ -1,0 +1,132 @@
+.profile {
+    &-inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        background-color: $white;
+        padding: $spacer-lg;
+        margin: $spacer-xl 0;
+        box-shadow: $shadow
+    }
+
+    &-sidebar {
+        width: 20%
+    }
+
+    &-avatar {
+        margin-bottom: $spacer-xs;
+        padding-bottom: $spacer-md;
+        border-bottom: 1px solid $light;
+
+        .avatar {
+            position: relative;
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: $radius;
+            box-shadow: $shadow
+        }
+
+        .dt-logout {
+            i {
+                margin-right: 3px
+            }
+        }
+    }
+
+    &-login {
+        margin: $spacer-md 0 $spacer-xs;
+        color: $brand-violet
+    }
+
+    &-content {
+        width: 75%;
+
+        &-inner {
+            display: none;
+
+            &.active {
+                display: block
+            }
+        }
+
+        .section-title {
+            &.underlined {
+                margin-bottom: 0
+            }
+        }
+    }
+}
+
+.user {
+    &-tab {
+        cursor: pointer;
+        font-size: $fs-xl;
+        font-weight: $fw-semibold;
+        color: $gray;
+        padding: $spacer-xs 0;
+        transition: color ease-out $tr;
+
+        &:hover,
+        &.active {
+            color: $brand-violet
+        }
+    }
+
+    &-fields {
+        width: 100%;
+
+        &.disabled {
+            opacity: 0.5
+        }
+
+        .button {
+            background-color: $very-dark;
+            transition: background-color ease-out $tr;
+
+            &:hover {
+                background-color: $brand-blue
+            }
+        }
+    }
+
+    &-field {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: $spacer-xs 0;
+
+        &.hidden {
+            display: none
+        }
+
+        &.note {
+            justify-content: center;
+            color: $brand-violet;
+            font-weight: $fw-semibold
+        }
+
+        &.avatar {
+            img {
+                border-radius: $radius;
+                box-shadow: $shadow;
+                margin-right: $spacer-xs
+            }
+        }
+
+        &-label {
+            width: 30%;
+            color: $gray
+        }
+
+        &-value {
+            width: 65%;
+            font-weight: $fw-semibold
+        }
+
+        &-button {
+            margin-top: $spacer-sm;
+            justify-content: flex-end
+        }
+    }
+}
