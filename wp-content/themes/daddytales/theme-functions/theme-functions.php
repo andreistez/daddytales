@@ -1,5 +1,13 @@
 <?php
 /**
+ * For user sessions.
+ */
+function dt_register_session(){
+	if( ! session_id() ) session_start();
+}
+add_action( 'init', 'dt_register_session' );
+
+/**
  * Clean incoming value from trash.
  *
  * @param	mixed	$value	- some value to clean.
@@ -149,7 +157,35 @@ function dt_posts_custom_column_views( $column_name, $id ){
 /**
  * Function for HTML content type in E-mails.
  */
-function set_html_content_type(){
+function dt_set_html_content_type(){
 	return 'text/html';
+}
+
+/**
+ * Register new post types and taxonomies.
+ */
+add_action( 'init', 'dt_custom_init' );
+function dt_custom_init(){
+	// Hidden post type for users' avatars.
+	register_post_type(
+		'user_avatar',
+		[
+			'labels'				=> ['name' => esc_html__( 'User Avatar', 'daddytales' )],
+			'menu_icon'				=> 'dashicons-id-alt',
+			'public'				=> false,
+			'publicly_queryable'	=> false,
+			'exclude_from_search'	=> true,
+			'show_ui'				=> false,
+			'show_in_menu'			=> false,
+			'show_in_rest'			=> false,
+			'query_var'				=> true,
+			'rewrite'				=> false,
+			'capability_type'		=> 'user_avatar',
+			'map_meta_cap'			=> true,
+			'has_archive'			=> false,
+			'hierarchical'			=> false,
+			'supports'				=> ['title', 'thumbnail', 'author']
+		]
+	);
 }
 

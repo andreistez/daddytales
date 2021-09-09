@@ -108,7 +108,7 @@ label {
     font-weight: $fw-semibold
 }
 
-input, .input,
+input:not([type="file"]), .input,
 textarea, .textarea {
     width: 100%;
     font-family: $ff;
@@ -139,13 +139,18 @@ input, .input {
 
 textarea, .textarea {
     height: 80px;
-    padding: $spacer-sm
+    padding: 5px $spacer-sm
 }
 
 input[type="checkbox"] {
     width: $spacer-sm;
     height: $spacer-sm;
     margin: 0 5px 0 0
+}
+
+input[type="file"] {
+    width: auto;
+    height: auto
 }
 
 .disclaimer {

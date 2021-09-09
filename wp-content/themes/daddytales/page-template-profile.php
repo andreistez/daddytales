@@ -16,8 +16,13 @@ $user = wp_get_current_user()
         <div class="fw-container">
             <div class="profile-inner">
                 <?php
-                get_template_part( 'includes/profile/sidebar', null, ['user' => $user] );
-                get_template_part( 'includes/profile/content', null, ['user' => $user] );
+                // If User is logged in.
+                if( is_user_logged_in() ){
+                    get_template_part( 'includes/profile/sidebar', null, ['user' => $user] );
+                    get_template_part( 'includes/profile/content', null, ['user' => $user] );
+                }   else {
+                    get_template_part( 'includes/profile/not', 'logged-in' );
+                }
                 ?>
             </div>
         </div><!-- .fw-container -->
