@@ -8,6 +8,7 @@
 
 // Correct only inside WP loop.
 $post_id = get_the_ID();
+$post_views = dt_get_post_views( $post_id );
 
 if( ! $post_id ) return;
 ?>
@@ -24,6 +25,10 @@ if( ! $post_id ) return;
             <?php
         }
         ?>
+
+        <div class="slide-views">
+            <i class="far fa-eye"></i> <?php echo number_format( esc_html( $post_views ), 0, '', ' ' ) ?>
+        </div>
 
         <div class="slide-info">
             <h6 class="slide-info__title">

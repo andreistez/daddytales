@@ -5,6 +5,10 @@
  * @package WordPress
  * @subpackage daddytales
  */
+
+/** @var array $args */
+$user = $args['user'];
+$user_id = $user->ID;
 ?>
 
 <div class="profile-content-inner invite" data-content="invite">
@@ -44,6 +48,49 @@
 			<?php wp_nonce_field( 'dt_ajax_invite_friend', 'dt_invite_friend_nonce' ) ?>
 			<div class="user-field note hidden"></div>
 		</fieldset>
-	</form>
+	</form><!-- .user-invite -->
+
+	<?php
+	$users = get_users( [
+		'meta_key'		=> 'invited_by',
+		'meta_value'	=> $user_id,
+		'meta_compare'	=> '=',
+		'number'		=> '',
+		'fields'		=> 'all_with_meta'
+	] );
+
+	if( $users ){
+		?>
+		<div class="section-title underlined">
+			<h3 class="section-title-text">
+				<?php esc_html_e( 'Пользователи, пришедшие по Вашей ссылке', 'daddytales' ) ?>
+			</h3>
+		</div>
+
+		<div class="invite-list">
+			<?php
+			$iter = 1;
+			foreach( $users as $key => $invited_user ){
+				$args = [
+					'iter'	=> $iter,
+					'user'	=> $invited_user
+				];
+				get_template_part( 'includes/profile/invited', 'user', $args );
+				$iter++;
+			}
+			?>
+		</div><!-- .invite-list -->
+		<?php
+	}	else {
+		?>
+		<p class="invite-list-empty">
+			<?php esc_html_e( 'Здесь будут отображаться все Пользователи, прошедшие регистрацию на сайте по Вашей ссылке.', 'daddytales' ) ?>
+		</p>
+		<p class="invite-list-empty">
+			<?php esc_html_e( 'Статус активации их аккаунтов также будет указан.', 'daddytales' ) ?>
+		</p>
+		<?php
+	}
+	?>
 </div><!-- .profile-content-inner.invite -->
 

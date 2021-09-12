@@ -1,0 +1,119 @@
+.invite-member {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-top: $spacer-lg;
+    padding-bottom: $spacer-xs;
+    border-bottom: 1px solid $light;
+
+    &.activated {
+        .invite-member__status {
+            color: $brand-green
+        }
+    }
+
+    &.not-activated {
+        .invite-member__status {
+            color: $gray
+        }
+    }
+
+    &-number {
+        width: 20%;
+        font-family: $ff-title;
+        font-size: 24px;
+        font-weight: $fw-bold;
+        padding-left: 5px;
+
+        @media all and (min-width: $grid-sm) {
+            width: 15%
+        }
+
+        @media all and (min-width: $grid-md) {
+            width: 10%
+        }
+    }
+
+    &-image {
+        width: 80px;
+        height: 80px;
+        overflow: hidden;
+        border-radius: $radius;
+        box-shadow: $shadow
+    }
+
+    &-info {
+        width: 100%;
+        padding-left: 20%;
+        margin-top: $spacer-xs;
+
+        @media all and (min-width: $grid-sm) {
+            padding-left: 15%
+        }
+
+        @media all and (min-width: $grid-md) {
+            padding-left: 10%
+        }
+
+        @media all and (min-width: $grid-lg) {
+            width: auto;
+            flex-grow: 1;
+            padding-left: $spacer-md;
+            margin-top: 0
+        }
+    }
+
+    &__title {
+        font-size: $spacer-md;
+        margin-bottom: 5px
+    }
+
+    &__row {
+        display: flex;
+        flex-direction: column;
+        font-size: $fs-sm;
+        margin-bottom: 5px;
+
+        @media all and (min-width: $grid-sm) {
+            font-size: $fs-lg
+        }
+
+        @media all and (min-width: $grid-md) {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between
+        }
+    }
+
+    &__label {
+        width: 100%;
+        color: $gray;
+
+        @media all and (min-width: $grid-md) {
+            width: 20%
+        }
+    }
+
+    &__value {
+        width: 100%;
+        font-weight: $fw-semibold;
+
+        @media all and (min-width: $grid-md) {
+            width: 75%
+        }
+
+        a {
+            color: $brand-blue;
+
+            &:hover {
+                color: $brand-violet
+            }
+        }
+
+        i {
+            width: 18px;
+            height: 18px;
+            margin-right: $spacer-xs
+        }
+    }
+}

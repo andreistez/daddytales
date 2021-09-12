@@ -55,6 +55,22 @@ $user_bio = $user_meta['description'][0];
             <i class="fas fa-user-edit"></i>
             <?php esc_html_e( 'Редактировать профиль', 'daddytales' ) ?>
         </div>
+
+        <?php
+        // If current User has role that can go to Admin Console.
+        $allowed_roles = ['administrator'];
+        if( array_intersect( $allowed_roles, $user->roles ) ){
+            // Show button to quick redirect.
+            ?>
+            <div class="user-tab user-tab_admin" data-content="to-admin">
+                <i class="fas fa-lock-open"></i>
+                <a href="<?php echo home_url() ?>/wp-admin">
+                    <?php esc_html_e( 'В Админку', 'daddytales' ) ?>
+                </a>
+            </div>
+            <?php
+        }
+        ?>
     </div><!-- .user-tabs -->
 </aside><!-- .profile-sidebar -->
 

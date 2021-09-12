@@ -187,5 +187,79 @@ function dt_custom_init(){
 			'supports'				=> ['title', 'thumbnail', 'author']
 		]
 	);
+
+	// Cartoons taxonomy.
+	register_taxonomy(
+		'cartoons',
+		['cartoon'],
+		[
+			'label'                 => esc_html__( 'Cartoons Categories', 'daddytales' ),
+			'labels'                => [
+				'name'              => esc_html__( 'Cartoons Categories', 'daddytales' ),
+				'singular_name'     => esc_html__( 'Cartoons Category', 'daddytales' ),
+				'search_items'      => esc_html__( 'Search Cartoons Categories', 'daddytales' ),
+				'all_items'         => esc_html__( 'All Cartoons Categories', 'daddytales' ),
+				'view_item '        => esc_html__( 'View Cartoons Categories', 'daddytales' ),
+				'parent_item'       => esc_html__( 'Parent Cartoons Category', 'daddytales' ),
+				'parent_item_colon' => esc_html__( 'Parent Cartoons Category:', 'daddytales' ),
+				'edit_item'         => esc_html__( 'Edit Cartoons Category', 'daddytales' ),
+				'update_item'       => esc_html__( 'Update Cartoons Category', 'daddytales' ),
+				'add_new_item'      => esc_html__( 'Add New Cartoons Category', 'daddytales' ),
+				'new_item_name'     => esc_html__( 'New Cartoons Category', 'daddytales' ),
+				'menu_name'         => esc_html__( 'Cartoons Categories', 'daddytales' ),
+			],
+			'description'           => '',
+			'public'                => true,
+			'publicly_queryable'    => true,
+			'show_in_nav_menus'     => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'show_tagcloud'         => true,
+			'show_in_quick_edit'    => true,
+			'hierarchical'          => true,
+			'rewrite'               => true,
+			'capabilities'          => [],
+			'show_admin_column'     => true,
+			'show_in_rest'          => true
+		]
+	);
+	// Cartoon post type.
+	register_post_type(
+		'cartoon',
+		[
+			'labels'				=> [
+				'name'				=> esc_html__( 'Cartoon', 'daddytales' ),
+				'singular_name'		=> esc_html__( 'Cartoon', 'daddytales' ),
+				'add_new'			=> esc_html__( 'Add New Cartoon', 'daddytales' ),
+				'add_new_item'		=> esc_html__( 'Add New Cartoon', 'daddytales' ),
+				'edit_item'			=> esc_html__( 'Edit Cartoon', 'daddytales' ),
+				'new_item'			=> esc_html__( 'New Cartoon', 'daddytales' ),
+				'view_item'			=> esc_html__( 'Look at Cartoon', 'daddytales' ),
+				'search_items'		=> esc_html__( 'Find Cartoon', 'daddytales' ),
+				'not_found'         => esc_html__( 'Cartoons not found', 'daddytales' ),
+				'not_found_in_trash'=> esc_html__( 'There are no Cartoons in the trash', 'daddytales' ),
+				'parent_item_colon'	=> '',
+				'menu_name'			=> esc_html__( 'Cartoons', 'daddytales' )
+			],
+			'menu_icon'				=> 'dashicons-video-alt3',
+			'public'				=> true,
+			'publicly_queryable'	=> true,
+			'exclude_from_search'	=> false,
+			'show_ui'				=> true,
+			'show_in_menu'			=> true,
+			'show_in_rest'			=> true,
+			'query_var'				=> true,
+			'rewrite'				=> [
+				'slug'			=> '/',
+				'with_front'	=> false
+			],
+			'capability_type'		=> 'post',
+			'map_meta_cap'			=> true,
+			'has_archive'			=> true,
+			'hierarchical'			=> false,
+			'menu_position'			=> 6,
+			'supports'				=> ['title', 'editor', 'thumbnail', 'author']
+		]
+	);
 }
 

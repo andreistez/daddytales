@@ -60,5 +60,5 @@ $user_website = $user_data->user_url;
         }
         ?>
 	</div><!-- .user-fields -->
-</div><!-- .user-dashboard-info -->
+</div><!-- .profile-content-inner -->
 

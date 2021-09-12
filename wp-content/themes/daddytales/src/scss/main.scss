@@ -13,6 +13,7 @@
 @import 'components/base';
 @import 'components/buttons';
 @import 'components/form';
+@import 'components/404';
 
 // Header.
 @import 'header/header';
@@ -28,6 +29,8 @@
 
 // Profile.
 @import 'profile/profile';
+@import 'profile/user';
+@import 'profile/invite-member';
 
 // Unyson framework extensions styles.
 @import '../../../../plugins/unyson-framework-plugin/framework/extensions/shortcodes/shortcodes/section/static/css/styles';

@@ -91,6 +91,28 @@
         }
     }
 
+    &-views {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 5px;
+        left: $spacer-xs;
+        font-size: $fs-md;
+        color: $very-dark;
+        font-weight: $fw-light;
+        background-color: rgba(255, 255, 255, 0.75);
+        border-radius: $radius;
+        padding: 0 5px;
+        box-shadow: $shadow;
+        z-index: 1;
+
+        i {
+            font-size: $fs-xl;
+            color: $brand-violet;
+            margin-right: 5px
+        }
+    }
+
     &-info {
         position: absolute;
         bottom: 0;

@@ -24,12 +24,12 @@
                     <i class="fas fa-long-arrow-alt-left"></i>
 				</a>
 
-				<a class="button black icon" href="<?php echo get_the_permalink( 7010 ) ?>">
+				<a class="button black icon" href="<?php echo get_the_permalink( 6706 ) ?>">
 					<span><?php esc_html_e( 'Вход', 'daddytales' ) ?></span>
                     <i class="fas fa-sign-in-alt"></i>
 				</a>
 
-				<a class="button black icon" href="<?php echo get_the_permalink( 7013 ) ?>">
+				<a class="button black icon" href="<?php echo get_the_permalink( 6723 ) ?>">
 					<span><?php esc_html_e( 'Регистрация', 'daddytales' ) ?></span>
                     <i class="fas fa-user-alt"></i>
 				</a>

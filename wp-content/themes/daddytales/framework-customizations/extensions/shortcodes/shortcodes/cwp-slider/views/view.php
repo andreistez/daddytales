@@ -11,7 +11,7 @@ $type_of_slider = $atts['type_of_slider'];
 			$posts_count = $type_of_slider['auto']['posts_count'] ?? 20;
 			$slider_query = new WP_Query(
 				[
-					'post_type'			=> 'post',
+					'post_type'			=> 'cartoon',
 					'cat'				=> 6,
 					'post_status'		=> 'publish',
 					'posts_per_page'	=> $posts_count
@@ -34,7 +34,9 @@ $type_of_slider = $atts['type_of_slider'];
 			if( empty( $slides ) ) return;
 
 			foreach( $slides as $slide ){
-				echo get_the_title( $slide );
+				if( ! $slide ) continue;
+
+				get_template_part( 'includes/single/slider', 'preview', ['post_id' => $slide] );
 			}
 		}
 		?>

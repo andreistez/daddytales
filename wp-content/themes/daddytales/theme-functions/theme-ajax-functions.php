@@ -2,7 +2,6 @@
 /**
  * AJAX login with redirect.
  */
-add_action( 'wp_ajax_dt_ajax_login', 'dt_ajax_login' );
 add_action( 'wp_ajax_nopriv_dt_ajax_login', 'dt_ajax_login' );
 function dt_ajax_login(){
 	// Get data from request and clean it.
@@ -20,6 +19,7 @@ function dt_ajax_login(){
 
 	$login = dt_clean_value( $form_data['login-name'] );
 	$pass = dt_clean_value( $form_data['login-pass'] );
+	$pass = htmlspecialchars_decode( $pass );
 	$remember = dt_clean_value( $form_data['rememberme'] ) ? true : false;
 
 	// If data is not set - send error.
@@ -30,8 +30,6 @@ function dt_ajax_login(){
 			]
 		);
 	}
-
-	$pass = str_replace( '&amp;', '&', $pass );
 
 	// If can't find such login or email - user not exists, send error.
 	if( ! username_exists( $login ) && ! email_exists( $login ) ){
@@ -115,7 +113,6 @@ function dt_ajax_login(){
  * AJAX logout.
  */
 add_action( 'wp_ajax_dt_ajax_logout', 'dt_ajax_logout' );
-add_action( 'wp_ajax_nopriv_dt_ajax_logout', 'dt_ajax_logout' );
 function dt_ajax_logout(){
 	// Redirect link to Login page.
 	$redirect = get_the_permalink( 6706 );
@@ -133,7 +130,6 @@ function dt_ajax_logout(){
 /**
  * AJAX lost password.
  */
-add_action( 'wp_ajax_dt_ajax_lost_password', 'dt_ajax_lost_password' );
 add_action( 'wp_ajax_nopriv_dt_ajax_lost_password', 'dt_ajax_lost_password' );
 function dt_ajax_lost_password(){
 	// Get data from request and clean it.
@@ -190,6 +186,7 @@ function dt_ajax_lost_password(){
 	$user_id = $user->ID;
 	$user_email = $user->data->user_email;
 	$pass = wp_generate_password( 16, true, true );
+	$pass = str_replace( ' ', '', $pass );
 
 	$msg = "Здравствуйте!\n";
 	$msg .= "Вы запросили смену пароля для аккаунта $login.\n";
@@ -219,7 +216,6 @@ function dt_ajax_lost_password(){
 /**
  * AJAX register with redirect.
  */
-add_action( 'wp_ajax_dt_ajax_register', 'dt_ajax_register' );
 add_action( 'wp_ajax_nopriv_dt_ajax_register', 'dt_ajax_register' );
 function dt_ajax_register(){
 	if( ! get_option( 'users_can_register' ) ){
@@ -247,8 +243,12 @@ function dt_ajax_register(){
 	$last_name = dt_clean_value( $form_data['last-name'] ) ?? '';
 	$email = dt_clean_value( $form_data['email'] );
 	$login = dt_clean_value( $form_data['login'] );
+
 	$pass = dt_clean_value( $form_data['pass'] );
+	$pass = htmlspecialchars_decode( $pass );
+
 	$pass_confirm = dt_clean_value( $form_data['pass-confirm'] );
+	$pass_confirm = htmlspecialchars_decode( $pass_confirm );
 
 	// If some of required data fields is not set - send error.
 	if( ! $first_name || ! $email || ! $login || ! $pass || ! $pass_confirm ){
@@ -503,14 +503,15 @@ function dt_ajax_save_profile_changes(){
 	$last_name = dt_clean_value( $_POST['last-name'] );
 	$website = dt_clean_value( $_POST['website'] );
 	$biography = dt_clean_value( $_POST['biography'] );
-	$pass = dt_clean_value( $_POST['pass'] );
-	$pass_new = dt_clean_value( $_POST['pass-new'] );
-	$pass_new_confirm = dt_clean_value( $_POST['pass-new-confirm'] );
 
-	// Fix '& in password converts to &amp;' issue.
-	$pass = str_replace( '&amp;', '&', $pass );
-	$pass_new = str_replace( '&amp;', '&', $pass_new );
-	$pass_new_confirm = str_replace( '&amp;', '&', $pass_new_confirm );
+	$pass = dt_clean_value( $_POST['pass'] );
+	$pass = htmlspecialchars_decode( $pass );
+
+	$pass_new = dt_clean_value( $_POST['pass-new'] );
+	$pass_new = htmlspecialchars_decode( $pass_new );
+
+	$pass_new_confirm = dt_clean_value( $_POST['pass-new-confirm'] );
+	$pass_new_confirm = htmlspecialchars_decode( $pass_new_confirm );
 
 	// If required data fields is not set - send error.
 	if(

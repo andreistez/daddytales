@@ -1,8 +1,7 @@
 .profile {
     &-inner {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+        flex-direction: column;
         background-color: $white;
         padding: $spacer-sm;
         margin: $spacer-xl 0;
@@ -11,10 +10,24 @@
         @media all and (min-width: $grid-md) {
             padding: $spacer-lg
         }
+
+        @media all and (min-width: $grid-lg) {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between
+        }
     }
 
     &-sidebar {
-        width: 25%
+        width: 100%;
+
+        @media all and (min-width: $grid-lg) {
+            width: 30%
+        }
+
+        @media all and (min-width: $grid-xl) {
+            width: 25%
+        }
     }
 
     &-avatar {
@@ -53,7 +66,17 @@
     }
 
     &-content {
-        width: 70%;
+        width: 100%;
+        margin-top: $spacer-xl;
+
+        @media all and (min-width: $grid-lg) {
+            width: 65%;
+            margin-top: 0
+        }
+
+        @media all and (min-width: $grid-xl) {
+            width: 70%
+        }
 
         &-inner {
             display: none;
@@ -67,96 +90,6 @@
             &.underlined {
                 margin-bottom: 0
             }
-        }
-    }
-}
-
-.user {
-    &-tab {
-        cursor: pointer;
-        font-size: $fs-xl;
-        font-weight: $fw-semibold;
-        color: $gray;
-        padding: $spacer-xs 0;
-        transition: color ease-out $tr;
-
-        &:hover,
-        &.active {
-            color: $brand-violet
-        }
-
-        i {
-            width: 25px;
-            height: 25px;
-            text-align: center;
-            line-height: 25px;
-            margin-right: 5px
-        }
-    }
-
-    &-fields {
-        width: 100%;
-
-        &.disabled {
-            opacity: 0.5
-        }
-    }
-
-    &-field {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        padding: $spacer-xs 0;
-
-        &.hidden {
-            display: none
-        }
-
-        &.note {
-            justify-content: center;
-            color: $brand-violet;
-            font-weight: $fw-semibold
-        }
-
-        &.avatar {
-            img {
-                border-radius: $radius;
-                box-shadow: $shadow;
-                margin-right: $spacer-xs
-            }
-        }
-
-        &-label {
-            width: 30%;
-            color: $gray
-        }
-
-        &-value {
-            display: flex;
-            align-items: center;
-            width: 65%;
-            font-weight: $fw-semibold;
-
-            a {
-                color: $brand-blue;
-
-                &:hover {
-                    color: $brand-violet
-                }
-            }
-        }
-
-        &-button {
-            margin-top: $spacer-sm;
-            justify-content: flex-end
-        }
-    }
-
-    // Invite form.
-    &-invite {
-        &.disabled {
-            opacity: 0.5
         }
     }
 }
