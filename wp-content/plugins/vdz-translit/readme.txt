@@ -5,7 +5,7 @@ Tags: translit, transliteration, transliterate, транслит, трансли
 Requires at least: 3.3
 Requires PHP: 7
 Tested up to: 5.8.1
-Stable tag: 1.3.15
+Stable tag: 1.3.16
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,8 +14,26 @@ Simple ukrainian and russian translit for post/page title and uploaded files
 == Description ==
 Simple cyrillic, ukrainian and russian translit slugs for post/page title and uploaded files 
 Just install and use :)
-***RU***
+
+**RU**
 Плагин транслитерации (транслит) для сайта, преобразует заголовки постов/страниц и названия файлов из кирилицы/украинского/русского и др языков в транслит (латиницу)
+
+
+**Check out other plugins by VDZ:**
+
+* **[VDZ CallBack Plugin](https://wordpress.org/plugins/vdz-call-back/)** 
+* **[VDZ Yandex Metrika](https://wordpress.org/plugins/vdz-yandex-metrika/)** 
+* **[VDZ Google Analytics](https://wordpress.org/plugins/vdz-google-analytics/)** 
+* **[VDZ VERIFICATION](https://wordpress.org/plugins/vdz-verification/)** 
+* **[VDZ Contact Us](https://wordpress.org/plugins/vdz-contact-us/)** 
+* **[VDZ Yandex Share](https://wordpress.org/plugins/vdz-yandex-share/)** 
+* **[VDZ TRANSLIT](https://wordpress.org/plugins/vdz-translit/)** 
+* **[VDZ Robots.txt](https://wordpress.org/plugins/vdz-robotstxt/)** 
+* **[VDZ Content Navigation](https://wordpress.org/plugins/vdz-content-navigation/)** 
+* **[VDZ SHOW MORE](https://wordpress.org/plugins/vdz-show-more/)** 
+* **[VDZ Ringostat Contacts](https://wordpress.org/plugins/vdz-ringostat-contacts/)** 
+* **[VDZ Custom Simple CSS](https://wordpress.org/plugins/vdz-simple-css/)** 
+
 
 
 == Installation ==
@@ -25,10 +43,13 @@ Just install and use :)
 
 
 == Upgrade Notice ==
-Add new version 1.3.15
+Add new version 1.3.16
 
 
 == Changelog ==
+
+= 1.3.16 =
+Update Readme
 
 = 1.3.15 =
 Tested up to: 5.8.1

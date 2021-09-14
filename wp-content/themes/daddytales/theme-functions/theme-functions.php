@@ -249,10 +249,7 @@ function dt_custom_init(){
 			'show_in_menu'			=> true,
 			'show_in_rest'			=> true,
 			'query_var'				=> true,
-			'rewrite'				=> [
-				'slug'			=> '/',
-				'with_front'	=> false
-			],
+			'rewrite'				=> ['slug' => 'cartoon'],
 			'capability_type'		=> 'post',
 			'map_meta_cap'			=> true,
 			'has_archive'			=> true,

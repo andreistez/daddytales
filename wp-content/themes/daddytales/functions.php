@@ -64,4 +64,6 @@ require_once get_template_directory() . '/tgmpa/daddytales.php';
 require_once get_template_directory() . '/theme-functions/theme-functions.php';
 // Theme AJAX functions.
 require_once get_template_directory() . '/theme-functions/theme-ajax-functions.php';
+// Kinopoisk API functions.
+require_once get_template_directory() . '/theme-functions/kinopoisk-api.php';
 

@@ -4,6 +4,7 @@
 //= ../../node_modules/object-fit-images/dist/ofi.js
 //= ../../node_modules/body-scroll-lock/lib/bodyScrollLock.min.js
 //= ../../node_modules/slick-carousel/slick/slick.min.js
+//= libs/yohoho.js
 
 /**
  * Theme scripts.

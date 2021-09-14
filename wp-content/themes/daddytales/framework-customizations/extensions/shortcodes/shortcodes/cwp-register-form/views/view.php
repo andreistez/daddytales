@@ -6,12 +6,14 @@
 		// If user is NOT logged in - show form.
 		if( ! is_user_logged_in() ){
 			// Check if new User is invited by already exisiting website member.
-			$invited_by = (int) dt_clean_value( $_GET['invited_by'] );
+			if( isset( $_GET['invited_by'] ) ){
+				$invited_by = (int) dt_clean_value( $_GET['invited_by'] );
 
-			// Check if website User with this ID already exists.
-			if( $invited_by && is_int( $invited_by ) ){
-				// Then store it in session.
-				if( $user = get_userdata( $invited_by ) ) $_SESSION['invited_by'] = $invited_by;
+				// Check if website User with this ID already exists.
+				if( $invited_by && is_int( $invited_by ) ){
+					// Then store it in session.
+					if( $user = get_userdata( $invited_by ) ) $_SESSION['invited_by'] = $invited_by;
+				}
 			}
 			?>
 			<div class="login-content">

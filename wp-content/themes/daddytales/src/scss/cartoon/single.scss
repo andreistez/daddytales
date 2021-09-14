@@ -1,0 +1,179 @@
+.single-cartoon {
+    .cwp-title__text {
+        padding: $spacer-xl
+    }
+}
+
+.cartoon {
+    &-inner {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 1
+    }
+
+    &-info {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        background-color: $white;
+        width: 100%;
+        border-radius: $radius;
+        margin: $spacer-xl 0 $spacer-md;
+        padding: $spacer-sm;
+        box-shadow: $shadow;
+
+        @media all and (min-width: $grid-md) {
+            padding: $spacer-lg
+        }
+
+        @media all and (min-width: $grid-xl) {
+            margin-top: 100px
+        }
+
+        &-thumb {
+            width: 100%;
+            max-width: 300px;
+            border-radius: $radius;
+            box-shadow: $shadow;
+            overflow: hidden;
+            margin: 0 auto;
+
+            img {
+                display: block;
+                width: 100%
+            }
+        }
+    }
+
+    &-fields {
+        width: 100%;
+        margin-top: $spacer-md;
+
+        @media all and (min-width: $grid-md) {
+            width: calc(100% - 300px);
+            padding-left: $spacer-md;
+            margin-top: 0
+        }
+    }
+
+    &-field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: $spacer-sm;
+
+        @media all and (min-width: $grid-md) {
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center
+        }
+
+        &:last-child {
+            margin-bottom: 0
+        }
+
+        &_desc {
+            flex-direction: column;
+            align-items: flex-start;
+
+            .cartoon-field__value {
+                margin-left: 0
+            }
+        }
+
+        &_age {
+            .cartoon-field__value {
+                font-size: $fs-xl;
+                font-weight: $fw-semibold;
+                color: $brand-violet
+            }
+        }
+
+        &__label {
+            font-weight: $fw-semibold
+        }
+
+        &__value {
+            color: $gray;
+
+            @media all and (min-width: $grid-md) {
+                margin-left: 5px
+            }
+        }
+
+        &__rating {
+            font-size: $fs-xl;
+            font-weight: $fw-semibold;
+            color: $brand-blue
+        }
+    }
+
+    &-desc {
+        background-color: $white;
+        padding: $spacer-lg;
+        border-radius: $radius;
+        box-shadow: $shadow;
+
+        iframe {
+            width: 100%;
+            height: 250px;
+            border-radius: $radius;
+            overflow: hidden;
+            box-shadow: $shadow;
+
+            @media all and (min-width: $grid-sm) {
+                height: 300px !important
+            }
+
+            @media all and (min-width: $grid-md) {
+                height: 350px !important
+            }
+
+            @media all and (min-width: $grid-lg) {
+                height: 500px !important
+            }
+
+            @media all and (min-width: $grid-xl) {
+                height: 600px !important
+            }
+        }
+    }
+
+    &-player {
+        width: 100%;
+        background-color: $white;
+        padding: $spacer-sm;
+        border-radius: $radius;
+        box-shadow: $shadow;
+        margin-top: $spacer-md;
+
+        @media all and (min-width: $grid-md) {
+            padding: $spacer-lg
+        }
+
+        #yohoho,
+        #yohoho-iframe {
+            width: 100% !important;
+            height: 250px !important;
+            border-radius: $radius;
+            overflow: hidden;
+            box-shadow: $shadow;
+
+            @media all and (min-width: $grid-sm) {
+                height: 300px !important
+            }
+
+            @media all and (min-width: $grid-md) {
+                height: 350px !important
+            }
+
+            @media all and (min-width: $grid-lg) {
+                height: 500px !important
+            }
+
+            @media all and (min-width: $grid-xl) {
+                height: 600px !important
+            }
+        }
+    }
+}

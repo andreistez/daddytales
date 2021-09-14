@@ -3,7 +3,7 @@
 Plugin Name: VDZ Translit Plugin (SEO permalinks)
 Plugin URI:  http://online-services.org.ua
 Description: Simple ukrainian and russian translit for post/page title and uploaded files.
-Version:     1.3.15
+Version:     1.3.16
 Author:      VadimZ
 Author URI:  http://online-services.org.ua#vdz-translit
 License:     GPL2

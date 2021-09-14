@@ -26,7 +26,9 @@ $header_logo = fw_get_db_customizer_option( 'header_logo' );
 				&& ! is_page_template( 'page-template-register.php' )
 				&& ! is_page_template( 'page-template-activate.php' )
 			){
+				get_template_part( 'includes/common/footer/footer', 'cta' );
 				?>
+
 				<footer class="footer">
 					<div class="footer-top">
 						<div class="fw-container">
@@ -56,7 +58,7 @@ $header_logo = fw_get_db_customizer_option( 'header_logo' );
 
 										<div class="footer-contacts">
 											<p>
-												<?php esc_html_e( 'Привет! Есть предложения или замечания по развитию ресурса? Смело заполняй форму обратной связи и отправляй нам. Мы читаем каждое письмо.', 'daddytales' ) ?>
+												<?php esc_html_e( 'Привет! Нашли ошибку или дубликат? Есть предложения или замечания по развитию ресурса? Смело заполняйте форму обратной связи и отправляйте нам. Мы читаем каждое письмо.', 'daddytales' ) ?>
 											</p>
 											<button class="button yellow icon footer-contacts__send">
 												<?php esc_html_e( 'Написать', 'daddytales' ) ?>

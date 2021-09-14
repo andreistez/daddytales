@@ -86,9 +86,6 @@ $user_id = $user->ID;
 		<p class="invite-list-empty">
 			<?php esc_html_e( 'Здесь будут отображаться все Пользователи, прошедшие регистрацию на сайте по Вашей ссылке.', 'daddytales' ) ?>
 		</p>
-		<p class="invite-list-empty">
-			<?php esc_html_e( 'Статус активации их аккаунтов также будет указан.', 'daddytales' ) ?>
-		</p>
 		<?php
 	}
 	?>
