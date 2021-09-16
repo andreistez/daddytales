@@ -74,6 +74,11 @@ $options = [
 					'genres'	=> [
 						'type'	=> 'text',
 						'label'	=> esc_html__( 'Жанры', 'daddytales' )
+					],
+
+					'frames'	=> [
+						'type'	=> 'textarea',
+						'label'	=> esc_html__( 'Кадры', 'daddytales' )
 					]
 				]
 			]

@@ -1,0 +1,24 @@
+.cartoon-frames {
+    margin-bottom: $spacer-md;
+
+    &.slick-slider {
+        .cartoon-frame {
+            &__img {
+                display: none
+            }
+        }
+    }
+}
+
+.cartoon-frame {
+    &-inner {
+        height: 150px;
+        max-width: none;
+        cursor: pointer;
+        transition: opacity ease-out $tr;
+
+        &:hover {
+            opacity: 0.75
+        }
+    }
+}

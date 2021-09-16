@@ -15,6 +15,8 @@
 //= auth/ajax.js
 //= auth/scripts.js
 
+//= cartoon/scripts.js
+
 /**
  * Unyson components scripts.
  */

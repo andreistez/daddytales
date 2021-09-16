@@ -21,6 +21,7 @@ if( is_singular( 'cartoon' ) ){
 	if( $kinopoisk_id ){
 		// Update all necessary data.
 		dt_get_cartoon_info( $post_id, $kinopoisk_id );
+		dt_get_cartoon_frames( $post_id, $kinopoisk_id );
 
 		// Get all data from post fields.
 		$original_name	= fw_get_db_post_option( $post_id, 'original_name' );
@@ -51,8 +52,9 @@ if( is_singular( 'cartoon' ) ){
 					<div class="cartoon-info">
 						<?php
 						if( has_post_thumbnail( $post_id ) ){
+							$full_thumb = get_the_post_thumbnail_url( $post_id, 'full' );
 							?>
-							<div class="cartoon-info-thumb">
+							<div class="cartoon-info-thumb" data-full="<?php echo esc_url( $full_thumb ) ?>">
 								<?php echo get_the_post_thumbnail( $post_id, 'medium' ) ?>
 							</div>
 							<?php
@@ -195,12 +197,12 @@ if( is_singular( 'cartoon' ) ){
 				</div>
 
 				<?php
+				// Frames & player.
 				if( $kinopoisk_id ){
-					?>
-					<div class="cartoon-player">
-						<div id="yohoho" data-kinopoisk="<?php echo esc_attr( $kinopoisk_id ) ?>"></div>
-					</div>
-					<?php
+					get_template_part( 'includes/single/cartoon/player', null, [
+						'post_id'	=> $post_id,
+						'kp_id'		=> $kinopoisk_id
+					] );
 				}
 				?>
 			</div><!-- .cartoon-inner -->

@@ -79,7 +79,7 @@
         position: relative;
         height: 350px;
 
-        @media (min-width: $grid-md) {
+        @media all and (min-width: $grid-md) {
             height: 300px
         }
 

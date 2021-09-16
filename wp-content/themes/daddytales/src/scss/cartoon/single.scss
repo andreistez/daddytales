@@ -38,6 +38,12 @@
             box-shadow: $shadow;
             overflow: hidden;
             margin: 0 auto;
+            cursor: pointer;
+            transition: opacity ease-out $tr;
+
+            &:hover {
+                opacity: 0.75
+            }
 
             img {
                 display: block;
