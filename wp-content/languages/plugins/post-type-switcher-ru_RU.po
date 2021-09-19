@@ -1,0 +1,44 @@
+# Translation of Plugins - Post Type Switcher - Development (trunk) in Russian
+# This file is distributed under the same license as the Plugins - Post Type Switcher - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-07-14 13:22:07+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: ru\n"
+"Project-Id-Version: Plugins - Post Type Switcher - Development (trunk)\n"
+
+#: post-type-switcher.php:370
+msgid "&mdash; No Change &mdash;"
+msgstr "&mdash; Не изменять &mdash;"
+
+#. Plugin Name of the plugin
+msgid "Post Type Switcher"
+msgstr "Post Type Switcher"
+
+#: post-type-switcher.php:225 post-type-switcher.php:252
+msgid "Post Type"
+msgstr "Тип записи"
+
+#: post-type-switcher.php:183
+msgid "Type"
+msgstr "Тип"
+
+#: post-type-switcher.php:163
+msgid "Cancel"
+msgstr "Отмена"
+
+#: post-type-switcher.php:162
+msgid "OK"
+msgstr "ОК"
+
+#: post-type-switcher.php:147
+msgid "Edit"
+msgstr "Изменить"
+
+#: post-type-switcher.php:142
+msgid "Post Type:"
+msgstr "Тип записи:"

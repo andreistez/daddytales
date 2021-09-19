@@ -6,8 +6,7 @@
  * @subpackage daddytales
  */
 
-// Correct only inside WP loop.
-$post_id = get_the_ID();
+$post_id = isset( $args['post_id'] ) ? $args['post_id'] : get_the_ID();
 
 if( ! $post_id ) return;
 ?>

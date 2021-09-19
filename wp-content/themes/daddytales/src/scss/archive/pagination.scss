@@ -1,0 +1,36 @@
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.page-numbers {
+    width: $spacer-xl;
+    height: $spacer-xl;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $white;
+    border-radius: $radius;
+    margin-right: $spacer-xs;
+    color: $dark;
+    font-weight: $fw-semibold;
+    transition:
+        color ease-out $tr,
+        background-color ease-out $tr;
+
+    &:hover {
+        background-color: $brand-yellow;
+        color: $white
+    }
+
+    &:last-child {
+        margin-right: 0
+    }
+
+    &.current,
+    &.dots {
+        color: $light-1;
+        pointer-events: none
+    }
+}

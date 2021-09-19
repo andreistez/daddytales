@@ -114,15 +114,12 @@ function dt_ajax_login(){
  */
 add_action( 'wp_ajax_dt_ajax_logout', 'dt_ajax_logout' );
 function dt_ajax_logout(){
-	// Redirect link to Login page.
-	$redirect = get_the_permalink( 6706 );
 	wp_logout();
 	ob_clean();
 
 	wp_send_json_success(
 		[
-			'msg'		=> esc_html__( 'Вы успешно вышли из аккаунта.', 'daddytales' ),
-			'redirect'	=> $redirect
+			'msg'	=> esc_html__( 'Вы успешно вышли из аккаунта.', 'daddytales' )
 		]
 	);
 }
@@ -825,6 +822,85 @@ function dt_ajax_get_in_touch_form_send(){
 	wp_send_json_success(
 		[
 			'msg'	=> esc_html__( 'Отправка прошла успешно! Спасибо за Ваше сообщение.', 'daddytales' )
+		]
+	);
+}
+
+add_action( 'wp_ajax_dt_ajax_posts_pagination', 'dt_ajax_posts_pagination' );
+add_action( 'wp_ajax_nopriv_dt_ajax_posts_pagination', 'dt_ajax_posts_pagination' );
+function dt_ajax_posts_pagination(){
+	// Get data from request and clean it.
+	$page_to_load	= dt_clean_value( $_POST['page'] ) ?? 1;
+	$search_query	= dt_clean_value( $_POST['search'] );
+	$post_type		= dt_clean_value( $_POST['type'] );
+	$taxonomy		= dt_clean_value( $_POST['taxonomy'] );
+	$term			= dt_clean_value( $_POST['term'] );
+	$posts_per_page	= 20;
+	$offset = $page_to_load * $posts_per_page - $posts_per_page;
+
+	$args = [
+		'post_type'         	=> $post_type,
+		'post_status'       	=> 'publish',
+		'posts_per_page'    	=> $posts_per_page,
+		'offset'            	=> $offset
+	];
+
+	// If search query is set - this is search results page, don't need tax & term.
+	if( $search_query ){
+		$args['s'] = $search_query;
+	}	else {
+		$args['tax_query'] = [
+			[
+				'taxonomy'	=> $taxonomy,
+				'field'		=> 'slug',
+				'terms'		=> $term
+			]
+		];
+	}
+
+	$new_query = new WP_Query( $args );
+	$posts = $pagination = '';
+
+	if( $new_query->have_posts() ){
+		ob_start();
+		while( $new_query->have_posts() ){
+			$new_query->the_post();
+			$post_id = get_the_ID();
+
+			if( ! $post_id ) continue;
+
+			get_template_part( 'includes/single/slider', 'preview', ['post_id' => $post_id] );
+		}
+		$posts = ob_get_contents();
+		ob_end_clean();
+
+		$query_max_num_pages = $new_query->max_num_pages;
+		$pagination = '<nav class = "navigation pagination" role="navigation">
+			<div class="nav-links">
+				' . paginate_links(
+					[
+						'total'					=> $query_max_num_pages,
+						'current'				=> $page_to_load,
+						'show_all'				=> false,
+						'end_size'				=> 1,
+						'mid_size'				=> 1,
+						'prev_next'				=> true,
+						'prev_text'				=> '<i class="fas fa-chevron-left"></i>',
+						'next_text'				=> '<i class="fas fa-chevron-right"></i>',
+						'screen_reader_text'	=> ' '
+					]
+				) . '
+			</div>
+		</nav>';
+	}
+	wp_reset_query();
+
+	if( ! $posts ) $posts = '<p class="posts-not-found">' . esc_html__( 'Записи не найдены.', 'daddytales' ) . '</p>';
+
+	wp_send_json_success(
+		[
+			'posts'			=> $posts,
+			'pagination'	=> $pagination
 		]
 	);
 }

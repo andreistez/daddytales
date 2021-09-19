@@ -11,6 +11,7 @@
  */
 //= partials/app.js
 //= partials/ajax.js
+//= partials/ajax-pagination.js
 
 //= auth/ajax.js
 //= auth/scripts.js

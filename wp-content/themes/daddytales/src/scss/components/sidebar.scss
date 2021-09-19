@@ -1,0 +1,35 @@
+.sidebar {
+    width: 100%;
+    order: 2;
+
+    @media all and (min-width: $grid-xl) {
+        width: 27%;
+        order: 1
+    }
+
+    &-section {
+        margin-bottom: $spacer-xl;
+
+        &:last-child {
+            margin-bottom: 0
+        }
+
+        &-title {
+            margin-bottom: $spacer-md;
+
+            &__text {
+                margin-bottom: 0
+            }
+        }
+    }
+
+    &-posts {
+        .latest-col-post {
+            margin-bottom: $spacer-md;
+
+            &:last-child {
+                margin-bottom: 0
+            }
+        }
+    }
+}

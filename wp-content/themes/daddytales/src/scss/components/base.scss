@@ -42,11 +42,27 @@ ul {
     overflow: hidden
 }
 
+.disabled {
+    pointer-events: none;
+    opacity: 0.5
+}
+
 .img-cover-inside {
     img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         font-family: 'object-fit: cover;'
+    }
+}
+
+.white-wrapper {
+    background-color: $white;
+    box-shadow: $shadow;
+    border-radius: $radius;
+    padding: $spacer-sm;
+
+    @media all and (min-width: $grid-md) {
+        padding: $spacer-lg
     }
 }

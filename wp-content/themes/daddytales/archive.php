@@ -60,7 +60,7 @@ $term_slug = $term->slug;
 				}	else {
 					?>
 					<div class="archive-posts not-found">
-						<?php esc_html_e( 'Posts not found.', 'daddytales' ) ?>
+						<?php esc_html_e( 'Записи не найдены.', 'daddytales' ) ?>
 					</div>
 					<?php
 				}

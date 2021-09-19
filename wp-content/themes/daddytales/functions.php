@@ -8,6 +8,12 @@ function inclusion_enqueue() {
 	$ver_num = mt_rand();
 	wp_enqueue_style( 'main', get_template_directory_uri() . '/static/css/main.min.css', [], $ver_num, 'all' );
 	wp_enqueue_script( 'scripts', get_template_directory_uri() . '/static/js/main.min.js', ['jquery'], $ver_num, true );
+
+	// Comments on single posts.
+	if(
+		( is_singular( 'post' ) || is_singular( 'cartoon' ) )
+		&& comments_open() && get_option( 'thread_comments' )
+	) wp_enqueue_script( 'comment-reply' );
 }
 add_action( 'wp_enqueue_scripts', 'inclusion_enqueue' );
 

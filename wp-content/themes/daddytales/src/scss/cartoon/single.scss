@@ -16,12 +16,8 @@
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
-        background-color: $white;
         width: 100%;
-        border-radius: $radius;
         margin: $spacer-xl 0 $spacer-md;
-        padding: $spacer-sm;
-        box-shadow: $shadow;
 
         @media all and (min-width: $grid-md) {
             padding: $spacer-lg
@@ -115,10 +111,46 @@
     }
 
     &-desc {
-        background-color: $white;
-        padding: $spacer-lg;
-        border-radius: $radius;
-        box-shadow: $shadow;
+        h1 {
+            font-size: 21px;
+
+            @media all and (min-width: $grid-md) {
+                font-size: 60px
+            }
+        }
+
+        h2 {
+            font-size: 21px;
+
+            @media all and (min-width: $grid-md) {
+                font-size: 48px
+            }
+        }
+
+        h3 {
+            font-size: 21px;
+
+            @media all and (min-width: $grid-md) {
+                font-size: 36px
+            }
+        }
+
+        p {
+            font-size: $fs-sm;
+
+            @media all and (min-width: $grid-md) {
+                font-size: $fs-lg
+            }
+        }
+
+        a {
+            font-weight: $fw-semibold;
+            color: $brand-blue;
+
+            &:hover {
+                color: $brand-violet
+            }
+        }
 
         iframe {
             width: 100%;
@@ -147,10 +179,6 @@
 
     &-player {
         width: 100%;
-        background-color: $white;
-        padding: $spacer-sm;
-        border-radius: $radius;
-        box-shadow: $shadow;
         margin-top: $spacer-md;
 
         @media all and (min-width: $grid-md) {

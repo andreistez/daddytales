@@ -33,8 +33,8 @@ function dt_clean_value( $value )
  */
 function dt_check_length( $value = '', int $min, int $max ): bool
 {
-    $result = ( mb_strlen( $value ) < $min || mb_strlen( $value ) > $max );
-    return !$result;
+	$result = ( mb_strlen( $value ) < $min || mb_strlen( $value ) > $max );
+	return !$result;
 }
 
 /**
@@ -78,7 +78,7 @@ function dt_blockusers_init(){
 	global $pagenow;
 
 	if( 'wp-login.php' === $pagenow && ! current_user_can( 'administrator' ) ){
-		wp_redirect( get_the_permalink( 6736 ) );
+		wp_redirect( get_the_permalink( 6706 ) );
 		exit;
 	}
 
@@ -87,7 +87,7 @@ function dt_blockusers_init(){
 		&& ! current_user_can( 'administrator' )
 		&& ! ( defined( 'DOING_AJAX' ) && DOING_AJAX )
 	){
-		wp_redirect( get_the_permalink( 6736 ) );
+		wp_redirect( get_the_permalink( 6706 ) );
 		exit;
 	}
 }
@@ -97,41 +97,41 @@ function dt_blockusers_init(){
  */
 add_action( 'wp_login_failed', 'dt_login_failed', 10, 1 );
 function dt_login_failed( $username ){
-    wp_redirect( get_the_permalink( 6736 ), 302 );
-    exit;
+	wp_redirect( get_the_permalink( 6706 ), 302 );
+	exit;
 }
 
 /**
  * Get post views count.
  */
 function dt_get_post_views( $post_id ){
-    $count_key = 'post_views_count';
-    $count = get_post_meta( $post_id, $count_key, true );
+	$count_key = 'post_views_count';
+	$count = get_post_meta( $post_id, $count_key, true );
 
-    if( $count === '' ){
-        delete_post_meta( $post_id, $count_key );
-        add_post_meta( $post_id, $count_key, '0' );
-        return '0';
-    }
+	if( $count === '' ){
+		delete_post_meta( $post_id, $count_key );
+		add_post_meta( $post_id, $count_key, '0' );
+		return '0';
+	}
 
-    return $count;
+	return $count;
 }
 
 /**
  * Set post views count.
  */
 function dt_set_post_views( $post_id ){
-    $count_key = 'post_views_count';
-    $count = get_post_meta( $post_id, $count_key, true );
+	$count_key = 'post_views_count';
+	$count = get_post_meta( $post_id, $count_key, true );
 
-    if( $count === '' ){
-        $count = 0;
-        delete_post_meta( $post_id, $count_key );
-        add_post_meta( $post_id, $count_key, '0' );
-    }	else {
-        $count++;
-        update_post_meta( $post_id, $count_key, $count );
-    }
+	if( $count === '' ){
+		$count = 0;
+		delete_post_meta( $post_id, $count_key );
+		add_post_meta( $post_id, $count_key, '0' );
+	}	else {
+		$count++;
+		update_post_meta( $post_id, $count_key, $count );
+	}
 }
 
 /**
@@ -145,13 +145,13 @@ remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 add_filter( 'manage_posts_columns', 'dt_posts_column_views' );
 add_filter( 'manage_pages_columns', 'dt_posts_column_views' );
 function dt_posts_column_views( $defaults ){
-    $defaults['post_views'] = esc_html__( 'Views' );
-    return $defaults;
+	$defaults['post_views'] = esc_html__( 'Views' );
+	return $defaults;
 }
 add_action( 'manage_posts_custom_column', 'dt_posts_custom_column_views', 5, 2 );
 add_action( 'manage_pages_custom_column', 'dt_posts_custom_column_views', 5, 2 );
 function dt_posts_custom_column_views( $column_name, $id ){
-    if( $column_name === 'post_views' ) echo dt_get_post_views( get_the_ID() );
+	if( $column_name === 'post_views' ) echo dt_get_post_views( get_the_ID() );
 }
 
 /**
@@ -255,8 +255,139 @@ function dt_custom_init(){
 			'has_archive'			=> true,
 			'hierarchical'			=> false,
 			'menu_position'			=> 6,
-			'supports'				=> ['title', 'editor', 'thumbnail', 'author']
+			'supports'				=> ['title', 'editor', 'thumbnail', 'author', 'comments']
 		]
 	);
+}
+
+/**
+ * Get User avatar.
+ *
+ * @param	int		$user_id	- User ID.
+ * @return	string	User avatar URL.
+ */
+function dt_get_user_avatar( $user_id ): string
+{
+	// User avatar - trying to get attachment ID from current User meta field.
+	$user_avatar_url	= get_user_meta( $user_id, 'dt_avatar_image_id', true );
+	$user_avatar_url	=  $user_avatar_url ? wp_get_attachment_image_url( $user_avatar_url, 'thumbnail' ) : '';
+
+	// If fail - get standard gravatar url.
+	if( ! $user_avatar_url ) return get_avatar_url( $user_id );
+	return $user_avatar_url;
+}
+
+/**
+ * Remove website URL field from comment form.
+ */
+add_filter( 'comment_form_default_fields', 'dt_unset_url_field_in_comment_form' );
+function dt_unset_url_field_in_comment_form( $fields ){
+    if( isset( $fields['url'] ) ) unset( $fields['url'] );
+    return $fields;
+}
+
+/**
+ * Comments restyling.
+ */
+function dt_theme_comments( $comment, $args, $depth ){
+	$GLOBALS['comment']		= $comment;
+	$comment_author_email	= $comment->comment_author_email;
+	$comment_author			= get_user_by( 'email', $comment_author_email );
+
+	// If such User exists.
+	if( $comment_author ){
+		$comment_author_name	= $comment_author->user_firstname;
+		$comment_author_login	= $comment_author->user_login;
+		$user_avatar_url		= dt_get_user_avatar( $comment_author->ID );
+	}	else {	// User not exists.
+		$comment_author_name	= $comment->comment_author;
+		$comment_author_login	= '';
+		$user_avatar_url = dt_get_user_avatar( null );
+	}
+
+	// echo var_dump( $comment );
+
+	switch( $comment->comment_type ){
+		case 'comment':
+			?>
+			<li <?php comment_class() ?> id="li-comment-<?php comment_ID() ?>">
+				<div class="comment-avatar img-cover-inside">
+					<?php
+					if( $user_avatar_url ){
+						?>
+						<img class="avatar avatar-100 photo" src="<?php echo $user_avatar_url ?>" loading="lazy" width="100" height="100" alt="" />
+						<?php
+					}
+					?>
+				</div>
+
+				<div id="comment-<?php comment_ID() ?>" class="comment-inner">
+					<div class = "comment-author">
+						<h4 class="comment-author__name">
+							<?php
+							if( $comment_author_login ) printf( esc_html( '%s (%s):'), $comment_author_name, $comment_author_login );
+							else echo esc_html( $comment_author_name ), ':';
+							?>
+						</h4>
+					</div>
+
+					<div class="comment-data">
+						<?php
+						printf(
+							esc_html__( '%1$s в %2$s' ),
+							get_comment_date( 'd.m.Y' ),
+							get_comment_time( 'h:i' )
+						);
+						?>
+					</div>
+
+					<?php
+					if( $comment->comment_approved == '0' ){
+						?>
+						<div class="comment-awaiting-verification">
+							<?php esc_html_e( 'Ваш комментарий на модерации.', 'daddytales' ) ?>
+						</div>
+						<?php
+					}
+					?>
+
+					<div class="comment-text">
+						<?php comment_text() ?>
+					</div>
+
+					<div class="reply">
+						<?php
+						if( ! is_user_logged_in() ){
+							?>
+							<a class="comment-reply-link" href="<?php echo get_permalink( 6706 ) ?>">
+								<i class="fas fa-reply"></i>
+								<?php esc_html_e( 'Войдите, чтобы ответить', 'daddytales' ) ?>
+							</a>
+							<?php
+						}	else {
+							comment_reply_link(
+								array_merge( $args, [
+									'depth'			=> $depth,
+									'max_depth'		=> $args['max_depth'],
+									'reply_text'	=> esc_html__( 'Ответить', 'daddytales' ),
+									'before'		=> '<i class="fas fa-reply"></i>'
+								] )
+							);
+						}
+						?>
+					</div><!-- .reply -->
+				</div><!-- .comment-inner -->
+			<?php
+			break;
+
+		case 'pingback':
+		case 'trackback':
+			?>
+			<li class="post pingback">
+				<?php
+				comment_author_link();
+				edit_comment_link( esc_html__( 'Редактировать', 'daddytales' ), ' ' );
+			break;
+	}
 }
 

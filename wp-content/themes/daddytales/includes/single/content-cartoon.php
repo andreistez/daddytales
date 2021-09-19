@@ -49,13 +49,13 @@ if( is_singular( 'cartoon' ) ){
 				<?php
 				if( $kinopoisk_id ){
 					?>
-					<div class="cartoon-info">
+					<div class="cartoon-info white-wrapper">
 						<?php
 						if( has_post_thumbnail( $post_id ) ){
 							$full_thumb = get_the_post_thumbnail_url( $post_id, 'full' );
 							?>
 							<div class="cartoon-info-thumb" data-full="<?php echo esc_url( $full_thumb ) ?>">
-								<?php echo get_the_post_thumbnail( $post_id, 'medium' ) ?>
+								<?php echo get_the_post_thumbnail( $post_id, 'full' ) ?>
 							</div>
 							<?php
 						}
@@ -192,7 +192,7 @@ if( is_singular( 'cartoon' ) ){
 				}
 				?>
 
-				<div class="cartoon-desc">
+				<div class="cartoon-desc white-wrapper">
 					<?php the_content() ?>
 				</div>
 
@@ -204,6 +204,9 @@ if( is_singular( 'cartoon' ) ){
 						'kp_id'		=> $kinopoisk_id
 					] );
 				}
+
+				// If comments are open or we have at least one comment.
+				if ( comments_open() || get_comments_number() ) comments_template( '', true );
 				?>
 			</div><!-- .cartoon-inner -->
 		</div><!-- .fw-container -->

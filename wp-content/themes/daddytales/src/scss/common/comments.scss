@@ -1,0 +1,244 @@
+.comments-area {
+    width: 100%;
+    margin-top: $spacer-md
+}
+
+#commentform {
+    width: 100%;
+
+    @media all and (min-width: $grid-lg) {
+        width: 50%
+    }
+
+    .button {
+        font-size: $fs-xs;
+
+        @media all and (min-width: $grid-md) {
+            font-size: 17px
+        }
+    }
+}
+
+.logged-in-as {
+    font-weight: $fw-semibold;
+    font-size: $fs-sm;
+
+    @media all and (min-width: $grid-md) {
+        font-size: $fs-xl
+    }
+
+    a {
+        color: $brand-blue;
+
+        &:hover {
+            color: $brand-violet
+        }
+    }
+}
+
+#comment {
+    height: $spacer-xl * 2;
+    resize: none
+}
+
+#respond {
+    position: relative;
+    width: 100%;
+    background-color: $white;
+    margin-bottom: $spacer-xl
+}
+
+.comments-title {
+    padding-top: $spacer-md;
+    border-top: 1px solid $light;
+    margin-bottom: $spacer-lg
+}
+
+.comment {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+
+    &:last-child {
+        margin-bottom: 0
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -20px;
+        left: 24px;
+        width: calc(100% - 24px);
+        height: calc(100% + 20px);
+        border: 5px solid $light;
+        border-radius: $radius;
+
+        @media all and (min-width: $grid-xl) {
+            left: 45px;
+            width: calc(100% - 50px);
+            border-width: $spacer-xs;
+            border-radius: $radius * 2
+        }
+    }
+
+    &-form-comment {
+        label {
+            font-size: $fs-sm;
+
+            @media all and (min-width: $grid-md) {
+                font-size: $fs-xl
+            }
+        }
+    }
+
+    &-avatar {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        box-shadow: $shadow;
+        border-radius: $radius;
+        background-color: $white;
+        overflow: hidden;
+
+        @media all and (min-width: $grid-xl) {
+            width: 100px;
+            height: 100px
+        }
+    }
+
+    &-inner {
+        position: relative;
+        width: calc(100% - 50px);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: $spacer-md;
+
+        @media all and (min-width: $grid-xl) {
+            width: calc(100% - 100px)
+        }
+    }
+
+    &-author__name {
+        color: $brand-violet;
+        margin-bottom: 5px
+    }
+
+    &-data {
+        font-size: $fs-sm;
+        color: $gray;
+        font-weight: $fw-light
+    }
+
+    &-text {
+        margin-top: 5px;
+
+        p {
+            font-size: $fs-sm;
+
+            @media all and (min-width: $grid-xl) {
+                font-size: $fs-lg
+            }
+
+            &:last-of-type {
+                margin-bottom: 0
+            }
+        }
+    }
+
+    &-awaiting-verification {
+        color: $brand-violet;
+        font-weight: $fw-semibold;
+        font-size: $fs-xl
+    }
+
+    .children {
+        margin-top: $spacer-xl;
+        width: 92%;
+        margin-left: 6%
+    }
+
+    #respond {
+        box-shadow: $shadow;
+        border-radius: $radius;
+        padding: $spacer-sm;
+        margin-bottom: 0;
+
+        @media all and (min-width: $grid-lg) {
+            padding: $spacer-lg
+        }
+    }
+
+    &-reply {
+        &-title {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-size: $fs-xl;
+
+            @media all and (min-width: $grid-md) {
+                font-size: 36px
+            }
+
+            small {
+                line-height: $spacer-md
+            }
+
+            #cancel-comment-reply-link {
+                font-family: $ff;
+                font-size: $fs-sm;
+                color: $brand-blue;
+
+                @media all and (min-width: $grid-md) {
+                    font-size: $fs-xl
+                }
+
+                &:hover {
+                    color: $brand-violet
+                }
+            }
+        }
+
+        &-link {
+            position: relative;
+            color: $brand-blue;
+            font-size: $fs-sm;
+            padding-left: 25px;
+
+            @media all and (min-width: $grid-xl) {
+                font-size: $fs-md
+            }
+
+            &:hover {
+                color: $brand-violet
+            }
+        }
+    }
+}
+
+.reply {
+    position: relative;
+    display: inline-block;
+    margin-top: $spacer-xs;
+
+    &:hover {
+        i {
+            color: $brand-violet
+        }
+    }
+
+    i {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $brand-blue;
+        transition: color ease-out $tr
+    }
+}

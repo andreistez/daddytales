@@ -16,7 +16,7 @@ if( ! $post_id || ! $kinopoisk_id ) return;
 $frames	= fw_get_db_post_option( $post_id, 'frames' );
 ?>
 
-<div class="cartoon-player">
+<div class="cartoon-player white-wrapper">
 	<?php
 	if( $frames ){
 		$frames = json_decode( $frames );

@@ -94,7 +94,7 @@
                     // If ajax response is success.
                     case true:
                         link.text( data.data.msg );
-                        window.location.href = data.data.redirect;
+                        document.location.reload();
                         // Enable AJAX.
                         isAjaxOn = false;
                         break;
