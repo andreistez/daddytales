@@ -15,7 +15,13 @@ $popular_query = new WP_Query(
 		'post_type'     	=> $post_type,
 		'post_status'   	=> 'publish',
 		'posts_per_page'	=> 16,
-		$tax_name			=> $term->slug,
+		'tax_query'			=> [
+			[
+				'taxonomy'			=> $tax_name,
+				'field'				=> 'slug',
+				'terms'				=> [$term->slug]
+			]
+		],
 		'meta_key'			=> 'post_views_count',
 		'orderby'			=> ['meta_value_num' => 'DESC']
 	]

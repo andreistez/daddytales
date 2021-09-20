@@ -258,6 +258,77 @@ function dt_custom_init(){
 			'supports'				=> ['title', 'editor', 'thumbnail', 'author', 'comments']
 		]
 	);
+
+	// Songs taxonomy.
+	register_taxonomy(
+		'songs',
+		['song'],
+		[
+			'label'                 => esc_html__( 'Songs Categories', 'daddytales' ),
+			'labels'                => [
+				'name'              => esc_html__( 'Songs Categories', 'daddytales' ),
+				'singular_name'     => esc_html__( 'Songs Category', 'daddytales' ),
+				'search_items'      => esc_html__( 'Search Songs Categories', 'daddytales' ),
+				'all_items'         => esc_html__( 'All Songs Categories', 'daddytales' ),
+				'view_item '        => esc_html__( 'View Songs Categories', 'daddytales' ),
+				'parent_item'       => esc_html__( 'Parent Songs Category', 'daddytales' ),
+				'parent_item_colon' => esc_html__( 'Parent Songs Category:', 'daddytales' ),
+				'edit_item'         => esc_html__( 'Edit Songs Category', 'daddytales' ),
+				'update_item'       => esc_html__( 'Update Songs Category', 'daddytales' ),
+				'add_new_item'      => esc_html__( 'Add New Songs Category', 'daddytales' ),
+				'new_item_name'     => esc_html__( 'New Songs Category', 'daddytales' ),
+				'menu_name'         => esc_html__( 'Songs Categories', 'daddytales' ),
+			],
+			'description'           => '',
+			'public'                => true,
+			'publicly_queryable'    => true,
+			'show_in_nav_menus'     => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'show_tagcloud'         => true,
+			'show_in_quick_edit'    => true,
+			'hierarchical'          => true,
+			'rewrite'               => true,
+			'capabilities'          => [],
+			'show_admin_column'     => true,
+			'show_in_rest'          => true
+		]
+	);
+	// Song post type.
+	register_post_type(
+		'song',
+		[
+			'labels'				=> [
+				'name'				=> esc_html__( 'Song', 'daddytales' ),
+				'singular_name'		=> esc_html__( 'Song', 'daddytales' ),
+				'add_new'			=> esc_html__( 'Add New Song', 'daddytales' ),
+				'add_new_item'		=> esc_html__( 'Add New Song', 'daddytales' ),
+				'edit_item'			=> esc_html__( 'Edit Song', 'daddytales' ),
+				'new_item'			=> esc_html__( 'New Song', 'daddytales' ),
+				'view_item'			=> esc_html__( 'Look at Song', 'daddytales' ),
+				'search_items'		=> esc_html__( 'Find Song', 'daddytales' ),
+				'not_found'         => esc_html__( 'Songs not found', 'daddytales' ),
+				'not_found_in_trash'=> esc_html__( 'There are no Songs in the trash', 'daddytales' ),
+				'parent_item_colon'	=> '',
+				'menu_name'			=> esc_html__( 'Songs', 'daddytales' )
+			],
+			'menu_icon'				=> 'dashicons-playlist-audio',
+			'public'				=> true,
+			'publicly_queryable'	=> true,
+			'exclude_from_search'	=> false,
+			'show_ui'				=> true,
+			'show_in_menu'			=> true,
+			'show_in_rest'			=> true,
+			'query_var'				=> true,
+			'rewrite'				=> ['slug' => 'song'],
+			'capability_type'		=> 'post',
+			'map_meta_cap'			=> true,
+			'has_archive'			=> true,
+			'hierarchical'			=> false,
+			'menu_position'			=> 7,
+			'supports'				=> ['title', 'editor', 'thumbnail', 'author', 'comments']
+		]
+	);
 }
 
 /**
