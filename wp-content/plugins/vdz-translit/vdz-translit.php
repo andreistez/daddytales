@@ -3,15 +3,17 @@
 Plugin Name: VDZ Translit Plugin (SEO permalinks)
 Plugin URI:  http://online-services.org.ua
 Description: Simple ukrainian and russian translit for post/page title and uploaded files.
-Version:     1.3.16
+Version:     1.3.17
 Author:      VadimZ
 Author URI:  http://online-services.org.ua#vdz-translit
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
-
 define( 'VDZ_TRANSLIT_API', 'vdz_info_translit' );
+
+require_once 'api.php';
+require_once 'updated_plugin_admin_notices.php';
 
 function vdz_translit( $string ) {
 
@@ -210,7 +212,6 @@ function vdz_translit( $string ) {
 add_filter( 'sanitize_file_name', 'vdz_translit' );
 add_filter( 'sanitize_title', 'vdz_translit' );
 
-require_once 'api.php';
 // Код активации плагина
 register_activation_hook(
 	__FILE__,
@@ -232,62 +233,5 @@ register_deactivation_hook(
 	__FILE__,
 	function () {
 		// do_action(VDZ_TRANSLIT_API, 'off', plugin_basename(__FILE__));
-	}
-);
-
-
-
-
-/**
- * This function runs when WordPress completes its upgrade process
- * It iterates through each plugin updated to see if ours is included
- *
- * @param $upgrader_object Array
- * @param $options Array
- */
-add_action(
-	'upgrader_process_complete',
-	function ( $upgrader_object, $options ) {
-		// The path to our plugin's main file
-		$our_plugin = plugin_basename( __FILE__ );
-		// If an update has taken place and the updated type is plugins and the plugins element exists
-		if ( 'update' === $options['action'] && 'plugin' === $options['type'] && isset( $options['plugins'] ) ) {
-			// Iterate through the plugins being updated and check if ours is there
-			foreach ( $options['plugins'] as $plugin ) {
-				if ( $plugin === $our_plugin ) {
-					// Set a transient to record that our plugin has just been updated
-					set_transient( 'vdz_api_updated' . plugin_basename( __FILE__ ), 1 );
-				}
-			}
-		}
-	},
-	10,
-	2
-);
-
-/**
- * Show a notice to anyone who has just updated this plugin
- * This notice shouldn't display to anyone who has just installed the plugin for the first time
- */
-add_action(
-	'admin_notices',
-	function () {
-		// Check the transient to see if we've just updated the plugin
-		if ( get_transient( 'vdz_api_updated' . plugin_basename( __FILE__ ) ) ) {
-
-			if ( function_exists( 'get_locale' ) && in_array( get_locale(), array( 'uk', 'ru_RU' ), true ) ) {
-				echo '<div class="notice notice-success">
-					<h4>Поздравляю! Обновление успешно завершено! </h4>
-					<h3><a target="_blank" href="https://wordpress.org/support/plugin/vdz-translit/reviews/?rate=5#new-post">Скажи спасибо и проголосуй (5 звезд) </a> - Мне будет приятно и я пойму, что все делаю правильно</h3>
-				  </div>';
-			} else {
-				echo '<div class="notice notice-success">
-					<h4>Congratulations! Update completed successfully!</h4>
-					<h3><a target="_blank" href="https://wordpress.org/support/plugin/vdz-translit/reviews/?rate=5#new-post">Say thanks and vote (5 stars)</a> - I will be glad and understand that doing everything right</h3>
-				  </div>';
-			}
-
-			delete_transient( 'vdz_api_updated' . plugin_basename( __FILE__ ) );
-		}
 	}
 );

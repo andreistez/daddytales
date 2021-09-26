@@ -1,0 +1,53 @@
+.song-preview {
+    width: 100%;
+    margin-bottom: $spacer-md;
+    border-bottom: 1px solid $light-2;
+    padding-bottom: $spacer-md;
+
+    &-inner {
+        display: flex;
+        flex-wrap: wrap
+    }
+
+    &-thumb {
+        width: $spacer-xl * 2;
+        height: $spacer-xl * 2;
+        border-radius: $radius;
+        box-shadow: $shadow
+    }
+
+    &-info {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        width: calc(100% - 80px);
+        padding-left: $spacer-md
+    }
+
+    .slide-info__title {
+        margin: $spacer-xl 0 0;
+
+        a {
+            color: $brand-blue;
+            text-shadow: none;
+
+            &:hover {
+                color: $brand-violet
+            }
+        }
+    }
+
+    .slide-button {
+        display: none;
+        margin: auto 0 auto auto;
+        padding-left: $spacer-md;
+
+        @media all and (min-width: $grid-sm) {
+            display: block
+        }
+    }
+
+    .slide-views {
+        left: $spacer-md
+    }
+}

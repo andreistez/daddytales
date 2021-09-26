@@ -5,7 +5,7 @@ Tags: translit, transliteration, transliterate, транслит, трансли
 Requires at least: 3.3
 Requires PHP: 7
 Tested up to: 5.8.1
-Stable tag: 1.3.16
+Stable tag: 1.3.17
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,8 @@ Just install and use :)
 * **[VDZ CallBack Plugin](https://wordpress.org/plugins/vdz-call-back/)** 
 * **[VDZ Yandex Metrika](https://wordpress.org/plugins/vdz-yandex-metrika/)** 
 * **[VDZ Google Analytics](https://wordpress.org/plugins/vdz-google-analytics/)** 
-* **[VDZ VERIFICATION](https://wordpress.org/plugins/vdz-verification/)** 
+* **[VDZ VERIFICATION](https://wordpress.org/plugins/vdz-verification/)**
+* **[VDZ Scroll Up](https://wordpress.org/plugins/vdz-scroll-up/)**
 * **[VDZ Contact Us](https://wordpress.org/plugins/vdz-contact-us/)** 
 * **[VDZ Yandex Share](https://wordpress.org/plugins/vdz-yandex-share/)** 
 * **[VDZ TRANSLIT](https://wordpress.org/plugins/vdz-translit/)** 
@@ -43,10 +44,13 @@ Just install and use :)
 
 
 == Upgrade Notice ==
-Add new version 1.3.16
+Add new version 1.3.17
 
 
 == Changelog ==
+
+= 1.3.17 =
+Update notification
 
 = 1.3.16 =
 Update Readme

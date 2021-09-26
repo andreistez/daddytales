@@ -38,7 +38,7 @@ $options = [
 							'type'			=> 'multi-select',
 							'label'			=> esc_html__( 'Post for Slide', 'daddytales' ),
 							'population'	=> 'posts',
-							'source'		=> 'post',
+							'source'		=> 'cartoon',
 							'prepopulate'	=> 10,
 							'limit'			=> 1
 						]

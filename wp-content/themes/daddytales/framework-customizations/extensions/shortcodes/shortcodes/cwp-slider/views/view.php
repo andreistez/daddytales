@@ -12,7 +12,6 @@ $type_of_slider = $atts['type_of_slider'];
 			$slider_query = new WP_Query(
 				[
 					'post_type'			=> 'cartoon',
-					'cat'				=> 6,
 					'post_status'		=> 'publish',
 					'posts_per_page'	=> $posts_count
 				]

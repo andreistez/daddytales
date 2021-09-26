@@ -1,6 +1,6 @@
 <?php
 /**
- * Archives template for Cartoon custom post type.
+ * Archives template for Song custom post type.
  *
  * @package WordPress
  * @subpackage daddytales
@@ -19,7 +19,7 @@ $term_slug	= $term->slug;
 		<?php
 		$title_args = [
 			'title'			=> $term->name,
-			'margin_left'	=> null
+			'margin_left'	=> 4
 		];
 		get_template_part( 'includes/common/section', 'title', $title_args );
 		?>
@@ -28,7 +28,7 @@ $term_slug	= $term->slug;
 			<div class="tax-inner">
 				<?php
 				$args = [
-					'post_type'	=> 'cartoon',
+					'post_type'	=> 'song',
 					'tax_name'	=> $tax_name,
 					'term'		=> $term
 				];
@@ -39,7 +39,7 @@ $term_slug	= $term->slug;
 				if( have_posts() ){
 					?>
 					<div class="tax-content white-wrapper">
-						<div class="tax-posts">
+						<div class="tax-posts tax-songs">
 							<?php
 							while( have_posts() ){
 								the_post();
@@ -47,14 +47,14 @@ $term_slug	= $term->slug;
 
 								if( ! $post_id ) continue;
 
-								get_template_part( 'includes/single/slider', 'preview', ['post_id' => $post_id] );
+								get_template_part( 'includes/single/song', 'preview', ['post_id' => $post_id] );
 							}
 							?>
 						</div>
 
 						<?php
 						$pagination_args = [
-							'post_type'	=> 'cartoon',
+							'post_type'	=> 'song',
 							'tax_name'	=> $tax_name,
 							'term_slug'	=> $term_slug
 						];
