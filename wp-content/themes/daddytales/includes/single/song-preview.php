@@ -34,8 +34,9 @@ if( ! $post_id ) return;
 			</h6>
 
 			<div class="slide-button">
-				<a class="button yellow" href="<?php echo get_the_permalink( $post_id ) ?>">
-					<?php esc_html_e( 'Слушать', 'daddytales' ) ?>
+				<a class="button yellow icon" href="<?php echo get_the_permalink( $post_id ) ?>">
+					<span><?php esc_html_e( 'Слушать', 'daddytales' ) ?></span>
+					<i class="fas fa-play"></i>
 				</a>
 			</div>
 

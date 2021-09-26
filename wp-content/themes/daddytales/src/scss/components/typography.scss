@@ -58,7 +58,20 @@ a {
 }
 
 p {
-    margin-top: 0
+    margin-top: 0;
+
+    a {
+        font-weight: $fw-semibold;
+        color: $brand-blue;
+
+        &:hover {
+            color: $brand-violet
+        }
+    }
+
+    i, em {
+        font-style: normal
+    }
 }
 
 b, strong {

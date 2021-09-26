@@ -1,0 +1,38 @@
+<?php
+/**
+ * Single Song post content.
+ *
+ * @package WordPress
+ * @subpackage daddytales
+ */
+
+if( isset( $args['post_id'] ) ) $post_id = $args['post_id'];
+else $post_id = get_the_ID();
+
+// If this is single post page.
+if( is_singular( 'song' ) ){
+    dt_set_post_views( $post_id );
+    ?>
+    <article class="single-post song-single post-<?php echo esc_attr( $post_id ) ?>">
+        <div class="cwp-title">
+			<h1 class="cwp-title__text">
+				<?php the_title() ?>
+			</h1>
+		</div>
+
+        <div class="fw-container">
+			<div class="song-inner">
+                <div class="song-content white-wrapper">
+                    <?php the_content() ?>
+                </div>
+
+                <?php
+                // If comments are open or we have at least one comment.
+                if ( comments_open() || get_comments_number() ) comments_template( '', true );
+                ?>
+            </div>
+        </div>
+    </article><!-- .single-post.single-song -->
+    <?php
+}
+

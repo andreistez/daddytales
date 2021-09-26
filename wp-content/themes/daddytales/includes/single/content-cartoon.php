@@ -37,7 +37,7 @@ if( is_singular( 'cartoon' ) ){
 		$genres			= fw_get_db_post_option( $post_id, 'genres' );
 	}
 	?>
-	<article class="single-cartoon post-<?php echo esc_attr( $post_id ) ?>">
+	<article class="cartoon-single post-<?php echo esc_attr( $post_id ) ?>">
 		<div class="cwp-title">
 			<h1 class="cwp-title__text">
 				<?php the_title() ?>

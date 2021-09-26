@@ -6,7 +6,8 @@
  * @subpackage daddytales
  */
 
-$post_id = $args['post_id'];
+if( isset( $args['post_id'] ) ) $post_id = $args['post_id'];
+else $post_id = get_the_ID();
 
 // If this is single post page.
 if( is_singular( 'post' ) ){

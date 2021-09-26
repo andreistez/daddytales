@@ -1,0 +1,32 @@
+.song-single {
+    .cwp-title__text {
+        padding: $spacer-xl
+    }
+}
+
+.song-inner {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 1
+}
+
+.song-content {
+    margin-top: $spacer-xl;
+
+    @media all and (min-width: $grid-xl) {
+        margin-top: 100px
+    }
+
+    .wp-block-audio {
+        margin: $spacer-xl 0 0;
+        border-radius: $radius;
+        overflow: hidden;
+        box-shadow: $shadow;
+
+        audio {
+            display: block;
+            width: 100%
+        }
+    }
+}
