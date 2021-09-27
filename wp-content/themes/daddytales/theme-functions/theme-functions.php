@@ -77,13 +77,8 @@ add_action( 'init', 'dt_blockusers_init' );
 function dt_blockusers_init(){
 	global $pagenow;
 
-	if( 'wp-login.php' === $pagenow && ! current_user_can( 'administrator' ) ){
-		wp_redirect( get_the_permalink( 6706 ) );
-		exit;
-	}
-
 	if(
-		is_admin()
+		( 'wp-login.php' === $pagenow || is_admin() )
 		&& ! current_user_can( 'administrator' )
 		&& ! ( defined( 'DOING_AJAX' ) && DOING_AJAX )
 	){

@@ -99,6 +99,8 @@ function dt_ajax_login(){
 		);
 	}
 
+	wp_set_auth_cookie( $user_id );
+
 	// Success! Redirect to User dashboard page on front-end.
 	$redirect = get_the_permalink( 6736 );
 	wp_send_json_success(
