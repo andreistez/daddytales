@@ -1,6 +1,6 @@
 <?php
 /**
- * Archives template for Cartoon custom post type.
+ * Archives template for Cartoons taxonomy.
  *
  * @package WordPress
  * @subpackage daddytales

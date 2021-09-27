@@ -58,8 +58,8 @@ $user_bio = $user_meta['description'][0];
             // Show button to quick redirect.
             ?>
             <div class="user-tab user-tab_admin" data-content="to-admin">
-                <i class="fas fa-lock-open"></i>
                 <a href="<?php echo home_url() ?>/wp-admin">
+                    <i class="fas fa-lock-open"></i>
                     <?php esc_html_e( 'В Админку', 'daddytales' ) ?>
                 </a>
             </div>

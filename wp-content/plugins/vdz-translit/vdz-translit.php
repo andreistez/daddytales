@@ -3,7 +3,7 @@
 Plugin Name: VDZ Translit Plugin (SEO permalinks)
 Plugin URI:  http://online-services.org.ua
 Description: Simple ukrainian and russian translit for post/page title and uploaded files.
-Version:     1.3.17
+Version:     1.3.18
 Author:      VadimZ
 Author URI:  http://online-services.org.ua#vdz-translit
 License:     GPL2
@@ -229,9 +229,30 @@ register_activation_hook(
 );
 
 // Код деактивации плагина
-register_deactivation_hook(
-	__FILE__,
-	function () {
-		// do_action(VDZ_TRANSLIT_API, 'off', plugin_basename(__FILE__));
+register_deactivation_hook( __FILE__, function () {
+	$plugin_name = preg_replace( '|\/(.*)|', '', plugin_basename( __FILE__ ));
+	$response = wp_remote_get( "http://api.online-services.org.ua/off/{$plugin_name}" );
+	if ( ! is_wp_error( $response ) && isset( $response['body'] ) && ( json_decode( $response['body'] ) !== null ) ) {
+		//TODO Вывод сообщения для пользователя
 	}
-);
+} );
+//Сообщение при отключении плагина
+add_action( 'admin_init', function (){
+	if(is_admin()){
+		$plugin_data = get_plugin_data(__FILE__);
+		$plugin_name = isset($plugin_data['Name']) ? $plugin_data['Name'] : ' us';
+		$plugin_dir_name = preg_replace( '|\/(.*)|', '', plugin_basename( __FILE__ ));
+		$handle = 'admin_'.$plugin_dir_name;
+		wp_register_script( $handle, '', null, false, true );
+		wp_enqueue_script( $handle );
+		$msg = '';
+		if ( function_exists( 'get_locale' ) && in_array( get_locale(), array( 'uk', 'ru_RU' ), true ) ) {
+			$msg .= "Спасибо, что были с нами! ({$plugin_name}) Хорошего дня!";
+		}else{
+			$msg .= "Thanks for your time with us! ({$plugin_name}) Have a nice day!";
+		}
+		wp_add_inline_script( $handle, "document.getElementById('deactivate-".esc_attr($plugin_dir_name)."').onclick=function (e){alert('".esc_attr( $msg )."');}" );
+	}
+} );
+
+

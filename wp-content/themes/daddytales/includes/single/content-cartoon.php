@@ -40,7 +40,10 @@ if( is_singular( 'cartoon' ) ){
 	<article class="cartoon-single post-<?php echo esc_attr( $post_id ) ?>">
 		<div class="cwp-title">
 			<h1 class="cwp-title__text">
-				<?php the_title() ?>
+				<?php
+				$post_title = str_replace( ' ', '', get_the_title( $post_id ) );
+				printf( esc_html__( '%s', 'daddytales' ), $post_title );
+				?>
 			</h1>
 		</div>
 

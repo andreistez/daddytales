@@ -22,6 +22,7 @@
         opacity: 0.35;
         pointer-events: none;
         margin-top: -170px;
+        word-wrap: anywhere;
 
         @media all and (min-width: $grid-xl) {
             display: flex

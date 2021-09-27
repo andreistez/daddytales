@@ -1,6 +1,6 @@
 <?php
 /**
- * Archives template for Songs taxonomy.
+ * Archives template for Poems taxonomy.
  *
  * @package WordPress
  * @subpackage daddytales
@@ -28,7 +28,7 @@ $term_slug	= $term->slug;
 			<div class="tax-inner">
 				<?php
 				$args = [
-					'post_type'	=> 'song',
+					'post_type'	=> 'poem',
 					'tax_name'	=> $tax_name,
 					'term'		=> $term
 				];
@@ -49,8 +49,10 @@ $term_slug	= $term->slug;
 
 								$preview_args = [
 									'post_id'	=> $post_id,
-									'btn_icon'	=> '<i class="fas fa-play"></i>',
-									'btn_text'	=> esc_html__( 'Слушать', 'daddytales' )
+									'post_type'	=> 'poem',
+									'tax_name'	=> $tax_name,
+									'btn_icon'	=> '<i class="fas fa-feather"></i>',
+									'btn_text'	=> esc_html__( 'Читать', 'daddytales' )
 								];
 								get_template_part( 'includes/single/song/song', 'preview', $preview_args );
 							}
@@ -59,7 +61,7 @@ $term_slug	= $term->slug;
 
 						<?php
 						$pagination_args = [
-							'post_type'	=> 'song',
+							'post_type'	=> 'poem',
 							'tax_name'	=> $tax_name,
 							'term_slug'	=> $term_slug
 						];

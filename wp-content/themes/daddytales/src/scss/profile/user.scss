@@ -9,7 +9,11 @@
 
         &:hover,
         &.active {
-            color: $brand-violet
+            color: $brand-violet;
+
+            a {
+                color: $brand-violet
+            }
         }
 
         &_admin {

@@ -826,6 +826,9 @@ function dt_ajax_get_in_touch_form_send(){
 	);
 }
 
+/**
+ * AJAX posts pagination.
+ */
 add_action( 'wp_ajax_dt_ajax_posts_pagination', 'dt_ajax_posts_pagination' );
 add_action( 'wp_ajax_nopriv_dt_ajax_posts_pagination', 'dt_ajax_posts_pagination' );
 function dt_ajax_posts_pagination(){
@@ -869,7 +872,32 @@ function dt_ajax_posts_pagination(){
 
 			if( ! $post_id ) continue;
 
-			get_template_part( 'includes/single/slider', 'preview', ['post_id' => $post_id] );
+			switch( $post_type ){
+				case 'song':
+					$preview_args = [
+						'post_id'	=> $post_id,
+						'btn_icon'	=> '<i class="fas fa-play"></i>',
+						'btn_text'	=> esc_html__( 'Слушать', 'daddytales' )
+					];
+					get_template_part( 'includes/single/song/song', 'preview', $preview_args );
+					break;
+
+				case 'poem':
+					$preview_args = [
+						'post_id'	=> $post_id,
+						'post_type'	=> 'poem',
+						'tax_name'	=> $taxonomy,
+						'btn_icon'	=> '<i class="fas fa-feather"></i>',
+						'btn_text'	=> esc_html__( 'Читать', 'daddytales' )
+					];
+					get_template_part( 'includes/single/song/song', 'preview', $preview_args );
+					break;
+
+				case 'cartoon':
+				default:
+					get_template_part( 'includes/single/slider', 'preview', ['post_id' => $post_id] );
+					break;
+			}
 		}
 		$posts = ob_get_contents();
 		ob_end_clean();

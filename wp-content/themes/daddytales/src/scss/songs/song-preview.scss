@@ -13,7 +13,8 @@
         width: $spacer-xl * 2;
         height: $spacer-xl * 2;
         border-radius: $radius;
-        box-shadow: $shadow
+        box-shadow: $shadow;
+        overflow: hidden
     }
 
     &-info {
@@ -21,11 +22,18 @@
         display: flex;
         align-items: flex-start;
         width: calc(100% - 80px);
-        padding-left: $spacer-md
+        padding-left: $spacer-md;
+
+        &__fields {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start
+        }
     }
 
     .slide-info__title {
-        margin: $spacer-xl 0 0;
+        margin: 0;
 
         a {
             color: $brand-blue;
@@ -34,6 +42,27 @@
             &:hover {
                 color: $brand-violet
             }
+        }
+    }
+
+    &-terms {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 5px
+    }
+
+    &-term {
+        font-size: $fs-sm;
+        color: $gray;
+        font-weight: $fw-light;
+        margin-right: $spacer-xs;
+
+        &:last-child {
+            margin-right: 0
+        }
+
+        &:hover {
+            color: $brand-violet
         }
     }
 
@@ -48,6 +77,9 @@
     }
 
     .slide-views {
-        left: $spacer-md
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: $spacer-xs
     }
 }

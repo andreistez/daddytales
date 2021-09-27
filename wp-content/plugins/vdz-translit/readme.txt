@@ -5,7 +5,7 @@ Tags: translit, transliteration, transliterate, транслит, трансли
 Requires at least: 3.3
 Requires PHP: 7
 Tested up to: 5.8.1
-Stable tag: 1.3.17
+Stable tag: 1.3.18
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,10 +44,13 @@ Just install and use :)
 
 
 == Upgrade Notice ==
-Add new version 1.3.17
+Add new version 1.3.18
 
 
 == Changelog ==
+
+= 1.3.18 =
+Update API
 
 = 1.3.17 =
 Update notification

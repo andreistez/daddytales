@@ -12,6 +12,7 @@
 }
 
 .song-content {
+    width: 100%;
     margin-top: $spacer-xl;
 
     @media all and (min-width: $grid-xl) {
@@ -28,5 +29,36 @@
             display: block;
             width: 100%
         }
+    }
+}
+
+.song-terms {
+    width: 100%;
+    margin-top: 20px;
+
+    &-inner {
+        display: flex;
+        flex-wrap: wrap
+    }
+}
+
+.song-term {
+    border: 1px solid $brand-green;
+    border-radius: 5px;
+    padding: 5px $spacer-md;
+    margin-right: $spacer-md;
+    color: $brand-green;
+    font-weight: $fw-semibold;
+    transition:
+        color ease-out $tr,
+        background-color ease-out $tr;
+
+    &:last-child {
+        margin-right: 0
+    }
+
+    &:hover {
+        color: $white;
+        background-color: $brand-green
     }
 }
