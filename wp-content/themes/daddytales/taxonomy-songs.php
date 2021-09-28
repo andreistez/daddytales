@@ -32,7 +32,7 @@ $term_slug	= $term->slug;
 					'tax_name'	=> $tax_name,
 					'term'		=> $term
 				];
-				get_template_part( 'includes/single/sidebar/sidebar', null, $args );
+				get_template_part( 'includes/sidebar/sidebar', null, $args );
 				?>
 
                 <?php

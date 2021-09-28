@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Post Type Switcher - Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-07-14 13:22:07+0000\n"
+"PO-Revision-Date: 2021-09-28 08:15:12+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,9 +11,38 @@ msgstr ""
 "Language: ru\n"
 "Project-Id-Version: Plugins - Post Type Switcher - Development (trunk)\n"
 
+#: post-type-switcher.php:692
+msgctxt "verb"
+msgid "Sponsor"
+msgstr "Спонсор"
+
+#. Author URI of the plugin
+msgid "https://jjj.software"
+msgstr "https://jjj.software"
+
+#. Author of the plugin
+msgid "Triple J Software, Inc."
+msgstr "Triple J Software, Inc."
+
+#. Description of the plugin
+msgid "A simple way to change a post's type in WordPress"
+msgstr "Простой способ изменить тип записи в WordPress"
+
+#: post-type-switcher.php:424
+msgid "Sorry, you cannot do this."
+msgstr "Извините, но вы не можете этого сделать."
+
+#: post-type-switcher.php:413
+msgid "Missing data."
+msgstr "Недостающие данные."
+
 #: post-type-switcher.php:370
 msgid "&mdash; No Change &mdash;"
-msgstr "&mdash; Не изменять &mdash;"
+msgstr "&mdash; Без изменений &mdash;"
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/post-type-switcher"
+msgstr "https://wordpress.org/plugins/post-type-switcher"
 
 #. Plugin Name of the plugin
 msgid "Post Type Switcher"

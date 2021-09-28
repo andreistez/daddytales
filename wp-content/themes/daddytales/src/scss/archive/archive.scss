@@ -18,10 +18,12 @@
 .tax-content {
     width: 100%;
     order: 1;
+    margin-bottom: $spacer-xl;
 
     @media all and (min-width: $grid-xl) {
         width: 70%;
-        order: 2
+        order: 2;
+        margin-bottom: 0
     }
 }
 

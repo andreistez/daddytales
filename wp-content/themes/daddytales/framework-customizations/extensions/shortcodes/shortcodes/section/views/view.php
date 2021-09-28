@@ -5,12 +5,13 @@ $class = $atts['class_name'] ? ' ' . $atts['class_name'] : '';
 
 $bg_color = '';
 if ( ! empty( $atts['background_color'] ) ) {
-	$bg_color = 'background-color:' . $atts['background_color'] . ';';
+	$bg_color = 'background-color:' . esc_attr( $atts['background_color'] ) . ';';
 }	else {
 	$bg_color = 'background-color:#fff;';
 }
 
 $bg_image		= $atts['bg_image'];
+$hide_overflow	= $atts['hide_overflow'] ? 'overflow: hidden;' : '';
 $gradient_deg	= $atts['gradient_degrees'] ?? 90;
 $gradient		= ( $atts['gradient_start'] && $atts['gradient_end'] )
 				? 'background: linear-gradient(' . esc_attr( $gradient_deg ) . 'deg, ' . esc_attr( $atts['gradient_start'] ) . ', ' . esc_attr( $atts['gradient_end'] ) . ');'
@@ -27,9 +28,13 @@ $margin_bottom	= ( isset( $atts['margin_bottom'] ) && $atts['margin_bottom'] )
 				? $atts['margin_bottom'] : 0;
 $margin			= 'margin:' . esc_attr( $margin_top ) . 'px 0 ' . esc_attr( $margin_bottom ) . 'px;';
 
-$section_style	= $bg_color ? 'style="' . esc_attr( $bg_color ) . $gradient . $padding . $margin . '"' : '';
-$container_class = ( isset( $atts['is_fullwidth'] ) && $atts['is_fullwidth'] ) ? 'fw-container-fluid' : 'fw-container';
+$section_style		= ( $bg_color || $gradient || $padding || $margin || $hide_overflow )
+					? 'style="' . $bg_color . $gradient . $padding . $margin . $hide_overflow . '"'
+					: '';
+$container_class	= ( isset( $atts['is_fullwidth'] ) && $atts['is_fullwidth'] )
+					? 'fw-container-fluid' : 'fw-container';
 ?>
+
 <section class = "fw-main-row<?php echo esc_attr( $class ) ?>" <?php echo $section_style ?>>
 	<?php
 	if( $bg_image ){

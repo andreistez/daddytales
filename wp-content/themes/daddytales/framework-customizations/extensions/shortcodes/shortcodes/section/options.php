@@ -44,6 +44,11 @@ $options = [
 		]
 	],
 
+	'hide_overflow'	=> [
+		'label'	=> esc_html__( 'Hide Overflow', 'daddytales' ),
+		'type'	=> 'switch'
+	],
+
 	'padding_top'	=> [
 		'type'	=> 'text',
 		'label'	=> esc_html__( 'Padding Top (px)', 'daddytales' ),

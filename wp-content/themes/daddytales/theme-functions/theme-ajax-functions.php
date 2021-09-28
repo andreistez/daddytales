@@ -99,6 +99,7 @@ function dt_ajax_login(){
 		);
 	}
 
+	// Correct signon with HTTPS.
 	wp_set_auth_cookie( $user_id );
 
 	// Success! Redirect to User dashboard page on front-end.

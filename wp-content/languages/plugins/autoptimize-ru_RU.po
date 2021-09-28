@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Autoptimize - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-09-05 15:31:24+0000\n"
+"PO-Revision-Date: 2021-09-28 14:30:12+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -173,7 +173,7 @@ msgstr "Ранняя загрузка JavaScript (не рекомендуетс�
 
 #: classes/autoptimizeConfig.php:239
 msgid "Let Autoptimize also extract JS from the HTML (discouraged as it can make Autoptimize's cache size grow quickly)"
-msgstr "Позволить Autoptimize также извлекать JS из HTML (не рекомендуется, так как это может привести к быстрому увеличению размера кэша Autoptimize)."
+msgstr "Позволить Autoptimize также извлекать JS из HTML (не рекомендуется, так как это может привести к быстрому увеличению размера кэша Autoptimize)"
 
 #: classes/autoptimizeConfig.php:234
 msgid "Aggregate all linked JS-files to have them loaded non-render blocking?"
@@ -479,7 +479,7 @@ msgstr "Применить"
 
 #: classes/critcss-inc/admin_settings_rules.js.php:253
 msgid "For path based rules, paste your specific and minified critical CSS here or leave this empty to fetch it from criticalcss.com and hit submit to save. If you want to create a rule to exclude from critical CSS injection, enter \\\"none\\\""
-msgstr "Для правил, основанных на пути, вставьте сюда определённый и минифицированный критический CSS или оставьте это поле пустым, чтобы получить его с criticalcss.com, и нажмите кнопку «Применить» для сохранения. Если вы хотите создать правило, исключающее внедрение критического CSS, введите \\\"none\\\"."
+msgstr "Для правил, основанных на пути, вставьте сюда определённый и минифицированный критический CSS или оставьте это поле пустым, чтобы получить его с criticalcss.com, и нажмите кнопку «Применить» для сохранения. Если вы хотите создать правило, исключающее внедрение критического CSS, введите \\\"none\\\""
 
 #: classes/critcss-inc/admin_settings_rules.js.php:249
 msgid "For type based rules, paste your specific and minified critical CSS here and hit submit to save. If you want to create a rule to exclude from critical CSS injection, enter \\\"none\\\"."
@@ -829,7 +829,7 @@ msgstr "Очередь заданий"
 
 #: classes/critcss-inc/admin_settings_key.php:48
 msgid "Enter your <a href=\"https://criticalcss.com/account/api-keys?aff=1\" target=\"_blank\">criticalcss.com</a> API key above. The key is revalidated every time a new job is sent to it.<br />To obtain your API key, go to <a href=\"https://criticalcss.com/account/api-keys?aff=1\" target=\"_blank\">criticalcss.com</a> > Account > API Keys.<br />Requests to generate a critical CSS via the API are priced at £5 per domain per month.<br /><strong>Not sure yet? With the <a href=\"https://criticalcss.com/faq/?aff=1#trial\" target=\"_blank\">30 day money back guarantee</a>, you have nothing to lose!</strong>"
-msgstr "Введите выше свой  API-ключ <a href=\"https://criticalcss.com/account/api-keys?aff=1\" target=\"_blank\">criticalcss.com</a>. Ключ проверяется каждый раз, когда на него отправляется новое задание.<br />Для получения ключа API перейдите на <a href=\"https://criticalcss.com/account/api-keys?aff=1\" target=\"_blank\">criticalcss.com</a> > Account > API Keys.<br />Запросы на создание критического CSS через API стоят £5 за домен в месяц.<br /><strong>Еще не уверены? С <a href=\"https://criticalcss.com/faq/?aff=1#trial\" target=\"_blank\">30-дневной гарантией возврата денег</a>, вам нечего терять! </strong>"
+msgstr "Введите выше свой API-ключ <a href=\"https://criticalcss.com/account/api-keys?aff=1\" target=\"_blank\">criticalcss.com</a>. Ключ проверяется каждый раз, когда на него отправляется новое задание.<br />Для получения ключа API перейдите на <a href=\"https://criticalcss.com/account/api-keys?aff=1\" target=\"_blank\">criticalcss.com</a> > Account > API Keys.<br />Запросы на создание критического CSS через API стоят £5 за домен в месяц.<br /><strong>Еще не уверены? С <a href=\"https://criticalcss.com/faq/?aff=1#trial\" target=\"_blank\">30-дневной гарантией возврата денег</a>, вам нечего терять! </strong>"
 
 #: classes/critcss-inc/admin_settings_key.php:46
 msgid "Please enter your criticalcss.com API key here."

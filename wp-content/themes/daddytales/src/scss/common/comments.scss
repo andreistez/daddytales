@@ -242,3 +242,15 @@
         transition: color ease-out $tr
     }
 }
+
+.no-comments-yet,
+.comment-notes,
+.comment-form-author,
+.comment-form-email,
+.comment-form-cookies-consent {
+    font-size: $fs-sm;
+
+    @media all and (min-width: $grid-md) {
+        font-size: $fs-lg
+    }
+}
