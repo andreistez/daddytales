@@ -38,17 +38,13 @@ $user_bio = $user_meta['description'][0];
     ?>
 
     <div class="user-tabs">
-        <div class="user-tab active" data-content="info">
-            <i class="fas fa-info-circle"></i>
-            <?php esc_html_e( 'Информация', 'daddytales' ) ?>
+        <div class="user-tab active" data-content="edit">
+            <i class="fas fa-user-edit"></i>
+            <?php esc_html_e( 'Мой профиль', 'daddytales' ) ?>
         </div>
         <div class="user-tab" data-content="invite">
             <i class="fas fa-user-plus"></i>
             <?php esc_html_e( 'Пригласить друга', 'daddytales' ) ?>
-        </div>
-        <div class="user-tab" data-content="edit">
-            <i class="fas fa-user-edit"></i>
-            <?php esc_html_e( 'Редактировать профиль', 'daddytales' ) ?>
         </div>
 
         <?php

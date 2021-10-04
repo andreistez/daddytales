@@ -17,7 +17,7 @@ $user_data = get_userdata( $user_id );
 $user_website = $user_data->user_url;
 ?>
 
-<div class="profile-content-inner user-info active" data-content="info">
+<div class="profile-content-inner user-info" data-content="info">
 	<div class="section-title underlined">
 		<h3 class="section-title-text">
 			<?php esc_html_e( 'Информация профиля', 'daddytales' ) ?>

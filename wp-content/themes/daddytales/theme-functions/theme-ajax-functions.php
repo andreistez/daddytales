@@ -99,8 +99,8 @@ function dt_ajax_login(){
 		);
 	}
 
-	// Correct signon with HTTPS.
-	wp_set_auth_cookie( $user_id );
+	wp_set_current_user( $user_id );
+    wp_set_auth_cookie( $user_id, $remember );
 
 	// Success! Redirect to User dashboard page on front-end.
 	$redirect = get_the_permalink( 6736 );
@@ -413,18 +413,13 @@ function dt_ajax_register(){
 }
 
 /**
- * AJAX save profile changes.
+ * AJAX change profile avatar.
  */
-add_action( 'wp_ajax_dt_ajax_save_profile_changes', 'dt_ajax_save_profile_changes' );
-function dt_ajax_save_profile_changes(){
+add_action( 'wp_ajax_dt_ajax_change_profile_avatar', 'dt_ajax_change_profile_avatar' );
+function dt_ajax_change_profile_avatar(){
 	// Verify hidden nonce field.
-	if( empty( $_POST ) || ! wp_verify_nonce( $_POST['dt_save_profile_changes_nonce'], 'dt_ajax_save_profile_changes' ) ){
-		wp_send_json_error(
-			[
-				'msg'	=> esc_html__( 'Неверные данные в запросе.', 'daddytales' )
-			]
-		);
-	}
+	if( empty( $_POST ) || ! wp_verify_nonce( $_POST['dt_change_profile_avatar_nonce'], 'dt_ajax_change_profile_avatar' ) )
+		wp_send_json_error( ['msg' => esc_html__( 'Запрос из постороннего источника.', 'daddytales' )] );
 
 	// Get current user ID.
 	$user = wp_get_current_user();
@@ -437,170 +432,78 @@ function dt_ajax_save_profile_changes(){
 	}
 
 	// Avatar upload if file exists.
-	if( isset( $_FILES['avatar']['size'] ) && $_FILES['avatar']['size'] > 0 ){
-		// Conditions for avatar: ( png | jpg | jpeg ) and < 1 MB.
-		$allowed_image_types = ['image/jpeg', 'image/png'];
-		$max_image_size = 1000000;
+	if( ! isset( $_FILES['avatar']['size'] ) || $_FILES['avatar']['size'] <= 0 )
+		wp_send_json_error( ['msg' => esc_html__( 'Изображение не отправлено.', 'daddytales' )] );
 
-		// Check conditions for avatar.
-		if( ! in_array( $_FILES['avatar']['type'], $allowed_image_types ) || ( int ) $_FILES['avatar']['size'] > $max_image_size ){
-			wp_send_json_error(
-				[
-					'msg'	=> esc_html__( 'Только ( png | jpg | jpeg ) изображения < 1 Мб разрешены.', 'daddytales' )
-				]
-			);
-		}
+	// Conditions for avatar: ( png | jpg | jpeg ) and < 1 MB.
+	$allowed_image_types = ['image/jpeg', 'image/png'];
+	$max_image_size = 1000000;
 
-		require_once( ABSPATH . 'wp-admin/includes/image.php' );
-		require_once( ABSPATH . 'wp-admin/includes/file.php' );
-		require_once( ABSPATH . 'wp-admin/includes/media.php' );
+	// Check conditions for avatar.
+	if( ! in_array( $_FILES['avatar']['type'], $allowed_image_types ) || ( int ) $_FILES['avatar']['size'] > $max_image_size )
+		wp_send_json_error( ['msg' => esc_html__( 'Только ( png | jpg | jpeg ) изображения < 1 Мб разрешены.', 'daddytales' )] );
 
-		// If current User has no post ID in meta field - insert new hidden post.
-		if( ! $post_id = get_user_meta( $user_id, 'dt_avatar_image_id', true ) ){
-			$post_id = wp_insert_post(
-				[
-					'post_author'	=> $user_id,
-					'post_type'		=> 'user_avatar',
-					'post_status'	=> 'publish',
-					'post_title'	=> $user->data->display_name
-				]
-			);
-		}
-		$attachment_id = media_handle_upload( 'avatar', $post_id );
+	require_once( ABSPATH . 'wp-admin/includes/image.php' );
+	require_once( ABSPATH . 'wp-admin/includes/file.php' );
+	require_once( ABSPATH . 'wp-admin/includes/media.php' );
 
-		if( is_wp_error( $attachment_id ) ){
-			wp_send_json_error(
-				[
-					'msg'	=> esc_html__( 'Ошибка при загрузке изображения профиля.', 'daddytales' )
-				]
-			);
-		}
-
-		// If all is good - set attachment ID as ID for user avatar.
-		update_user_meta( $user_id, 'dt_avatar_image_id', $attachment_id );
-		if( $attachment_id != get_user_meta( $user_id, 'dt_avatar_image_id', true ) ){
-			wp_send_json_error(
-				[
-					'msg'	=> esc_html__( 'Ошибка при установке изображения профиля.', 'daddytales' )
-				]
-			);
-		}
-
-		update_user_meta( $user_id, 'dt_post_id', $post_id );
-		if( $post_id != get_user_meta( $user_id, 'dt_post_id', true ) ){
-			wp_send_json_error(
-				[
-					'msg'	=> esc_html__( 'Ошибка при записи данных изображения профиля.', 'daddytales' )
-				]
-			);
-		}
-
-		// Set post thumb - avatar.
-		set_post_thumbnail( $post_id, $attachment_id );
-	}
-
-	$first_name = dt_clean_value( $_POST['first-name'] );
-	$last_name = dt_clean_value( $_POST['last-name'] );
-	$website = dt_clean_value( $_POST['website'] );
-	$biography = dt_clean_value( $_POST['biography'] );
-
-	$pass = dt_clean_value( $_POST['pass'] );
-	$pass = htmlspecialchars_decode( $pass );
-
-	$pass_new = dt_clean_value( $_POST['pass-new'] );
-	$pass_new = htmlspecialchars_decode( $pass_new );
-
-	$pass_new_confirm = dt_clean_value( $_POST['pass-new-confirm'] );
-	$pass_new_confirm = htmlspecialchars_decode( $pass_new_confirm );
-
-	// If required data fields is not set - send error.
-	if(
-		! $first_name
-		&& ! $last_name
-		&& ! $website
-		&& ! $biography
-		&& ! $pass
-		&& ! $pass_new
-		&& ! $pass_new_confirm
-	){
-		wp_send_json_error(
+	// If current User has no post ID in meta field - insert new hidden post.
+	if( ! $post_id = get_user_meta( $user_id, 'dt_avatar_image_id', true ) ){
+		$post_id = wp_insert_post(
 			[
-				'msg'	=> esc_html__( 'Поля пусты.', 'daddytales' )
+				'post_author'	=> $user_id,
+				'post_type'		=> 'user_avatar',
+				'post_status'	=> 'publish',
+				'post_title'	=> $user->data->display_name
 			]
 		);
 	}
+	$attachment_id = media_handle_upload( 'avatar', $post_id );
 
-	// If at least one password field is set - User wants to change password.
-	if( ! empty( $pass ) || ! empty( $pass_new ) || ! empty( $pass_new_confirm ) ){
-		// If at least one password field is empty - send error.
-		if( empty( $pass ) || empty( $pass_new ) || empty( $pass_new_confirm ) ){
-			wp_send_json_error(
-				[
-					'msg'	=> esc_html__( 'Все поля с паролями должны быть заполнены для изменения.', 'daddytales' )
-				]
-			);
-		}
+	if( is_wp_error( $attachment_id ) )
+		wp_send_json_error( [ 'msg' => esc_html__( 'Ошибка при загрузке изображения профиля.', 'daddytales' )] );
 
-		// If new passwords are the same as old - send error.
-		if( $pass === $pass_new && $pass === $pass_new_confirm ){
-			wp_send_json_error(
-				[
-					'msg'	=> esc_html__( 'Ошибка - все поля с паролями одинаковы.', 'daddytales' )
-				]
-			);
-		}
+	// If all is good - set attachment ID as ID for user avatar.
+	update_user_meta( $user_id, 'dt_avatar_image_id', $attachment_id );
+	if( $attachment_id != get_user_meta( $user_id, 'dt_avatar_image_id', true ) )
+		wp_send_json_error( ['msg' => esc_html__( 'Ошибка при установке изображения профиля.', 'daddytales' )] );
 
-		// Get hash pass for comparison.
-		$user_data = get_userdata( $user_id )->data;
-		$hash = $user_data->user_pass;
+	update_user_meta( $user_id, 'dt_post_id', $post_id );
+	if( $post_id != get_user_meta( $user_id, 'dt_post_id', true ) )
+		wp_send_json_error( [ 'msg' => esc_html__( 'Ошибка при записи данных изображения профиля.', 'daddytales' )] );
 
-		// If old pass is not equal to DB - send error.
-		if( ! wp_check_password( $pass, $hash, $user_id ) ){
-			wp_send_json_error(
-				[
-					'msg'	=> esc_html__( 'Ошибка - старый пароль указан неверно.', 'daddytales' )
-				]
-			);
-		}
+	// Set post thumb - avatar.
+	set_post_thumbnail( $post_id, $attachment_id );
 
-		// Check new password length.
-		if( ! dt_check_length( $pass_new, 8, 30 ) || ! dt_check_length( $pass_new_confirm, 8, 30 ) ){
-			wp_send_json_error(
-				[
-					'msg'	=> esc_html__( 'Некорректная длина нового пароля.', 'daddytales' )
-				]
-			);
-		}
+	// Success!
+	wp_send_json_success( ['msg' => esc_html__( 'Изображение профиля успешно загружено. Перезагрузка...', 'daddytales' )] );
+}
 
-		// Check new passwords equality.
-		if( $pass_new !== $pass_new_confirm ){
-			wp_send_json_error(
-				[
-					'msg'	=> esc_html__( 'Новые пароли различаются.', 'daddytales' )
-				]
-			);
-		}
+/**
+ * AJAX save profile common fields.
+ */
+add_action( 'wp_ajax_dt_ajax_save_common_fields', 'dt_ajax_save_common_fields' );
+function dt_ajax_save_common_fields(){
+	$form_data = [];
+	parse_str( $_POST['form_data'], $form_data );
 
-		// Set new User password.
-		wp_set_password( $pass_new, $user_id );
+	// Verify hidden nonce field.
+	if( empty( $_POST ) || ! wp_verify_nonce( $form_data['dt_save_common_fields_nonce'], 'dt_ajax_save_common_fields' ) )
+		wp_send_json_error( ['msg' => esc_html__( 'Запрос из постороннего источника.', 'daddytales' )] );
 
-		// Letter to notice current User by E-mail about password is changed.
-		$msg = "<h1>Привет, $user->user_login!</h1>
-		<p>Пароль от Вашего аккаунта изменён на новый: $pass_new.</p><br />
-		<p>Если это были не Вы - пожалуйста, обратитесь к Администрации сайта \"Папины Сказки\" как можно быстрее.</p><br />
-		<p>Если Вы не $user->user_login - просто удалите это письмо.</p><br />
-		<p>С наилучшими пожеланиями, Администрация сайта <a href=\"" . home_url( '/' ) . "\">\"Папины Сказки\"</a>.</p>";
+	// Get current user ID.
+	$user = wp_get_current_user();
+	if( ! ( $user_id = $user->ID ) )
+		wp_send_json_error( ['msg' => esc_html__( 'Неавторизованный запрос.', 'daddytales' )] );
 
-		add_filter( 'wp_mail_from_name', function( $from_name ){
-			return 'Папины Сказки';
-		} );
-		add_filter( 'wp_mail_from', function( $email_address ){
-			return 'no-reply@daddy-tales.ru';
-		} );
-		add_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
-		wp_mail( $user->user_email, 'Папины Сказки', $msg );
-		remove_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
-	}
+	$first_name	= dt_clean_value( $form_data['first-name'] );
+	$last_name	= dt_clean_value( $form_data['last-name'] );
+	$website	= dt_clean_value( $form_data['website'] );
+	$biography	= dt_clean_value( $form_data['biography'] );
+
+	// If required data fields is not set - send error.
+	if( ! $first_name && ! $last_name && ! $website && ! $biography )
+		wp_send_json_error( ['msg' => esc_html__( 'Поля пусты.', 'daddytales' )] );
 
 	// Set other User meta fields - only if they are not empty.
 	if( $website ){
@@ -609,24 +512,94 @@ function dt_ajax_save_profile_changes(){
 			'user_url'	=> $website
 		] );
 
-		if( is_wp_error( $update_website ) ){
-			wp_send_json_error(
-				[
-					'msg'	=> esc_html__( 'Ошибка при обновлении поля "Веб-сайт".', 'daddytales' )
-				]
-			);
-		}
+		if( is_wp_error( $update_website ) )
+			wp_send_json_error( ['msg' => esc_html__( 'Ошибка при обновлении поля "Веб-сайт".', 'daddytales' )] );
 	}
-	if( $first_name ) update_user_meta( $user_id, 'first_name', $first_name );
-	if( $last_name ) update_user_meta( $user_id, 'last_name', $last_name );
-	if( $biography ) update_user_meta( $user_id, 'description', $biography );
+
+	if( $first_name )	update_user_meta( $user_id, 'first_name', $first_name );
+	if( $last_name )	update_user_meta( $user_id, 'last_name', $last_name );
+	if( $biography )	update_user_meta( $user_id, 'description', $biography );
 
 	// Success!
-	wp_send_json_success(
-		[
-			'msg'	=> esc_html__( 'Изменения сохранены успешно!', 'daddytales' )
-		]
-	);
+	wp_send_json_success( ['msg' => esc_html__( 'Изменения сохранены успешно. Перезагрузка...', 'daddytales' )] );
+}
+
+/**
+ * AJAX change password.
+ */
+add_action( 'wp_ajax_dt_ajax_change_password', 'dt_ajax_change_password' );
+function dt_ajax_change_password(){
+	$form_data = [];
+	parse_str( $_POST['form_data'], $form_data );
+
+	// Verify hidden nonce field.
+	if( empty( $_POST ) || ! wp_verify_nonce( $form_data['dt_change_password_nonce'], 'dt_ajax_change_password' ) )
+		wp_send_json_error( ['msg' => esc_html__( 'Запрос из постороннего источника.', 'daddytales' )] );
+
+	// Get current user ID.
+	$user = wp_get_current_user();
+	if( ! ( $user_id = $user->ID ) )
+		wp_send_json_error( ['msg' => esc_html__( 'Неавторизованный запрос.', 'daddytales' )] );
+
+	$pass = dt_clean_value( $form_data['pass'] );
+	$pass = htmlspecialchars_decode( $pass );
+
+	$pass_new = dt_clean_value( $form_data['pass-new'] );
+	$pass_new = htmlspecialchars_decode( $pass_new );
+
+	$pass_new_confirm = dt_clean_value( $form_data['pass-new-confirm'] );
+	$pass_new_confirm = htmlspecialchars_decode( $pass_new_confirm );
+
+	// If required data fields is not set - send error.
+	if( ! $pass && ! $pass_new && ! $pass_new_confirm )
+		wp_send_json_error( ['msg' => esc_html__( 'Поля пусты.', 'daddytales' )] );
+
+	// If at least one password field is empty - send error.
+	if( empty( $pass ) || empty( $pass_new ) || empty( $pass_new_confirm ) )
+		wp_send_json_error( ['msg' => esc_html__( 'Все поля с паролями должны быть заполнены для изменения.', 'daddytales' )] );
+
+	// If new passwords are the same as old - send error.
+	if( $pass === $pass_new && $pass === $pass_new_confirm )
+		wp_send_json_error( ['msg' => esc_html__( 'Ошибка - все поля с паролями одинаковы.', 'daddytales' )] );
+
+	// Get hash pass for comparison.
+	$user_data	= get_userdata( $user_id )->data;
+	$hash		= $user_data->user_pass;
+
+	// If old pass is not equal to DB - send error.
+	if( ! wp_check_password( $pass, $hash, $user_id ) )
+		wp_send_json_error( ['msg' => esc_html__( 'Ошибка - старый пароль указан неверно.', 'daddytales' )] );
+
+	// Check new password length.
+	if( ! dt_check_length( $pass_new, 8, 30 ) || ! dt_check_length( $pass_new_confirm, 8, 30 ) )
+		wp_send_json_error( ['msg' => esc_html__( 'Некорректная длина нового пароля.', 'daddytales' )] );
+
+	// Check new passwords equality.
+	if( $pass_new !== $pass_new_confirm )
+		wp_send_json_error( ['msg' => esc_html__( 'Новые пароли различаются.', 'daddytales' )] );
+
+	// Set new User password.
+	wp_set_password( $pass_new, $user_id );
+
+	// Letter to notice current User by E-mail about password is changed.
+	$msg = "<h1>Привет, $user->user_login!</h1>
+	<p>Пароль от Вашего аккаунта изменён на новый: $pass_new.</p><br />
+	<p>Если это были не Вы - пожалуйста, обратитесь к Администрации сайта \"Папины Сказки\" как можно быстрее.</p><br />
+	<p>Если Вы не $user->user_login - просто удалите это письмо.</p><br />
+	<p>С наилучшими пожеланиями, Администрация сайта <a href=\"" . home_url( '/' ) . "\">\"Папины Сказки\"</a>.</p>";
+
+	add_filter( 'wp_mail_from_name', function( $from_name ){
+		return 'Папины Сказки';
+	} );
+	add_filter( 'wp_mail_from', function( $email_address ){
+		return 'no-reply@daddy-tales.ru';
+	} );
+	add_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
+	wp_mail( $user->user_email, 'Папины Сказки', $msg );
+	remove_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
+
+	// Success!
+	wp_send_json_success( ['msg' => esc_html__( 'Пароль изменён успешно. Перезагрузка...', 'daddytales' )] );
 }
 
 /**
