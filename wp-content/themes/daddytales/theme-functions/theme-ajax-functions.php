@@ -909,3 +909,27 @@ function dt_ajax_posts_pagination(){
 	);
 }
 
+/**
+ * AJAX download image from Coloring Image post type.
+ */
+add_action( 'wp_ajax_dt_ajax_download_image', 'dt_ajax_download_image' );
+add_action( 'wp_ajax_nopriv_dt_ajax_download_image', 'dt_ajax_download_image' );
+function dt_ajax_download_image(){
+	$post_id = dt_clean_value( $_POST['post_id'] );
+
+	// Send error if post ID was not sent.
+	if( ! $post_id )
+		wp_send_json_error( ['msg' => esc_html__( 'Необходимые данные не переданы.', 'daddytales' )] );
+
+	$image_url	= is_user_logged_in()
+				? get_the_post_thumbnail_url( $post_id, 'full' )
+				: get_the_post_thumbnail_url( $post_id, 'medium' );
+
+	wp_send_json_success(
+		[
+			'msg'		=> esc_html__( 'Success', 'daddytales' ),
+			'image_url'	=> $image_url
+		]
+	);
+}
+

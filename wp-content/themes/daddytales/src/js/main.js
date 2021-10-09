@@ -13,10 +13,21 @@
 //= partials/ajax.js
 //= partials/ajax-pagination.js
 
+/**
+ * Authorization scripts.
+ */
 //= auth/ajax.js
 //= auth/scripts.js
 
+/**
+ * Cartoons scripts.
+ */
 //= cartoon/scripts.js
+
+/**
+ * Coloring images scripts.
+ */
+//= coloring/ajax.js
 
 /**
  * Unyson components scripts.

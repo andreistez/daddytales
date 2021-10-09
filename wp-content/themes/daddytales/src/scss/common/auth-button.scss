@@ -9,6 +9,7 @@
     }
 
     .button {
+        flex-wrap: nowrap;
         margin-right: $spacer-xs;
 
         &:last-child {

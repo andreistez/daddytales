@@ -13,6 +13,16 @@ switch( $taxonomy ){
 		$post_type	= 'song';
 		$term_id	= ( int ) $atts['taxonomy']['songs']['terms'][0];
 		break;
+
+	case 'poems':
+		$post_type	= 'poem';
+		$term_id	= ( int ) $atts['taxonomy']['poems']['terms'][0];
+		break;
+
+	case 'coloring_images':
+		$post_type	= 'coloring_image';
+		$term_id	= ( int ) $atts['taxonomy']['coloring_images']['terms'][0];
+		break;
 }
 
 $term			= get_term_by( 'id', $term_id, $taxonomy );

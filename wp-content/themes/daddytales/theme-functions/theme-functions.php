@@ -395,6 +395,77 @@ function dt_custom_init(){
 			'supports'				=> ['title', 'editor', 'thumbnail', 'comments']
 		]
 	);
+
+	// Coloring images taxonomy.
+	register_taxonomy(
+		'coloring_images',
+		['coloring_image'],
+		[
+			'label'                 => esc_html__( 'Категории Раскрасок', 'daddytales' ),
+			'labels'                => [
+				'name'              => esc_html__( 'Категории Раскрасок', 'daddytales' ),
+				'singular_name'     => esc_html__( 'Категория Раскрасок', 'daddytales' ),
+				'search_items'      => esc_html__( 'Искать Категории Раскрасок', 'daddytales' ),
+				'all_items'         => esc_html__( 'Все Категории Раскрасок', 'daddytales' ),
+				'view_item '        => esc_html__( 'Показать Категории Раскрасок', 'daddytales' ),
+				'parent_item'       => esc_html__( 'Родительская Категория', 'daddytales' ),
+				'parent_item_colon' => esc_html__( 'Родительская Категория:', 'daddytales' ),
+				'edit_item'         => esc_html__( 'Редактировать Категорию', 'daddytales' ),
+				'update_item'       => esc_html__( 'Обновить Категорию', 'daddytales' ),
+				'add_new_item'      => esc_html__( 'Добавить Новую Категорию Раскрасок', 'daddytales' ),
+				'new_item_name'     => esc_html__( 'Новая Категория Раскрасок', 'daddytales' ),
+				'menu_name'         => esc_html__( 'Категории Раскрасок', 'daddytales' ),
+			],
+			'description'           => '',
+			'public'                => true,
+			'publicly_queryable'    => true,
+			'show_in_nav_menus'     => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'show_tagcloud'         => true,
+			'show_in_quick_edit'    => true,
+			'hierarchical'          => true,
+			'rewrite'               => true,
+			'capabilities'          => [],
+			'show_admin_column'     => true,
+			'show_in_rest'          => true
+		]
+	);
+	// Coloring image post type.
+	register_post_type(
+		'coloring_image',
+		[
+			'labels'				=> [
+				'name'				=> esc_html__( 'Раскраска', 'daddytales' ),
+				'singular_name'		=> esc_html__( 'Раскраска', 'daddytales' ),
+				'add_new'			=> esc_html__( 'Добавить Новую', 'daddytales' ),
+				'add_new_item'		=> esc_html__( 'Добавить Новую Раскраску', 'daddytales' ),
+				'edit_item'			=> esc_html__( 'Редактировать Раскраску', 'daddytales' ),
+				'new_item'			=> esc_html__( 'Новая Раскраска', 'daddytales' ),
+				'view_item'			=> esc_html__( 'Посмотреть Раскраску', 'daddytales' ),
+				'search_items'		=> esc_html__( 'Найти Раскраску', 'daddytales' ),
+				'not_found'         => esc_html__( 'Раскраски не Найдены', 'daddytales' ),
+				'not_found_in_trash'=> esc_html__( 'В Корзине Нет Раскрасок', 'daddytales' ),
+				'parent_item_colon'	=> '',
+				'menu_name'			=> esc_html__( 'Раскраски', 'daddytales' )
+			],
+			'menu_icon'				=> 'dashicons-admin-appearance',
+			'public'				=> true,
+			'publicly_queryable'	=> true,
+			'exclude_from_search'	=> false,
+			'show_ui'				=> true,
+			'show_in_menu'			=> true,
+			'show_in_rest'			=> true,
+			'query_var'				=> true,
+			'rewrite'				=> ['slug' => 'coloring'],
+			'capability_type'		=> 'post',
+			'map_meta_cap'			=> true,
+			'has_archive'			=> true,
+			'hierarchical'			=> false,
+			'menu_position'			=> 7,
+			'supports'				=> ['title', 'editor', 'thumbnail', 'comments']
+		]
+	);
 }
 
 /**

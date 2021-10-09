@@ -1,0 +1,14 @@
+.coloring-image {
+    text-align: center;
+
+    img {
+        border: 1px solid $light;
+        border-radius: $radius;
+        box-shadow: $shadow
+    }
+}
+
+.coloring-button {
+    text-align: center;
+    margin-top: $spacer-xl
+}

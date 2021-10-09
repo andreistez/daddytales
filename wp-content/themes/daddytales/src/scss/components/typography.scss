@@ -101,3 +101,11 @@ b, strong {
         }
     }
 }
+
+.single {
+    article {
+        h2 {
+            text-transform: capitalize
+        }
+    }
+}

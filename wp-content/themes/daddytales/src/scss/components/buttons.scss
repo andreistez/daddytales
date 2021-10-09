@@ -7,6 +7,7 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     font-weight: $fw-semibold;
     padding: 5px $spacer-sm;
     border-radius: $radius;

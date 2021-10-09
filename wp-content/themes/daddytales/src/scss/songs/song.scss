@@ -40,6 +40,14 @@
         display: flex;
         flex-wrap: wrap
     }
+
+    h3 {
+        font-size: $fs-xl;
+
+        @media all and (min-width: $grid-md) {
+            font-size: 36px
+        }
+    }
 }
 
 .song-term {
