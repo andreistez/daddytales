@@ -27,6 +27,15 @@ if( is_singular( 'song' ) ){
 			<div class="song-inner">
 				<div class="song-content white-wrapper">
 					<?php the_content() ?>
+
+					<div class="song-download">
+						<a class="button yellow icon" href="#" download>
+							<span>
+								<?php esc_html_e( 'Скачать песню', 'daddytales' ) ?>
+							</span>
+							<i class="fas fa-cloud-download-alt"></i>
+						</a>
+					</div>
 				</div>
 
 				<?php

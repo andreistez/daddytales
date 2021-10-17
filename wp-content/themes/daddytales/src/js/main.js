@@ -30,6 +30,11 @@
 //= coloring/ajax.js
 
 /**
+ * Songs scripts.
+ */
+//= songs/scripts.js
+
+/**
  * Unyson components scripts.
  */
 //= unyson/cwp-slider.js
