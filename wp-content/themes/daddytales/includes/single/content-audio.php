@@ -1,6 +1,6 @@
 <?php
 /**
- * Single Poem post content.
+ * Single Audio post content.
  *
  * @package WordPress
  * @subpackage daddytales
@@ -9,11 +9,10 @@
 if( isset( $args['post_id'] ) ) $post_id = $args['post_id'];
 else $post_id = get_the_ID();
 
-// If this is single post page.
-if( is_singular( 'poem' ) ){
+if( is_singular( 'audio' ) ){
 	dt_set_post_views( $post_id );
 	?>
-	<article class="single-post song-single poem-single post-<?php echo esc_attr( $post_id ) ?>">
+	<article class="single-post audio-single post-<?php echo esc_attr( $post_id ) ?>">
 		<div class="cwp-title">
 			<h1 class="cwp-title__text">
 				<?php
@@ -24,15 +23,24 @@ if( is_singular( 'poem' ) ){
 		</div>
 
 		<div class="fw-container">
-			<div class="song-inner poem-inner">
-				<div class="song-content poem-content white-wrapper">
+			<div class="song-inner">
+				<div class="song-content white-wrapper">
 					<?php the_content() ?>
+
+					<div class="song-download audio-download">
+						<a class="button yellow icon" href="#" download>
+							<span>
+								<?php esc_html_e( 'Скачать сказку', 'daddytales' ) ?>
+							</span>
+							<i class="fas fa-cloud-download-alt"></i>
+						</a>
+					</div>
 				</div>
 
 				<?php
 				$args = [
 					'post_id'	=> $post_id,
-					'taxonomy'	=> 'poems'
+					'taxonomy'	=> 'audios'
 				];
 				get_template_part( 'includes/single/single', 'terms', $args );
 
@@ -40,7 +48,7 @@ if( is_singular( 'poem' ) ){
 				?>
 			</div>
 		</div>
-	</article><!-- .single-post.poem-single -->
+	</article><!-- .single-post.audio-single -->
 	<?php
 }
 

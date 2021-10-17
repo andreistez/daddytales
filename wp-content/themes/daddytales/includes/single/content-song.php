@@ -49,7 +49,7 @@ if( is_singular( 'song' ) ){
 				?>
 			</div>
 		</div>
-	</article><!-- .single-post.single-song -->
+	</article><!-- .single-post.song-single -->
 	<?php
 }
 

@@ -307,7 +307,7 @@ function dt_custom_init(){
 				'parent_item_colon'	=> '',
 				'menu_name'			=> esc_html__( 'Песни', 'daddytales' )
 			],
-			'menu_icon'				=> 'dashicons-playlist-audio',
+			'menu_icon'				=> 'dashicons-format-audio',
 			'public'				=> true,
 			'publicly_queryable'	=> true,
 			'exclude_from_search'	=> false,
@@ -316,6 +316,77 @@ function dt_custom_init(){
 			'show_in_rest'			=> true,
 			'query_var'				=> true,
 			'rewrite'				=> ['slug' => 'song'],
+			'capability_type'		=> 'post',
+			'map_meta_cap'			=> true,
+			'has_archive'			=> true,
+			'hierarchical'			=> false,
+			'menu_position'			=> 7,
+			'supports'				=> ['title', 'editor', 'thumbnail', 'author', 'comments']
+		]
+	);
+
+	// Audio taxonomy.
+	register_taxonomy(
+		'audios',
+		['audio'],
+		[
+			'label'                 => esc_html__( 'Категории Аудио', 'daddytales' ),
+			'labels'                => [
+				'name'              => esc_html__( 'Категории Аудио', 'daddytales' ),
+				'singular_name'     => esc_html__( 'Категория Аудио', 'daddytales' ),
+				'search_items'      => esc_html__( 'Искать Категории Аудио', 'daddytales' ),
+				'all_items'         => esc_html__( 'Все Категории Аудио', 'daddytales' ),
+				'view_item '        => esc_html__( 'Показать Категории Аудио', 'daddytales' ),
+				'parent_item'       => esc_html__( 'Родительская Категория', 'daddytales' ),
+				'parent_item_colon' => esc_html__( 'Родительская Категория:', 'daddytales' ),
+				'edit_item'         => esc_html__( 'Редактировать Категорию', 'daddytales' ),
+				'update_item'       => esc_html__( 'Обновить Категорию', 'daddytales' ),
+				'add_new_item'      => esc_html__( 'Добавить Новую Категорию Аудио', 'daddytales' ),
+				'new_item_name'     => esc_html__( 'Новая Категория Аудио', 'daddytales' ),
+				'menu_name'         => esc_html__( 'Категории Аудио', 'daddytales' ),
+			],
+			'description'           => '',
+			'public'                => true,
+			'publicly_queryable'    => true,
+			'show_in_nav_menus'     => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'show_tagcloud'         => true,
+			'show_in_quick_edit'    => true,
+			'hierarchical'          => true,
+			'rewrite'               => true,
+			'capabilities'          => [],
+			'show_admin_column'     => true,
+			'show_in_rest'          => true
+		]
+	);
+	// Audio post type.
+	register_post_type(
+		'audio',
+		[
+			'labels'				=> [
+				'name'				=> esc_html__( 'Аудио', 'daddytales' ),
+				'singular_name'		=> esc_html__( 'Аудио', 'daddytales' ),
+				'add_new'			=> esc_html__( 'Добавить Новую', 'daddytales' ),
+				'add_new_item'		=> esc_html__( 'Добавить Новую Аудио', 'daddytales' ),
+				'edit_item'			=> esc_html__( 'Редактировать Аудио', 'daddytales' ),
+				'new_item'			=> esc_html__( 'Новая Аудио', 'daddytales' ),
+				'view_item'			=> esc_html__( 'Посмотреть Аудио', 'daddytales' ),
+				'search_items'		=> esc_html__( 'Найти Аудио', 'daddytales' ),
+				'not_found'         => esc_html__( 'Аудио не Найдены', 'daddytales' ),
+				'not_found_in_trash'=> esc_html__( 'В Корзине Нет Аудио', 'daddytales' ),
+				'parent_item_colon'	=> '',
+				'menu_name'			=> esc_html__( 'Аудио', 'daddytales' )
+			],
+			'menu_icon'				=> 'dashicons-playlist-audio',
+			'public'				=> true,
+			'publicly_queryable'	=> true,
+			'exclude_from_search'	=> false,
+			'show_ui'				=> true,
+			'show_in_menu'			=> true,
+			'show_in_rest'			=> true,
+			'query_var'				=> true,
+			'rewrite'				=> ['slug' => 'audio'],
 			'capability_type'		=> 'post',
 			'map_meta_cap'			=> true,
 			'has_archive'			=> true,

@@ -850,6 +850,7 @@ function dt_ajax_posts_pagination(){
 
 			switch( $post_type ){
 				case 'song':
+				case 'audio':
 					$preview_args = [
 						'post_id'	=> $post_id,
 						'btn_icon'	=> '<i class="fas fa-play"></i>',

@@ -35,6 +35,11 @@
 //= songs/scripts.js
 
 /**
+ * Audio scripts.
+ */
+//= audio/scripts.js
+
+/**
  * Unyson components scripts.
  */
 //= unyson/cwp-slider.js
