@@ -1,6 +1,6 @@
 <?php
 /**
- * Archives template.
+ * Archives template for Slides Tales taxonomy.
  *
  * @package WordPress
  * @subpackage daddytales
@@ -8,10 +8,10 @@
 
 get_header();
 
-$tax_name = 'category';
-$term_id = get_queried_object()->term_id;
-$term = get_term( $term_id, $tax_name );
-$term_slug = $term->slug;
+$tax_name	= get_queried_object()->taxonomy;
+$term_id	= get_queried_object()->term_id;
+$term		= get_term( $term_id, $tax_name );
+$term_slug	= $term->slug;
 ?>
 
 <main class="main">
@@ -19,7 +19,7 @@ $term_slug = $term->slug;
 		<?php
 		$title_args = [
 			'title'			=> $term->name,
-			'margin_left'	=> 5
+			'margin_left'	=> null
 		];
 		get_template_part( 'includes/common/section', 'title', $title_args );
 		?>
@@ -28,7 +28,7 @@ $term_slug = $term->slug;
 			<div class="tax-inner">
 				<?php
 				$args = [
-					'post_type'	=> 'post',
+					'post_type'	=> 'slidestale',
 					'tax_name'	=> $tax_name,
 					'term'		=> $term
 				];
@@ -54,7 +54,7 @@ $term_slug = $term->slug;
 
 						<?php
 						$pagination_args = [
-							'post_type'	=> 'post',
+							'post_type'	=> 'slidestale',
 							'tax_name'	=> $tax_name,
 							'term_slug'	=> $term_slug
 						];
@@ -77,3 +77,4 @@ $term_slug = $term->slug;
 
 <?php
 get_footer();
+

@@ -1,0 +1,91 @@
+.slidestales-slider {
+    width: 100%;
+    margin-top: $spacer-md;
+    background-color: #b1d3d5;
+
+    &:hover {
+        .cwp-slider-nav__button {
+            @media all and (min-width: $grid-xl) {
+                opacity: 1
+            }
+        }
+    }
+
+    .slick-list {
+        width: calc(100% + 30px);
+        margin: 0 -15px
+    }
+
+    .slick-dots {
+        position: absolute;
+        left: 0;
+        bottom: 4px;
+        display: flex;
+        justify-content: center;
+
+        li {
+            margin: 0;
+
+            &.slick-active {
+                button {
+                    &::before {
+                        background-color: $brand-violet
+                    }
+                }
+            }
+
+            button {
+                width: inherit;
+                height: inherit;
+                padding: 0;
+
+                &::before {
+                    content: '';
+                    top: 50%;
+                    left: 50%;
+                    width: 6px;
+                    height: 6px;
+                    margin-top: -3px;
+                    margin-left: -3px;
+                    border-radius: 50%;
+                    background-color: $light;
+                    opacity: 1;
+                    transition: background-color ease-out $tr
+                }
+
+                &:hover {
+                    &::before {
+                        background-color: $brand-violet
+                    }
+                }
+            }
+        }
+    }
+}
+
+.slidestales-slide {
+    padding: 0 15px;
+
+    &-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center
+    }
+
+    &__img {
+        border-radius: $radius;
+        border: 1px solid $dark;
+        box-shadow: $shadow;
+        margin-bottom: $spacer-md
+    }
+
+    &__text {
+        font-size: $fs-xl;
+        font-weight: $fw-semibold;
+        color: $dark;
+
+        @media all and (min-width: $grid-xl) {
+            padding: 0 15%
+        }
+    }
+}

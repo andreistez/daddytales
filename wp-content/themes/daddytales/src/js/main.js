@@ -40,6 +40,11 @@
 //= audio/scripts.js
 
 /**
+ * Slides Tales scripts.
+ */
+//= slidestale/scripts.js
+
+/**
  * Unyson components scripts.
  */
 //= unyson/cwp-slider.js

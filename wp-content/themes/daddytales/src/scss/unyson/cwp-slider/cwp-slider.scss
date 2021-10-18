@@ -4,7 +4,7 @@
 
     &:hover {
         .cwp-slider-nav__button {
-            @media (min-width: $grid-xl) {
+            @media all and (min-width: $grid-xl) {
                 opacity: 1
             }
         }
