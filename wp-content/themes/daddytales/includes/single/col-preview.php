@@ -10,8 +10,9 @@ $post_id = isset( $args['post_id'] ) ? $args['post_id'] : get_the_ID();
 
 if( ! $post_id ) return;
 
-$colors	= ['yellow', 'blue', 'green', 'violet'];
-$class	= $colors[array_rand( $colors )];
+$post_type	= get_post_type( $post_id );
+$colors		= ['yellow', 'blue', 'green', 'violet'];
+$class		= $colors[array_rand( $colors )];
 ?>
 
 <article class="latest-col-post post-<?php echo esc_attr( $post_id ), ' ', esc_attr( $class ) ?>">
@@ -32,6 +33,29 @@ $class	= $colors[array_rand( $colors )];
 				<?php printf( esc_html__( '%s', 'daddytales' ), get_the_title( $post_id ) ) ?>
 			</a>
 		</h6>
+
+		<?php
+		if( $post_type === 'poem' ){
+			$preview_terms = get_the_terms( $post_id, 'poems' );
+
+			if( is_array( $preview_terms ) ){
+				?>
+				<div class="song-preview-terms">
+					<?php
+					foreach( $preview_terms as $term ){
+						if( ! $term->parent ) continue;
+						?>
+						<a class="song-preview-term" href="<?php echo get_term_link( $term->term_id, 'poems' ) ?>">
+							<?php echo esc_html( $term->name ) ?>
+						</a>
+						<?php
+					}
+					?>
+				</div>
+				<?php
+			}
+		}
+		?>
 
 		<div class="latest-col-post-info__views">
 			<i class="far fa-eye"></i>

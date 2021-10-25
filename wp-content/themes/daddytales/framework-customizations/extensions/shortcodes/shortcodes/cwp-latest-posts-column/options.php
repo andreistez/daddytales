@@ -16,6 +16,7 @@ $options = [
 				'label'     => esc_html__( 'Taxonomy Type', 'daddytales' ),
 				'choices'   => [
 					'category'			=> esc_html__( 'Category', 'daddytales' ),
+					'slidestales'		=> esc_html__( 'Slides Tales', 'daddytales' ),
 					'songs'				=> esc_html__( 'Songs', 'daddytales' ),
 					'poems'				=> esc_html__( 'Poems', 'daddytales' ),
 					'coloring_images'	=> esc_html__( 'Coloring', 'daddytales' )
@@ -30,6 +31,17 @@ $options = [
 					'label'			=> esc_html__( 'Category', 'daddytales' ),
 					'population'	=> 'taxonomy',
 					'source'		=> 'category',
+					'prepopulate'	=> false,
+					'limit'			=> 1
+				]
+			],
+
+			'slidestales'	=> [
+				'terms'	=> [
+					'type'			=> 'multi-select',
+					'label'			=> esc_html__( 'Slides Tales', 'daddytales' ),
+					'population'	=> 'taxonomy',
+					'source'		=> 'slidestales',
 					'prepopulate'	=> false,
 					'limit'			=> 1
 				]

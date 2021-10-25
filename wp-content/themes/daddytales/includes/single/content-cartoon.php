@@ -208,6 +208,8 @@ if( is_singular( 'cartoon' ) ){
 					] );
 				}
 
+				get_template_part( 'includes/common/related', 'articles' );
+
 				// If comments are open or we have at least one comment.
 				if ( comments_open() || get_comments_number() ) comments_template( '', true );
 				?>

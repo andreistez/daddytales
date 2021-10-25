@@ -741,3 +741,54 @@ function dt_theme_comments( $comment, $args, $depth ){
 	}
 }
 
+/**
+ * Function adds previous and next posts navigation
+ * in the end of the content of single post.
+ */
+add_filter( 'the_content', 'dt_show_prev_next_posts' );
+function dt_show_prev_next_posts( $content ){
+	$prev_post	= get_previous_post();
+	$next_post	= get_next_post();
+
+	// If at least one of side posts exists.
+	if( ! empty( $prev_post ) || ! empty( $next_post ) ){
+		$html = '<nav class="nav-single">';
+
+		// If previous post exists.
+		if( ! empty( $prev_post ) ){
+			$prev_post_id		= $prev_post->ID;
+			$prev_post_link		= get_permalink( $prev_post_id );
+			$prev_post_thumb	= has_post_thumbnail( $prev_post_id )
+								? '<div class="nav-single__img">' . get_the_post_thumbnail( $prev_post_id, 'thumbnail' ) . '</div>'
+								: '';
+			$html .= '<div class="nav-single__prev">
+				<a href="' . $prev_post_link . '">
+					<span>' . esc_html__( 'Предыдущая запись', 'daddytales' ) . '</span>
+					' . $prev_post->post_title . $prev_post_thumb . '
+				</a>
+			</div>';
+		}
+
+		// If next post exists.
+		if( ! empty( $next_post ) ){
+			$next_post_id		= $next_post->ID;
+			$next_post_link		= get_permalink( $next_post_id );
+			$next_post_thumb	= has_post_thumbnail( $next_post_id )
+								? '<div class="nav-single__img">' . get_the_post_thumbnail( $next_post_id, 'thumbnail' ) . '</div>'
+								: '';
+			$html .= '<div class="nav-single__next">
+				<a href="' . $next_post_link . '">
+					<span>' . esc_html__( 'Следующая запись', 'daddytales' ) . '</span>
+					' . $next_post->post_title . $next_post_thumb . '
+				</a>
+			</div>';
+		}
+
+		$html .= '</nav>';
+
+		$content .= $html;
+	}
+
+	return $content . ( shortcode_exists( 'addtoany' ) ? do_shortcode( '[addtoany]' ) : '' );
+}
+

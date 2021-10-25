@@ -36,6 +36,8 @@ if( is_singular( 'post' ) ){
 				];
 				get_template_part( 'includes/single/single', 'terms', $args );
 
+				get_template_part( 'includes/common/related', 'articles' );
+
 				if ( comments_open() || get_comments_number() ) comments_template( '', true );
 				?>
 			</div>

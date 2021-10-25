@@ -934,3 +934,25 @@ function dt_ajax_download_image(){
 	);
 }
 
+/**
+ * AJAX change views count.
+ */
+add_action( 'wp_ajax_dt_ajax_change_views_count', 'dt_ajax_change_views_count' );
+function dt_ajax_change_views_count(){
+	// Get data from request and clean it.
+	$form_data = [];
+	parse_str( $_POST['form_data'], $form_data );
+
+	$post_id		= dt_clean_value( $form_data['views-select'] );
+	$views_count	= dt_clean_value( $form_data['views-count'] );
+
+	// If data is not set - send error.
+	if( ! $post_id || ! $views_count )
+		wp_send_json_error( ['msg' => esc_html__( 'Неверные данные.', 'daddytales' )] );
+
+	if( ! update_post_meta( $post_id, 'post_views_count', $views_count ) )
+		wp_send_json_error( ['msg' => sprintf( esc_html__( 'Неудача! Количество просмотров для поста "%s" не изменено.', 'daddytales' ), get_the_title( $post_id ) )] );
+
+	wp_send_json_success( ['msg' => sprintf( esc_html__( 'Успешно! Количество просмотров для поста "%s" изменено.', 'daddytales' ), get_the_title( $post_id ) )] );
+}
+

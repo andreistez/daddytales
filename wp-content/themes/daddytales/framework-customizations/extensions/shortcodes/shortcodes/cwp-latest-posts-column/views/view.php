@@ -9,6 +9,11 @@ switch( $taxonomy ){
 		$term_id	= ( int ) $atts['taxonomy']['category']['terms'][0];
 		break;
 
+	case 'slidestales':
+		$post_type	= 'slidestale';
+		$term_id	= ( int ) $atts['taxonomy']['slidestales']['terms'][0];
+		break;
+
 	case 'songs':
 		$post_type	= 'song';
 		$term_id	= ( int ) $atts['taxonomy']['songs']['terms'][0];
