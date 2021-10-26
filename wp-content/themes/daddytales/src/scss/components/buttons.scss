@@ -41,9 +41,11 @@ button {
     }
 
     &.lg {
-        font-size: $fs-xl;
-        min-width: 200px;
-        padding: $spacer-sm 25px
+        @media all and (min-width: $grid-md) {
+            font-size: $fs-xl;
+            min-width: 200px;
+            padding: $spacer-sm 25px
+        }
     }
 
     &.icon {

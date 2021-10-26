@@ -136,6 +136,10 @@
 							<div class="header-logo">
 								<a href="<?php echo home_url( '/' ) ?>" title="<?php esc_attr_e( 'На Главную', 'daddytales' ) ?>">
 									<?php echo wp_get_attachment_image( $header_logo['attachment_id'] ) ?>
+									<span class="header-logo__text">
+										<span><?php esc_html_e( 'Папины', 'daddytales' ) ?></span>
+										<span><?php esc_html_e( 'Сказки', 'daddytales' ) ?></span>
+									</span>
 								</a>
 							</div>
 							<?php

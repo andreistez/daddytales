@@ -732,11 +732,12 @@ function dt_ajax_get_in_touch_form_send(){
 		);
 	}
 
-	$subject = dt_clean_value( $form_data['subject'] );
-	$message = dt_clean_value( $form_data['message'] );
+	$subject	= dt_clean_value( $form_data['subject'] );
+	$message	= dt_clean_value( $form_data['message'] );
+	$recaptcha	= dt_clean_value( $form_data['g-recaptcha-response'] );
 
 	// If data is not set - send error.
-	if( ! $subject || ! $message ){
+	if( ! $subject || ! $message || ! $recaptcha ){
 		wp_send_json_error(
 			[
 				'msg'	=> esc_html__( 'Неверные данные.', 'daddytales' )
@@ -752,6 +753,14 @@ function dt_ajax_get_in_touch_form_send(){
 			]
 		);
 	}
+
+	// Google reCAPTCHA validation.
+	$secret	= '6LdALS0UAAAAAIN8gzNCz2Nfg6YAkRbgMBkNA9Sn';
+	$json	= json_decode( file_get_contents( "https://www.google.com/recaptcha/api/siteverify?secret=". $secret . "&response=" . $recaptcha ), true );
+
+	// If reCAPTCHA error.
+	if( ! $json['success'] )
+		wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
 
 	// Trying to get current user who sends the letter.
 	$current_user = wp_get_current_user();
@@ -783,7 +792,7 @@ function dt_ajax_get_in_touch_form_send(){
 		return 'admin@daddy-tales.ru';
 	} );
 	add_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
-	$send = wp_mail( $admin_email, 'Папины Сказки', $msg );
+	$send = wp_mail( $admin_email, $subject, $msg );
 	remove_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
 
 	// If letter with is not send - show error.
@@ -818,11 +827,12 @@ function dt_ajax_posts_pagination(){
 	$offset = $page_to_load * $posts_per_page - $posts_per_page;
 
 	$args = [
-		'post_type'         	=> $post_type,
-		'post_status'       	=> 'publish',
-		'posts_per_page'    	=> $posts_per_page,
-		'offset'            	=> $offset
+		'post_status'		=> 'publish',
+		'posts_per_page'	=> $posts_per_page,
+		'offset'			=> $offset
 	];
+
+	if( $post_type ) $args['post_type'] = $post_type;
 
 	// If search query is set - this is search results page, don't need tax & term.
 	if( $search_query ){

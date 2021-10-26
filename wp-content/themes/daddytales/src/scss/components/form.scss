@@ -112,7 +112,7 @@ input:not([type="file"]), .input,
 textarea, .textarea {
     width: 100%;
     font-family: $ff;
-    font-size: $fs-md;
+    font-size: $fs-sm;
     color: $dark;
     margin-top: 5px;
     border-radius: $radius;
@@ -120,6 +120,10 @@ textarea, .textarea {
     transition:
         border-color ease-out $tr,
         color ease-out $tr;
+
+    @media all and (min-width: $grid-md) {
+        font-size: $fs-md
+    }
 
     &::placeholder {
         color: $dark;

@@ -6,7 +6,7 @@
  * @subpackage daddytales
  */
 
-$tax_name = $args['tax_name'];
+$tax_name = isset( $args['tax_name'] ) ? $args['tax_name'] : '';
 ?>
 
 <aside class="sidebar">

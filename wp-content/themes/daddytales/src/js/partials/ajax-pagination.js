@@ -19,7 +19,7 @@
 
             isAjaxOn = true;
             var section = $( '.tax-posts' );
-            var searchQuery = $( '.tax-pagination-wrapper' ).attr( 'data-search-query' );
+            var searchQuery = $( '.tax-pagination-wrapper' ).data( 'search-query' );
             var postType, taxonomy, term;
 
             // If this is search results page.

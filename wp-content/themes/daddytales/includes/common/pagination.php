@@ -6,17 +6,17 @@
  * @subpackage daddytales
  */
 
-$post_type	= $args['post_type'];
-$tax_name	= $args['tax_name'];
-$term_slug	= $args['term_slug'];
+$post_type	= isset( $args['post_type'] )
+			? ' data-type="' . esc_attr( $args['post_type'] ) . '"' : '';
+$tax_name	= isset( $args['tax_name'] )
+			? ' data-taxonomy="' . esc_attr( $args['tax_name'] ) . '"' : '';
+$term_slug	= isset( $args['term_slug'] )
+			? ' data-term="' . esc_attr( $args['term_slug'] ) . '"' : '';
+$s_query	= isset( $args['s'] )
+			? ' data-search-query="' . esc_attr( $args['s'] ) . '"' : '';
 ?>
 
-<div
-	class			= "tax-pagination-wrapper"
-	data-type		= "<?php echo esc_attr( $post_type ) ?>"
-	data-taxonomy	= "<?php echo esc_attr( $tax_name ) ?>"
-	data-term		= "<?php echo esc_attr( $term_slug ) ?>"
->
+<div class = "tax-pagination-wrapper"<?php echo $post_type, $tax_name, $term_slug, $s_query ?>>
 	<nav class = "navigation pagination" role="navigation">
 		<div class="nav-links">
 			<?php

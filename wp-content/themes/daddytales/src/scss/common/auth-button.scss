@@ -17,19 +17,17 @@
         }
 
         span {
-            display: none
+            font-size: $fs-sm;
+
+            @media all and (min-width: $grid-md) {
+                font-size: 17px
+            }
         }
 
         i {
-            margin-left: 0
-        }
+            margin-left: 3px;
 
-        @media all and (min-width: $grid-md) {
-            span {
-                display: inline
-            }
-
-            i {
+            @media all and (min-width: $grid-md) {
                 margin-left: $spacer-xs
             }
         }

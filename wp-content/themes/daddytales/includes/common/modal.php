@@ -8,7 +8,7 @@
 ?>
 
 <div id="modal-wrapper" class="modal-wrapper">
-	<form class="dt-form modal">
+	<form class="dt-form modal" action="?" method="POST">
 		<fieldset>
 			<div class="dt-form-field">
 				<label for="subject">
@@ -27,6 +27,11 @@
 			</div>
 
 			<div class="dt-form-field dt-form-field_button">
+				<!-- Google reCAPTCHA v2 -->
+				<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+				<div class="g-recaptcha" data-sitekey="6LdALS0UAAAAAF8PmMhEgCd_MvDouhfginJgPCgA"></div>
+				<!-- /Google reCAPTCHA v2 -->
+
 				<button class="button black icon" type="submit">
 					<?php esc_html_e( 'Отправить', 'daddytales' ) ?>
 					<i class="fas fa-paper-plane"></i>

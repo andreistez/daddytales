@@ -13,22 +13,43 @@
     &-logo {
         width: 100%;
         height: 100px;
-        text-align: center;
         margin-bottom: $spacer-xs;
 
         @media (min-width: $grid-md) {
-            width: auto;
-            text-align: left
+            width: auto
         }
 
         a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            height: 100%
+            height: 100%;
+
+            @media (min-width: $grid-lg) {
+                justify-content: flex-start
+            }
         }
 
         img {
             height: 100%;
             width: auto
+        }
+
+        &__text {
+            display: none;
+            flex-direction: column;
+            font-family: $ff-title;
+            font-size: 40px;
+            line-height: 40px;
+            margin-left: 5px;
+            color: $light;
+            text-shadow: $text-shadow;
+            text-align: left;
+
+            @media all and (min-width: $grid-lg) {
+                display: flex
+            }
         }
     }
 

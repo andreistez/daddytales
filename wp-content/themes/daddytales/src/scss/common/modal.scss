@@ -43,3 +43,11 @@
         }
     }
 }
+
+.g-recaptcha {
+    margin-bottom: $spacer-md;
+
+    & > div {
+        width: 100% !important
+    }
+}

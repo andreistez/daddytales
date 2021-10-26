@@ -2,6 +2,10 @@
     width: 100%;
 
     @media all and (min-width: $grid-md) {
+        max-width: 220px
+    }
+
+    @media all and (min-width: $grid-lg) {
         max-width: 350px
     }
 

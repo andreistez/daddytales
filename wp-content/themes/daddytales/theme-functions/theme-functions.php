@@ -747,6 +747,8 @@ function dt_theme_comments( $comment, $args, $depth ){
  */
 add_filter( 'the_content', 'dt_show_prev_next_posts' );
 function dt_show_prev_next_posts( $content ){
+	if( is_singular( 'page' ) ) return $content;
+
 	$prev_post	= get_previous_post();
 	$next_post	= get_next_post();
 
@@ -790,5 +792,16 @@ function dt_show_prev_next_posts( $content ){
 	}
 
 	return $content . ( shortcode_exists( 'addtoany' ) ? do_shortcode( '[addtoany]' ) : '' );
+}
+
+/**
+ * Exclude pages from search.
+ */
+add_filter( 'pre_get_posts', 'wpb_search_filter' );
+function wpb_search_filter( $query ){
+    if ( $query->is_main_query() && $query->is_search && ! is_admin() )
+		$query->set( 'post_type', ['post', 'cartoon', 'song', 'audio', 'poem', 'coloring_image', 'slidestale'] );
+
+    return $query;
 }
 

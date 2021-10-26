@@ -6,25 +6,29 @@
  * @subpackage daddytales
  */
 
-$post_type		= $args['post_type'];
-$tax_name		= $args['tax_name'];
-$term			= $args['term'];
-$popular_query	= new WP_Query(
-	[
-		'post_type'     	=> $post_type,
-		'post_status'   	=> 'publish',
-		'posts_per_page'	=> 16,
-		'tax_query'			=> [
-			[
-				'taxonomy'	=> $tax_name,
-				'field'		=> 'slug',
-				'terms'		=> [$term->slug]
-			]
-		],
-		'meta_key'			=> 'post_views_count',
-		'orderby'			=> ['meta_value_num' => 'DESC']
-	]
-);
+$post_type		= isset( $args['post_type'] ) ? $args['post_type'] : '';
+$tax_name		= isset( $args['tax_name'] ) ? $args['tax_name'] : '';
+$term			= isset( $args['term'] ) ? $args['term'] : '';
+$args			= [
+	'post_status'   	=> 'publish',
+	'posts_per_page'	=> 16,
+	'meta_key'			=> 'post_views_count',
+	'orderby'			=> ['meta_value_num' => 'DESC']
+];
+
+if( $post_type ) $args['post_type'] = $post_type;
+
+if( $tax_name && $term ){
+	$args['tax_query'] = [
+		[
+			'taxonomy'	=> $tax_name,
+			'field'		=> 'slug',
+			'terms'		=> [$term->slug]
+		]
+	];
+}
+
+$popular_query	= new WP_Query( $args );
 
 if( ! $popular_query->have_posts() ) return;
 ?>

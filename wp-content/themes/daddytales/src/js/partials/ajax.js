@@ -5,6 +5,7 @@
 
 	$( function(){
         sendModalLetter();
+        changeViewsCount();
 	} );
 
     /**
@@ -64,7 +65,7 @@
     /**
      * Change views count (/views page with Views template).
      */
-    function sendModalLetter(){
+    function changeViewsCount(){
         if ( ! $('.change-views-count').length ) return;
 
         $( 'body' ).on( 'submit', '.change-views-count', function( e ){
