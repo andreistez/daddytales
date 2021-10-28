@@ -50,7 +50,7 @@ $posts_query = new WP_Query(
 
 				<div class="note"></div>
 			</fieldset>
-		</form>
+		</form><!-- .change-views-count -->
 	</div>
 </main>
 
