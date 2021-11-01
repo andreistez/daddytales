@@ -5,7 +5,7 @@
  */
 
 function inclusion_enqueue() {
-	$ver_num = mt_rand();
+	$ver_num = '1.0.0';
 	wp_enqueue_style( 'main', get_template_directory_uri() . '/static/css/main.min.css', [], $ver_num, 'all' );
 	wp_enqueue_script( 'scripts', get_template_directory_uri() . '/static/js/main.min.js', ['jquery'], $ver_num, true );
 

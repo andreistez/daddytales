@@ -17,13 +17,14 @@ function dt_ajax_login(){
 		);
 	}
 
-	$login = dt_clean_value( $form_data['login-name'] );
-	$pass = dt_clean_value( $form_data['login-pass'] );
-	$pass = htmlspecialchars_decode( $pass );
-	$remember = dt_clean_value( $form_data['rememberme'] ) ? true : false;
+	$login		= dt_clean_value( $form_data['login-name'] );
+	$pass		= dt_clean_value( $form_data['login-pass'] );
+	$pass		= htmlspecialchars_decode( $pass );
+	$remember	= dt_clean_value( $form_data['rememberme'] ) ? true : false;
+	$recaptcha	= dt_clean_value( $form_data['g-recaptcha-response'] );
 
 	// If data is not set - send error.
-	if( ! $login || ! $pass ){
+	if( ! $login || ! $pass || ! $recaptcha ){
 		wp_send_json_error(
 			[
 				'msg'	=> esc_html__( 'Неверные данные.', 'daddytales' )
@@ -39,6 +40,8 @@ function dt_ajax_login(){
 			]
 		);
 	}
+
+	if( ! dt_check_recaptcha( $recaptcha ) ) wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
 
 	// First - trying to find user by login field.
 	$user = get_user_by( 'login', $login );
@@ -110,6 +113,27 @@ function dt_ajax_login(){
 			'redirect'	=> $redirect
 		]
 	);
+}
+
+/**
+ * Validate Google reCAPTCHA.
+ *
+ * @param	string	$recaptcha	- reCAPTCHA from front-end.
+ * @return	bool				- true on success, false on fail.
+ */
+function dt_check_recaptcha( string $recaptcha ): ?bool
+{
+	if( ! $recaptcha ) return null;
+
+	// Google reCAPTCHA validation.
+	$secret	= '6LdALS0UAAAAAIN8gzNCz2Nfg6YAkRbgMBkNA9Sn';
+	$json	= json_decode( file_get_contents( "https://www.google.com/recaptcha/api/siteverify?secret=". $secret . "&response=" . $recaptcha ), true );
+
+	// If reCAPTCHA error.
+	if( ! $json['success'] )
+		return false;
+
+	return true;
 }
 
 /**
@@ -250,8 +274,10 @@ function dt_ajax_register(){
 	$pass_confirm = dt_clean_value( $form_data['pass-confirm'] );
 	$pass_confirm = htmlspecialchars_decode( $pass_confirm );
 
+	$recaptcha = dt_clean_value( $form_data['g-recaptcha-response'] );
+
 	// If some of required data fields is not set - send error.
-	if( ! $first_name || ! $email || ! $login || ! $pass || ! $pass_confirm ){
+	if( ! $first_name || ! $email || ! $login || ! $pass || ! $pass_confirm || ! $recaptcha ){
 		wp_send_json_error(
 			[
 				'msg'	=> esc_html__( 'Неверные данные.', 'daddytales' )
@@ -312,6 +338,8 @@ function dt_ajax_register(){
 			]
 		);
 	}
+
+	if( ! dt_check_recaptcha( $recaptcha ) ) wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
 
 	// Data to create new User.
 	$userdata = [
@@ -754,13 +782,7 @@ function dt_ajax_get_in_touch_form_send(){
 		);
 	}
 
-	// Google reCAPTCHA validation.
-	$secret	= '6LdALS0UAAAAAIN8gzNCz2Nfg6YAkRbgMBkNA9Sn';
-	$json	= json_decode( file_get_contents( "https://www.google.com/recaptcha/api/siteverify?secret=". $secret . "&response=" . $recaptcha ), true );
-
-	// If reCAPTCHA error.
-	if( ! $json['success'] )
-		wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
+	if( ! dt_check_recaptcha( $recaptcha ) ) wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
 
 	// Trying to get current user who sends the letter.
 	$current_user = wp_get_current_user();
@@ -942,27 +964,5 @@ function dt_ajax_download_image(){
 			'image_url'	=> $image_url
 		]
 	);
-}
-
-/**
- * AJAX change views count.
- */
-add_action( 'wp_ajax_dt_ajax_change_views_count', 'dt_ajax_change_views_count' );
-function dt_ajax_change_views_count(){
-	// Get data from request and clean it.
-	$form_data = [];
-	parse_str( $_POST['form_data'], $form_data );
-
-	$post_id		= dt_clean_value( $form_data['views-select'] );
-	$views_count	= dt_clean_value( $form_data['views-count'] );
-
-	// If data is not set - send error.
-	if( ! $post_id || ! $views_count )
-		wp_send_json_error( ['msg' => esc_html__( 'Неверные данные.', 'daddytales' )] );
-
-	if( ! update_post_meta( $post_id, 'post_views_count', $views_count ) )
-		wp_send_json_error( ['msg' => sprintf( esc_html__( 'Неудача! Количество просмотров для поста "%s" не изменено.', 'daddytales' ), get_the_title( $post_id ) )] );
-
-	wp_send_json_success( ['msg' => sprintf( esc_html__( 'Успешно! Количество просмотров для поста "%s" изменено.', 'daddytales' ), get_the_title( $post_id ) )] );
 }
 

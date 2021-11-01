@@ -48,8 +48,13 @@
 	 * Header mobile menu close.
 	 */
 	function closeThumbPopup() {
-		$( 'body' ).on( 'click', '.modal-cartoon-wrapper__close', function(){
+		$( 'body' ).on( 'click', '.modal-cartoon-wrapper, .modal-cartoon-wrapper__close', function( e ){
+			e.stopPropagation();
+
 			var modalWrapper = $( '.modal-cartoon-wrapper' );
+
+			if( ! modalWrapper.is( e.target ) && ! $( '.modal-cartoon-wrapper__close' ).is( e.target ) ) return;
+
 			modalWrapper.removeClass( 'visible' );
 			setTimeout( function(){
 				modalWrapper.remove();

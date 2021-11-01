@@ -6,6 +6,12 @@
         margin-top: 110px
     }
 
+    .single & {
+        @media all and (min-width: $grid-xl) {
+            margin-top: 45px
+        }
+    }
+
     &__text {
         display: none;
         position: absolute;

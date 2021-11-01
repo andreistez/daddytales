@@ -201,7 +201,11 @@
 
         &.current-menu-item {
             & > a {
-                color: $light
+                color: $brand-violet;
+
+                @media (min-width: $grid-xl) {
+                    color: $light
+                }
             }
         }
 

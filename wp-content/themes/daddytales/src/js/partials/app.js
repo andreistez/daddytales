@@ -174,8 +174,12 @@
 	function closeModal(){
 		if( ! $( '.modal-wrapper' ).length ) return;
 
-		$( 'body' ).on( 'click', '.modal-close', function(){
+		$( 'body' ).on( 'click', '.modal-close, .modal-wrapper', function( e ){
+			e.stopPropagation();
 			var modalWrapper = $( '.modal-wrapper' );
+
+			// If clicked on form common area and elements - do nothing.
+			if( ! modalWrapper.is( e.target ) && ! $( '.modal-close' ).is( e.target ) && ! $( '.modal-close i' ).is( e.target ) ) return;
 
 			// If is visible - hide it.
 			if( modalWrapper.hasClass( 'active visible' ) ){

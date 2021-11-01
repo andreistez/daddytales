@@ -7,7 +7,6 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 }
 
@@ -20,7 +19,11 @@ body {
     font-size: $fs-lg;
     line-height: $lh;
     color: $black;
-    background-color: $light
+    background-color: $light;
+    overflow-x: hidden
+    // ^ AddToAny Share Buttons WP-plugin
+    // adds no-name div at the end of body,
+    // which causes horizontal scroll appearing.
 }
 
 img {
@@ -74,4 +77,39 @@ ul {
 
 .has-text-align-right {
     text-align: right
+}
+
+// Breadcrumbs.
+.breadcrumbs {
+    margin: $spacer-sm 0;
+
+    &-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center
+    }
+
+    span {
+        font-size: $fs-sm;
+        font-weight: $fw-semibold;
+
+        a {
+            color: $gray;
+
+            &:hover {
+                color: $brand-violet
+            }
+        }
+
+        &.current-item {
+            color: $brand-violet
+        }
+
+        &.breadcrumb-sep {
+            width: 2px;
+            height: 2px;
+            background-color: $gray;
+            margin: 0 $spacer-sm
+        }
+    }
 }

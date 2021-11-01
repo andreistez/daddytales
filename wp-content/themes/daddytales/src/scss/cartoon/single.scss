@@ -9,7 +9,7 @@
         position: relative;
         display: flex;
         flex-wrap: wrap;
-        z-index: 10
+        z-index: 9
     }
 
     &-info {
@@ -208,6 +208,10 @@
             @media all and (min-width: $grid-xl) {
                 height: 600px !important
             }
+        }
+
+        #yohoho-buttons {
+            z-index: 0 !important
         }
     }
 }

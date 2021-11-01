@@ -8,13 +8,37 @@
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
-	<meta charset="<?php bloginfo('charset') ?>" />
+	<!-- Global site tag (gtag.js) - Google Analytics --
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104778655-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-104778655-1');
+	</script>
+	!-- /Global site tag (gtag.js) - Google Analytics -->
+
+	<!-- BROPUSH --
+	<script type="text/javascript" src="https://bro1.biz/code/ha2tqy3egi5ha3ddf43dini" async></script>
+	!-- /BROPUSH -->
+
+	<meta charset="<?php bloginfo( 'charset' ) ?>" />
 	<meta http-equiv="x-ua-compatible" content="ie=edge" />
-	<meta content="" name="description" />
-	<meta content="" name="keywords" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<meta content="telephone=no" name="format-detection" />
 	<meta name="HandheldFriendly" content="true" />
+	<meta property = "og:image" content = "https://daddy-tales.ru/wp-content/uploads/2021/08/crown-150x150.png" />
+	<meta name = "description" content = "На сайте Папины Сказки Вы сможете найти все, что нужно Вам и Вашему ребенку для веселого досуга: песни, мультфильмы, раскраски и многое другое!" />
+	<meta property = "og:locale" content = "ru_RU" />
+	<meta property = "og:type" content = "website" />
+	<meta property = "og:url" content = "/" />
+	<meta property = "og:title" content = "Папины Сказки - Сказки с картинками, аудиосказки, мультфильмы" />
+	<meta property = "og:description" content = "На сайте Папины Сказки Вы сможете найти все, что нужно Вам и Вашему ребенку для веселого досуга: песни, мультфильмы, раскраски и многое другое!" />
+	<meta property = "og:site_name" content = "Папины сказки" />
+	<meta name = "twitter:card" content = "summary" />
+	<meta name = "twitter:description" content = "На сайте Папины Сказки Вы сможете найти все, что нужно Вам и Вашему ребенку для веселого досуга: песни, мультфильмы, раскраски и многое другое!" />
+	<meta name = "twitter:title" content = "Папины Сказки - Сказки с картинками, аудиосказки, мультфильмы" />
+	<meta name = "yandex-verification" content = "594daaef2e642af2" />
 
 	<title>
 		<?php
@@ -178,6 +202,22 @@
 					</div>
 				</div>
 			</header>
+
 			<?php
+			/**
+			 * Show breadcrumbs if current page is not:
+			 * Home, Profile.
+			 */
+			if( ! is_front_page() && ! is_page( 6736 ) ){
+				?>
+				<div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+					<div class="fw-container">
+						<div class="breadcrumbs-inner">
+							<?php if( function_exists( 'bcn_display' ) ) bcn_display() ?>
+						</div>
+					</div>
+				</div>
+				<?php
+			}
 		}
 		?>
