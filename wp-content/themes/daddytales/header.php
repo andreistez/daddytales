@@ -6,7 +6,7 @@
 ?>
 
 <!doctype html>
-<html class="no-js" <?php language_attributes(); ?>>
+<html class="no-js" <?php language_attributes(); ?> lang="en">
 <head>
 	<!-- Global site tag (gtag.js) - Google Analytics --
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104778655-1"></script>
@@ -56,11 +56,11 @@
 	</title>
 
 	<!-- Favicon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo $uri ?>/favicon/apple-touch-icon.png" />
-	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo $uri ?>/favicon/favicon-32x32.png" />
-	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo $uri ?>/favicon/favicon-16x16.png" />
-	<link rel="manifest" href="<?php echo $uri ?>/favicon/site.webmanifest" />
-	<link rel="mask-icon" href="<?php echo $uri ?>/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo $uri . '/favicon/apple-touch-icon.png' ?>" />
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo $uri . '/favicon/favicon-32x32.png' ?>" />
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo $uri . '/favicon/favicon-16x16.png' ?>" />
+	<link rel="manifest" href="<?php echo $uri . '/favicon/site.webmanifest' ?>" />
+	<link rel="mask-icon" href="<?php echo $uri . '/favicon/safari-pinned-tab.svg' ?>" color="#5bbad5" />
 	<meta name="msapplication-TileColor" content="#da532c" />
 	<meta name="theme-color" content="#ffffff" />
 	<!-- /Favicon -->
@@ -87,7 +87,7 @@
             width: 64px;
             height: 64px;
             margin: 8px;
-            border: 8px solid #ffd556;
+            border: 8px solid;
             border-radius: 50%;
             animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
             border-color: #ffd556 transparent transparent transparent
