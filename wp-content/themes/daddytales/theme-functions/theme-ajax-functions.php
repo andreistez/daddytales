@@ -21,10 +21,10 @@ function dt_ajax_login(){
 	$pass		= dt_clean_value( $form_data['login-pass'] );
 	$pass		= htmlspecialchars_decode( $pass );
 	$remember	= dt_clean_value( $form_data['rememberme'] ) ? true : false;
-	$recaptcha	= dt_clean_value( $form_data['g-recaptcha-response'] );
+	// $recaptcha	= dt_clean_value( $form_data['g-recaptcha-response'] );
 
 	// If data is not set - send error.
-	if( ! $login || ! $pass || ! $recaptcha ){
+	if( ! $login || ! $pass ){
 		wp_send_json_error(
 			[
 				'msg'	=> esc_html__( 'Неверные данные.', 'daddytales' )
@@ -41,7 +41,7 @@ function dt_ajax_login(){
 		);
 	}
 
-	if( ! dt_check_recaptcha( $recaptcha ) ) wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
+	// if( ! dt_check_recaptcha( $recaptcha ) ) wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
 
 	// First - trying to find user by login field.
 	$user = get_user_by( 'login', $login );
@@ -117,6 +117,10 @@ function dt_ajax_login(){
 
 /**
  * Validate Google reCAPTCHA.
+ *
+ * @example	Paste this to specific forms:
+ * <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+ * <div class="g-recaptcha" data-sitekey="6LdALS0UAAAAAF8PmMhEgCd_MvDouhfginJgPCgA"></div>
  *
  * @param	string	$recaptcha	- reCAPTCHA from front-end.
  * @return	bool				- true on success, false on fail.
@@ -274,10 +278,10 @@ function dt_ajax_register(){
 	$pass_confirm = dt_clean_value( $form_data['pass-confirm'] );
 	$pass_confirm = htmlspecialchars_decode( $pass_confirm );
 
-	$recaptcha = dt_clean_value( $form_data['g-recaptcha-response'] );
+	// $recaptcha = dt_clean_value( $form_data['g-recaptcha-response'] );
 
 	// If some of required data fields is not set - send error.
-	if( ! $first_name || ! $email || ! $login || ! $pass || ! $pass_confirm || ! $recaptcha ){
+	if( ! $first_name || ! $email || ! $login || ! $pass || ! $pass_confirm ){
 		wp_send_json_error(
 			[
 				'msg'	=> esc_html__( 'Неверные данные.', 'daddytales' )
@@ -339,7 +343,7 @@ function dt_ajax_register(){
 		);
 	}
 
-	if( ! dt_check_recaptcha( $recaptcha ) ) wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
+	// if( ! dt_check_recaptcha( $recaptcha ) ) wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
 
 	// Data to create new User.
 	$userdata = [
@@ -413,13 +417,7 @@ function dt_ajax_register(){
 	$msg .= "<p>Если Вы не $login и это письмо попало к Вам по ошибке - просто удалите его.</p>";
 	$msg .= "<p>С уважением, администрация сайта \"Папины Сказки\".</p>";
 
-	add_filter( 'wp_mail_from_name', function( $from_name ){
-		return 'Папины Сказки';
-	} );
-	add_filter( 'wp_mail_from', function( $email_address ){
-		return 'admin@daddy-tales.ru';
-	} );
-	add_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
+	dt_set_html_filters_for_email();
 	$send = wp_mail( $email, 'Папины Сказки', $msg );
 	remove_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
 
@@ -616,13 +614,7 @@ function dt_ajax_change_password(){
 	<p>Если Вы не $user->user_login - просто удалите это письмо.</p><br />
 	<p>С наилучшими пожеланиями, Администрация сайта <a href=\"" . home_url( '/' ) . "\">\"Папины Сказки\"</a>.</p>";
 
-	add_filter( 'wp_mail_from_name', function( $from_name ){
-		return 'Папины Сказки';
-	} );
-	add_filter( 'wp_mail_from', function( $email_address ){
-		return 'no-reply@daddy-tales.ru';
-	} );
-	add_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
+	dt_set_html_filters_for_email();
 	wp_mail( $user->user_email, 'Папины Сказки', $msg );
 	remove_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
 
@@ -714,13 +706,7 @@ function dt_ajax_invite_friend(){
 	<p>Если Вы не $new_fullname - просто удалите это письмо.</p><br />
 	<p>С наилучшими пожеланиями, Администрация сайта \"Папины Сказки\".</p>";
 
-	add_filter( 'wp_mail_from_name', function( $from_name ){
-		return 'Папины Сказки';
-	} );
-	add_filter( 'wp_mail_from', function( $email_address ){
-		return 'no-reply@daddy-tales.ru';
-	} );
-	add_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
+	dt_set_html_filters_for_email();
 	$send = wp_mail( $new_email, 'Папины Сказки', $msg );
 	remove_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
 
@@ -762,10 +748,10 @@ function dt_ajax_get_in_touch_form_send(){
 
 	$subject	= dt_clean_value( $form_data['subject'] );
 	$message	= dt_clean_value( $form_data['message'] );
-	$recaptcha	= dt_clean_value( $form_data['g-recaptcha-response'] );
+	// $recaptcha	= dt_clean_value( $form_data['g-recaptcha-response'] );
 
 	// If data is not set - send error.
-	if( ! $subject || ! $message || ! $recaptcha ){
+	if( ! $subject || ! $message ){
 		wp_send_json_error(
 			[
 				'msg'	=> esc_html__( 'Неверные данные.', 'daddytales' )
@@ -782,14 +768,14 @@ function dt_ajax_get_in_touch_form_send(){
 		);
 	}
 
-	if( ! dt_check_recaptcha( $recaptcha ) ) wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
+	// if( ! dt_check_recaptcha( $recaptcha ) ) wp_send_json_error( ['msg' => esc_html__( 'Ошибка reCAPTCHA.', 'daddytales' )] );
 
 	// Trying to get current user who sends the letter.
 	$current_user = wp_get_current_user();
 	$current_user_login = $current_user_email = null;
 
 	// If user is logged in.
-	if( $current_user ){
+	if( $current_user->ID ){
 		$current_user_login = $current_user->user_login;
 		$current_user_email = $current_user->user_email;
 		$current_user_text = "Пользователь $current_user_login с почтой $current_user_email отправил Вам сообщение с формы обратной связи:";
@@ -807,13 +793,7 @@ function dt_ajax_get_in_touch_form_send(){
 	";
 	$admin_email = get_option( 'admin_email' );
 
-	add_filter( 'wp_mail_from_name', function( $from_name ){
-		return 'Папины Сказки';
-	} );
-	add_filter( 'wp_mail_from', function( $email_address ){
-		return 'admin@daddy-tales.ru';
-	} );
-	add_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
+	dt_set_html_filters_for_email();
 	$send = wp_mail( $admin_email, $subject, $msg );
 	remove_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
 

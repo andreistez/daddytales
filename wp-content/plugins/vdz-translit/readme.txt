@@ -4,8 +4,8 @@ Donate link:  http://online-services.org.ua#Donate-vdz-translit
 Tags: translit, transliteration, transliterate, транслит, транслитерация, wordpress plugin, seo, ЧПУ,Rus to Lat, SEO permalinks, Cir to lat, Rus to lat, Ukr to lat
 Requires at least: 3.3
 Requires PHP: 7
-Tested up to: 5.8.1
-Stable tag: 1.3.20
+Tested up to: 5.9
+Stable tag: 1.3.21
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,10 +46,13 @@ Just install and use :)
 
 
 == Upgrade Notice ==
-Add new version 1.3.20
+Add new version 1.3.21
 
 
 == Changelog ==
+
+= 1.3.21 =
+Tested up to: 5.9
 
 = 1.3.20 =
 Update ReadMe

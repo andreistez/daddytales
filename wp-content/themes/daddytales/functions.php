@@ -5,7 +5,7 @@
  */
 
 function inclusion_enqueue() {
-	$ver_num = '1.0.0';
+	$ver_num = '1.0.1';
 	wp_enqueue_style( 'main', get_template_directory_uri() . '/static/css/main.min.css', [], $ver_num, 'all' );
 	wp_enqueue_script( 'scripts', get_template_directory_uri() . '/static/js/main.min.js', ['jquery'], $ver_num, true );
 
@@ -64,8 +64,6 @@ add_filter( 'get_the_archive_title', function( $title ) {
 	return preg_replace( '~^[^:]+: ~', '', $title );
 } );
 
-// TGMPA - notify Administrator to install required plugins.
-require_once get_template_directory() . '/tgmpa/daddytales.php';
 // Theme functions to avoid large size of code here.
 require_once get_template_directory() . '/theme-functions/theme-functions.php';
 // Theme AJAX functions.

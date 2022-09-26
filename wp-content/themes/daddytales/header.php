@@ -3,6 +3,8 @@
  * @package WordPress
  * @subpackage daddytales
  */
+
+$uri = get_template_directory_uri();
 ?>
 
 <!doctype html>
@@ -39,21 +41,6 @@
 	<meta name = "twitter:description" content = "На сайте Папины Сказки Вы сможете найти все, что нужно Вам и Вашему ребенку для веселого досуга: песни, мультфильмы, раскраски и многое другое!" />
 	<meta name = "twitter:title" content = "Папины Сказки - Сказки с картинками, аудиосказки, мультфильмы" />
 	<meta name = "yandex-verification" content = "594daaef2e642af2" />
-
-	<title>
-		<?php
-		global $page, $paged;
-		$uri = get_template_directory_uri();
-
-		wp_title( '|', true, 'right' );
-		bloginfo( 'name' );
-		$site_description = get_bloginfo( 'description', 'display' );
-
-		if( $site_description && ( is_home() || is_front_page() ) ) echo " | $site_description";
-
-		if( $paged >= 2 || $page >= 2 ) echo ' | ' . sprintf( __( 'Page %s', 'daddytales' ), max( $paged, $page ) );
-		?>
-	</title>
 
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo $uri . '/favicon/apple-touch-icon.png' ?>" />
@@ -122,6 +109,8 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700;900&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet" />
 	<!-- /Google Fonts -->
+
+    <title></title>
 
 	<?php wp_head() ?>
 </head>

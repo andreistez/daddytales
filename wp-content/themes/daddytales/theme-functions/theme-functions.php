@@ -150,10 +150,29 @@ function dt_posts_custom_column_views( $column_name, $id ){
 }
 
 /**
- * Function for HTML content type in E-mails.
+ * E-mail filters for HTML content type and letter title.
+ */
+function dt_set_html_filters_for_email(){
+	add_filter( 'wp_mail_content_type', 'dt_set_html_content_type' );
+}
+
+/**
+ * Function sets HTML content type in E-mails.
  */
 function dt_set_html_content_type(){
 	return 'text/html';
+}
+
+// Function to change email address
+add_filter( 'wp_mail_from', 'dt_sender_email' );
+function dt_sender_email( $original_email_address ) {
+    return 'no-reply@daddy-tales.ru';
+}
+
+// Function to change sender name
+add_filter( 'wp_mail_from_name', 'dt_sender_name' );
+function dt_sender_name( $original_email_from ) {
+    return 'Daddy Tales';
 }
 
 /**
@@ -635,6 +654,26 @@ function dt_unset_url_field_in_comment_form( $fields ){
     if( isset( $fields['url'] ) ) unset( $fields['url'] );
     return $fields;
 }
+
+/**
+ * Google recaptcha add before the submit button.
+ */
+function dt_add_google_recaptcha( $submit_field ){
+	$site_key = '6LdALS0UAAAAAF8PmMhEgCd_MvDouhfginJgPCgA';
+    $submit_field['submit_field'] = '<div class="g-recaptcha" data-sitekey="' . esc_attr( $site_key ) . '"></div>' . $submit_field['submit_field'];
+    return $submit_field;
+}
+add_filter( 'comment_form_defaults', 'dt_add_google_recaptcha' );
+
+function dt_verify_comment_recaptcha(){
+	$recaptcha = $_POST['g-recaptcha-response'];
+
+	if( empty( $recaptcha ) )
+		wp_die( __( "<b>Ошибка:</b> пожалуйста, выберите поле <b>Я не робот</b><p><a href='javascript:history.back()'>« Back</a></p>"));
+	else if( ! dt_check_recaptcha( $recaptcha ) )
+		wp_die( esc_html__( "<b>Иди расклеивать спам в свой двор!</b>" ) );
+}
+add_action( 'pre_comment_on_post', 'dt_verify_comment_recaptcha' );
 
 /**
  * Comments restyling.

@@ -254,3 +254,9 @@
         font-size: $fs-lg
     }
 }
+
+.g-recaptcha {
+    iframe {
+        max-width: 100%
+    }
+}
