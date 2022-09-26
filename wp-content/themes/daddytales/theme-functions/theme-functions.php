@@ -656,26 +656,6 @@ function dt_unset_url_field_in_comment_form( $fields ){
 }
 
 /**
- * Google recaptcha add before the submit button.
- */
-function dt_add_google_recaptcha( $submit_field ){
-	$site_key = '6LdALS0UAAAAAF8PmMhEgCd_MvDouhfginJgPCgA';
-    $submit_field['submit_field'] = '<div class="g-recaptcha" data-sitekey="' . esc_attr( $site_key ) . '"></div>' . $submit_field['submit_field'];
-    return $submit_field;
-}
-add_filter( 'comment_form_defaults', 'dt_add_google_recaptcha' );
-
-function dt_verify_comment_recaptcha(){
-	$recaptcha = $_POST['g-recaptcha-response'];
-
-	if( empty( $recaptcha ) )
-		wp_die( __( "<b>Ошибка:</b> пожалуйста, выберите поле <b>Я не робот</b><p><a href='javascript:history.back()'>« Back</a></p>"));
-	else if( ! dt_check_recaptcha( $recaptcha ) )
-		wp_die( esc_html__( "<b>Иди расклеивать спам в свой двор!</b>" ) );
-}
-add_action( 'pre_comment_on_post', 'dt_verify_comment_recaptcha' );
-
-/**
  * Comments restyling.
  */
 function dt_theme_comments( $comment, $args, $depth ){
@@ -693,8 +673,6 @@ function dt_theme_comments( $comment, $args, $depth ){
 		$comment_author_login	= '';
 		$user_avatar_url = dt_get_user_avatar( null );
 	}
-
-	// echo var_dump( $comment );
 
 	switch( $comment->comment_type ){
 		case 'comment':
