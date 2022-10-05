@@ -89,7 +89,9 @@ function dt_get_cartoon_frames( int $post_id, int $cartoon_id ){
 
 		if( empty( $response->items ) ){
 			$response = dt_get_response_by_url( 'https://kinopoiskapiunofficial.tech/api/v2.1/films/' . $cartoon_id . '/frames' );
-			$response = json_encode( $response );
+
+			if( ! empty( $response->frames ) ) $response = json_encode( $response );
+			else $response = '';
 		}   else {
 			$response = json_encode( $response->items );
 		}
