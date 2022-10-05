@@ -23,28 +23,20 @@ $frames	= fw_get_db_post_option( $post_id, 'frames' );
 		?>
 		<div class="cwp-slider cartoon-frames">
 			<?php
-			foreach( $frames->frames as $key => $frame ){
-				$frame_image	= $frame->image;
-				$frame_preview	= $frame->preview;
-				?>
-				<div class="slide cartoon-frame">
-					<div class="slide-inner cartoon-frame-inner img-cover-inside">
-						<?php
-						if( $frame_image ){
-							?>
-							<img class="cartoon-frame__img" src="<?php echo esc_url( $frame_image ) ?>" alt="" />
-							<?php
-						}
-
-						if( $frame_preview ){
-							?>
-							<img class="cartoon-frame__preview" src="<?php echo esc_url( $frame_preview ) ?>" alt="" />
-							<?php
-						}
-						?>
-					</div>
-				</div><!-- .cartoon-frame -->
-				<?php
+			if( isset( $frames->frames ) && ! empty( $frames->frames ) ){
+				foreach( $frames->frames as $key => $frame ){
+					get_template_part( 'includes/single/cartoon/slide', null, [
+						'image'		=> $frame->image,
+						'preview'	=> $frame->preview
+					] );
+				}
+			}	else {
+				foreach( $frames as $key => $frame ){
+					get_template_part( 'includes/single/cartoon/slide', null, [
+						'image'		=> $frame->imageUrl,
+						'preview'	=> $frame->previewUrl
+					] );
+				}
 			}
 			?>
 		</div><!-- .cartoon-frames -->

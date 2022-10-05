@@ -29,7 +29,7 @@ function dt_get_response_by_url( string $url ): ?Object
  * @param	int		$cartoon_id	- cartoon ID on kinopoisk.ru.
  */
 function dt_get_cartoon_info( int $post_id, int $cartoon_id ){
-	if( ! is_int( $post_id ) || ! is_int( $cartoon_id ) ) return null;
+	if( ! $post_id || ! $cartoon_id ) return null;
 
 	$response = dt_get_response_by_url( 'https://kinopoiskapiunofficial.tech/api/v2.2/films/' . $cartoon_id );
 
@@ -81,13 +81,16 @@ function dt_get_cartoon_info( int $post_id, int $cartoon_id ){
  * @param	int		$cartoon_id	- cartoon ID on kinopoisk.ru.
  */
 function dt_get_cartoon_frames( int $post_id, int $cartoon_id ){
-	if( ! is_int( $post_id ) || ! is_int( $cartoon_id ) ) return null;
-
-	$response = dt_get_response_by_url( 'https://kinopoiskapiunofficial.tech/api/v2.1/films/' . $cartoon_id . '/frames' );
-	$response = json_encode( $response );
+	if( ! $post_id || ! $cartoon_id ) return null;
 
 	// Check and set frames field if necessary.
-	if( ! fw_get_db_post_option( $post_id, 'frames' ) )
-		fw_set_db_post_option( $post_id, 'frames', $response );
+	if( ! fw_get_db_post_option( $post_id, 'frames' ) ) {
+		$response = dt_get_response_by_url( 'https://kinopoiskapiunofficial.tech/api/v2.2/films/' . $cartoon_id . '/images' );
+
+		if( isset( $response->items ) && ! empty( $response->items ) ) {
+			$response = json_encode( $response->items );
+			fw_set_db_post_option( $post_id, 'frames', $response );
+		}
+	}
 }
 
