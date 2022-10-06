@@ -6,7 +6,7 @@ $options[] = [
 	'section_404'	=> [
 		'title'					=> esc_html__( '404 Settings', 'daddytales' ),
 		'wp-customizer-args'	=> [
-			'priority'	=> 3
+			'priority'	=> 4
 		],
 
 		'options'	=> [

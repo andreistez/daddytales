@@ -8,14 +8,14 @@
  */
 function dt_get_response_by_url( string $url ): ?Object
 {
-	if( ! $url ) return null;
+	if( ! $url || ! ( $x_api_key = fw_get_db_customizer_option( 'x_api_key' ) ) ) return null;
 
 	$ch = curl_init();
 	curl_setopt( $ch, CURLOPT_URL, $url );
 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 	curl_setopt( $ch, CURLOPT_HTTPHEADER, [
 		'accept: application/json',
-		'X-API-KEY: cc9e2d6d-b756-4d5f-9223-e3351808d0ab'
+		'X-API-KEY: ' . $x_api_key
 	] );
 	$response = curl_exec( $ch );
 	curl_close( $ch );

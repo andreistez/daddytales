@@ -6,7 +6,7 @@ $options[] = [
     'section_header' => [
         'title' => esc_html__( 'Header Settings', 'daddytales' ),
         'wp-customizer-args' => [
-            'priority' => 1
+            'priority' => 2
         ],
 
         'options' => [

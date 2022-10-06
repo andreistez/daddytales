@@ -6,7 +6,7 @@ $options[] = [
 	'section_footer' => [
 		'title' => esc_html__( 'Footer Settings', 'daddytales' ),
 		'wp-customizer-args' => [
-			'priority' => 2
+			'priority' => 3
 		],
 		'options' => [
 			'group_footer' => [

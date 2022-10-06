@@ -2,6 +2,11 @@
 if( !defined( 'FW' ) ) die( 'Forbidden' );
 
 /**
+ * Common settings.
+ */
+require_once( 'customizer/common.php' );
+
+/**
  * Header settings.
  */
 require_once( 'customizer/header.php' );
