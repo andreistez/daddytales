@@ -83,20 +83,28 @@ function dt_get_cartoon_info( int $post_id, int $cartoon_id ){
 function dt_get_cartoon_frames( int $post_id, int $cartoon_id ){
 	if( ! $post_id || ! $cartoon_id ) return null;
 
-	// Check and set frames field if necessary.
-	if( ! fw_get_db_post_option( $post_id, 'frames' ) ) {
-		$response = dt_get_response_by_url( 'https://kinopoiskapiunofficial.tech/api/v2.2/films/' . $cartoon_id . '/images' );
+	// Do nothing if frames have been already set.
+	if( fw_get_db_post_option( $post_id, 'frames' ) ) return;
 
-		if( empty( $response->items ) ){
+	// Try new endpoint to get frames (images).
+	$response = dt_get_response_by_url( 'https://kinopoiskapiunofficial.tech/api/v2.2/films/' . $cartoon_id . '/images' );
+
+	if( ! empty( $response->items ) ){
+		$response = json_encode( $response->items );
+	}   else {  // If there are no images - try with another type - SCREENSHOT (STILL by default).
+		$response = dt_get_response_by_url( 'https://kinopoiskapiunofficial.tech/api/v2.2/films/' . $cartoon_id . '/images?type=SCREENSHOT' );
+
+		if( ! empty( $response->items ) ){
+			$response = json_encode( $response->items );
+		}   else {  // If there are no even screenshots - try old API endpoint.
 			$response = dt_get_response_by_url( 'https://kinopoiskapiunofficial.tech/api/v2.1/films/' . $cartoon_id . '/frames' );
 
 			if( ! empty( $response->frames ) ) $response = json_encode( $response );
 			else $response = '';
-		}   else {
-			$response = json_encode( $response->items );
 		}
-
-		fw_set_db_post_option( $post_id, 'frames', $response );
 	}
+
+	// Write data or empty string to the frames field.
+	fw_set_db_post_option( $post_id, 'frames', $response );
 }
 
